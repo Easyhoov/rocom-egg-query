@@ -82,11 +82,15 @@ app = FastAPI(
 )
 
 # 允许跨域 (小程序需要)
-# 静态文件 - 首页
+# 静态文件 - 首页 (Vue build)
 @app.get("/index.html")
 async def serve_index():
     from pathlib import Path
-    return FileResponse(Path(__file__).parent / "index.html")
+    build_index = Path(__file__).parent / "static" / "index.html"
+    if build_index.exists():
+        return FileResponse(str(build_index))
+    # Fallback to old single-file version
+    return FileResponse(str(Path(__file__).parent / "index.html"))
 
 app.add_middleware(
     CORSMiddleware,
@@ -297,7 +301,7 @@ def query_egg(height_m: float, weight_kg: float, egg_filter: Optional[int] = Non
 
 # ========== API 路由 ==========
 
-@app.get("/", response_model=HealthResponse)
+@app.get("/health", response_model=HealthResponse)
 async def health_check():
     """健康检查"""
     return HealthResponse(
@@ -572,14 +576,40 @@ async def list_groups():
     }
 
 
+# ========== 前端静态文件 ==========
+
+FRONTEND_DIR = Path(__file__).parent / "static"
+
+@app.get("/assets/{path:path}")
+async def serve_assets(path: str):
+    """Serve Vite build assets"""
+    file_path = FRONTEND_DIR / "assets" / path
+    if file_path.exists() and file_path.is_file():
+        return FileResponse(str(file_path))
+    raise HTTPException(status_code=404, detail="Asset not found")
+
+@app.get("/{path:path}")
+async def serve_spa(path: str):
+    """SPA fallback — serves index.html for all non-API routes"""
+    # Try serving the exact static file first
+    file_path = FRONTEND_DIR / path
+    if path and file_path.exists() and file_path.is_file():
+        return FileResponse(str(file_path))
+    # Fallback to index.html for SPA routing
+    index = FRONTEND_DIR / "index.html"
+    if index.exists():
+        return FileResponse(str(index))
+    raise HTTPException(status_code=404, detail="Frontend not built. Run: cd frontend && npm run build")
+
+
 # ========== 启动 ==========
 
 if __name__ == '__main__':
     print("\n" + "=" * 50)
     print("🎮 洛克王国：世界 - 孵蛋查询 API")
     print("=" * 50)
-    print(f"📡 API文档: http://localhost:8000/docs")
-    print(f"📡 ReDoc文档: http://localhost:8000/redoc")
+    print(f"📡 API文档: http://localhost:2026/docs")
+    print(f"📡 前端页面: http://localhost:2026/")
     print("=" * 50 + "\n")
     
     uvicorn.run(
