@@ -51,17 +51,9 @@ rocom-egg-query/
 │   └── breeding.json          # 孵蛋数据（1623条）
 ├── static/
 │   └── creature-atlas/        # 精灵图片（465张webp）
-└── docs/
-    ├── PLAN.md                # 实施方案
-    └── PRD.md                 # 产品需求文档
 ```
 
 ## 部署
 
 - 服务器: your-server-ip:2026
 - 进程管理: `nohup python3 main.py > server.log 2>&1 &`
-
-## 详细文档
-
-- [实施方案](docs/PLAN.md)
-- [产品需求](docs/PRD.md)

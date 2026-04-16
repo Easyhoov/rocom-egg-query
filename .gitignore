@@ -11,3 +11,4 @@ build/
 # Dependencies
 frontend/node_modules/
 frontend/.vite/
+docs/
