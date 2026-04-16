@@ -13,6 +13,7 @@ const props = defineProps({
 <template>
   <div class="result-card">
     <div class="result-card__header">
+      <img :src="pet.image" alt="" class="result-card__avatar" />
       <span class="result-card__name">{{ pet.name }}</span>
       <span class="result-card__type" v-if="pet.egg_type_name">
         {{ pet.egg_type_icon }} {{ pet.egg_type_name }}
@@ -55,9 +56,16 @@ const props = defineProps({
   align-items: baseline;
   margin-bottom: 8px;
 }
+.result-card__avatar {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
 .result-card__name {
   font-size: 18px;
   font-weight: 700;
+  vertical-align: middle;
 }
 .result-card__type {
   font-size: 12px;

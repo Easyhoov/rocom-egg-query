@@ -1,0 +1,3033 @@
+{
+  "name_to_id": {
+    "迪莫": "001",
+    "喵喵": "002",
+    "喵呜": "003",
+    "魔力猫": "004",
+    "火花": "005",
+    "焰火": "006",
+    "火神": "007",
+    "水蓝蓝": "008",
+    "波波拉": "009",
+    "水灵": "010",
+    "鸭吉吉": "011",
+    "板板壳": "012",
+    "咔咔壳": "013",
+    "水泡壳": "014",
+    "锥尾羊": "015",
+    "铃兰羊": "016",
+    "花影羚羊": "017",
+    "雪绒鸟": "018",
+    "冬羽雀": "019",
+    "岚鸟": "020",
+    "小灵菇": "021",
+    "幻灵菇": "022",
+    "幻影灵菇": "023",
+    "石肤蜥": "024",
+    "石刺蜥": "025",
+    "石冠王蜥": "026",
+    "布是石": "027",
+    "布是岩": "028",
+    "布克棱岩": "029",
+    "恶魔叮": "030",
+    "叮叮恶魔": "031",
+    "毛毛": "032",
+    "爬爬": "033",
+    "化蝶": "034",
+    "幽影树": "035",
+    "小鼠獭": "036",
+    "燕尾獭": "037",
+    "卷胡巨獭": "038",
+    "矿晶虫": "039",
+    "晶石蜗": "040",
+    "奇丽草": "041",
+    "奇丽叶": "042",
+    "奇丽花": "043",
+    "丢丢": "044",
+    "卡卡虫": "045",
+    "卡瓦重": "046",
+    "护主犬": "047",
+    "音速犬": "048",
+    "绿耳松鼠": "049",
+    "抱枕松鼠": "050",
+    "蹦床松鼠": "051",
+    "嘟嘟煲": "052",
+    "嘟嘟锅": "053",
+    "小灵面": "054",
+    "暗影灵面": "055",
+    "幽冥眼": "056",
+    "梦游": "057",
+    "梦悠悠": "058",
+    "兽花蕾": "059",
+    "伏地兽": "060",
+    "贪食鼹": "061",
+    "巨噬针鼹": "062",
+    "蹦蹦种子": "063",
+    "蹦蹦草": "064",
+    "蹦蹦花": "065",
+    "电咩咩": "066",
+    "粉咩咩": "067",
+    "电球咩咩": "068",
+    "蒲公英": "069",
+    "蒲公英娃娃": "070",
+    "伊贝儿": "071",
+    "伊贝粉粉": "072",
+    "白发懒人": "073",
+    "动力猿": "074",
+    "瞌睡王": "075",
+    "海盔虫": "076",
+    "刺盔虫": "077",
+    "千棘盔": "078",
+    "菊花梨": "079",
+    "小星光": "080",
+    "星光狮": "081",
+    "一窝蜂": "082",
+    "黄蜂后": "083",
+    "花魁蜂后": "084",
+    "小夜": "085",
+    "紫夜": "086",
+    "朔夜伊芙": "087",
+    "乖乖鹄": "088",
+    "蓝珠天鹅": "089",
+    "翠顶夫人": "090",
+    "黑羽夫人": "091",
+    "锤头鹳": "092",
+    "绿草精灵": "093",
+    "魔草巫灵": "094",
+    "记忆石": "095",
+    "咔咔羽毛": "096",
+    "咔咔雀": "097",
+    "咔咔鸟": "098",
+    "小草虫": "099",
+    "草衣虫": "100",
+    "花衣蝶": "101",
+    "绿翼鸟": "102",
+    "魔翼鸟": "103",
+    "魔眷鸟": "104",
+    "阿米亚特": "105",
+    "阿米樱": "106",
+    "罗隐": "107",
+    "风铃鲨": "108",
+    "蓝蝶鲨": "109",
+    "彩蝶鲨": "110",
+    "石石": "111",
+    "巨灵石": "112",
+    "仪使者": "113",
+    "仪式之星": "114",
+    "仪式巨像": "115",
+    "小独角兽": "116",
+    "白金独角兽": "117",
+    "旋叶虫": "118",
+    "蓬叶虫": "119",
+    "风滚暮虫": "120",
+    "小黑猫": "121",
+    "黑猫巫师": "122",
+    "忽幽狸": "123",
+    "影狸": "124",
+    "多多": "125",
+    "多啦多": "126",
+    "古啦多": "127",
+    "哭哭菇": "128",
+    "怖须菇": "129",
+    "怖哭菇": "130",
+    "恶魔狼": "131",
+    "小电企鹅": "132",
+    "电企鹅": "133",
+    "雪豆丁": "134",
+    "雪蛮人": "135",
+    "雪巨人": "136",
+    "呼呼猪": "137",
+    "獠牙猪": "138",
+    "雪娃娃": "139",
+    "冰封怨灵": "140",
+    "雪灵": "141",
+    "大耳帽兜": "142",
+    "帽兜娃娃": "143",
+    "雪影娃娃": "144",
+    "权杖-Ⅱ": "145",
+    "权杖-Ⅴ": "146",
+    "灵狐": "147",
+    "九尾狐": "148",
+    "尖嘴狐仙": "149",
+    "里奥": "150",
+    "灵羽勇士": "151",
+    "圣羽翼王": "152",
+    "松仔": "153",
+    "松叶羊": "154",
+    "针叶巡林": "155",
+    "小勇狮": "156",
+    "炽焰狮": "157",
+    "炽心勇狮": "158",
+    "水滴蛇": "159",
+    "水蛇锁": "160",
+    "游蛇魔使": "161",
+    "公平鸽": "162",
+    "小怂猫": "163",
+    "怒目怂猫": "164",
+    "小狮鹫": "165",
+    "神圣狮鹫": "166",
+    "皇家狮鹫": "167",
+    "圆眼蜘蛛": "168",
+    "尖角蜘蛛": "169",
+    "芋香巨角蛛": "170",
+    "波波螺": "171",
+    "消波螺": "172",
+    "嗜波螺": "173",
+    "菇菇丁": "174",
+    "多菇丁": "175",
+    "九幽菇": "176",
+    "斑斑": "177",
+    "斑枭": "178",
+    "草头鸭": "179",
+    "卷毛鸭": "180",
+    "海豹战士": "181",
+    "海豹船长": "182",
+    "号儿鱼": "183",
+    "圆号鱼": "184",
+    "甜田螺": "185",
+    "壳乙螺": "186",
+    "卡洛儿": "187",
+    "棋棋": "188",
+    "棋骑士": "189",
+    "棋齐垒": "190",
+    "棋祈督": "191",
+    "棋绮后": "192",
+    "奔波鼠": "193",
+    "流浪鼠": "194",
+    "呆小路": "195",
+    "舞动路路": "196",
+    "白发路路": "197",
+    "逗逗": "198",
+    "气球猫": "199",
+    "梦想三三": "200",
+    "花怨鳗": "201",
+    "鳗尾兽": "202",
+    "伊雷龙": "203",
+    "伊兰亚龙": "204",
+    "拉特": "205",
+    "酷拉": "206",
+    "闪电环": "207",
+    "刺电环": "208",
+    "荆棘电环": "209",
+    "小箱怪": "210",
+    "迷迷箱怪": "211",
+    "古钟蛇": "212",
+    "寒音蛇": "213",
+    "矮脚爬爬": "214",
+    "恶魔红钻": "215",
+    "火尾瓦特": "216",
+    "火尾战士": "217",
+    "烈火守护": "218",
+    "里拉鳐": "219",
+    "海枝枝": "220",
+    "多西": "221",
+    "库多西": "222",
+    "波多西": "223",
+    "小翼龙": "224",
+    "翼龙": "225",
+    "电动长颈鹿": "226",
+    "奔乐鹿": "227",
+    "爵士鹿": "228",
+    "缇塔": "229",
+    "声波缇塔": "230",
+    "小鹬": "231",
+    "鄙目鹬": "232",
+    "高脚鹬": "233",
+    "脆筒甜甜": "234",
+    "香草甜甜": "235",
+    "圣代甜甜": "236",
+    "刺轮砣": "237",
+    "月亮砣": "238",
+    "豆丁鱼": "239",
+    "快鳍鱼": "240",
+    "龙鱼": "241",
+    "胆小鳗鱼": "242",
+    "闪电鳗鱼": "243",
+    "翡翠水母": "244",
+    "琉璃水母": "245",
+    "裘洛": "246",
+    "裘力": "247",
+    "裘卡": "248",
+    "可爱猿": "249",
+    "炽热猿": "250",
+    "火焰猿": "251",
+    "布鲁斯": "252",
+    "雪顶布鲁斯": "253",
+    "冰钻布鲁斯": "254",
+    "治愈兔": "255",
+    "红丝绒": "256",
+    "红绒十字": "257",
+    "乌达": "258",
+    "迷你乌": "259",
+    "乌拉塔": "260",
+    "螺旋帕帕": "261",
+    "帕帕斯卡": "262",
+    "机械方方": "263",
+    "多彩方方": "264",
+    "立方人": "265",
+    "可立鸡": "266",
+    "晕晕鸡": "267",
+    "绅士鸡": "268",
+    "武者鸡": "269",
+    "优优": "270",
+    "绒光优优": "271",
+    "噼啪鸟": "272",
+    "深蓝鲸": "273",
+    "格兰种子": "274",
+    "格兰花": "275",
+    "格兰球": "276",
+    "地鼠": "277",
+    "遁鼠": "278",
+    "遁地鼠": "279",
+    "墨鱿士": "280",
+    "混乱鱿彩": "281",
+    "秩序鱿墨": "282",
+    "小甲虫": "283",
+    "铠甲虫": "284",
+    "圣剑侍从": "285",
+    "圣剑-X": "286",
+    "吸泥鸥": "287",
+    "泥吼牙": "288",
+    "大头骨龙": "289",
+    "寂灭骨龙": "290",
+    "厉毒小萝": "291",
+    "厉毒修萝": "292",
+    "小帕尔": "293",
+    "帕尔萨斯": "294",
+    "龙息帕尔": "295",
+    "毛头小蛛": "296",
+    "捕尘长绒": "297",
+    "食尘短绒": "298",
+    "画精灵": "299",
+    "画像守护": "300",
+    "画间法师手": "301",
+    "画间沉铁兽": "302",
+    "书魔虫": "303",
+    "书卷守护": "304",
+    "古卷执政官": "305",
+    "古卷匣魔像": "306",
+    "绒绒": "307",
+    "小绒茧": "308",
+    "绒仙子": "309",
+    "犀角鸟": "310",
+    "光纤兽": "311",
+    "疾光千兽": "312",
+    "果冻": "313",
+    "抹茶布丁": "314",
+    "椰浆布丁": "315",
+    "熔岩布丁": "316",
+    "星尘虫": "317",
+    "落星虫": "318",
+    "陨星虫": "319",
+    "双灯鱼": "320",
+    "利灯鱼": "321",
+    "月牙雪熊": "322",
+    "嗜光嗡嗡": "323",
+    "窃光蚊": "324",
+    "柴渣虫": "325",
+    "燃薪虫": "326",
+    "空空颅": "327",
+    "夜宿颅": "328",
+    "夜枭": "329",
+    "粉粉星": "330",
+    "小皮球": "331",
+    "贝瑟": "332",
+    "贝加尔": "333",
+    "贝古斯": "334",
+    "粉星仔": "335",
+    "粉耳星兔": "336",
+    "落陨星兔": "337",
+    "布瓜蝌": "338",
+    "上岸蛙": "339",
+    "火红尾": "340",
+    "雅丹鬃": "341",
+    "春团": "342",
+    "春兔": "343",
+    "春花兔": "344",
+    "幽星光": "345",
+    "曜星光": "346",
+    "暮星辰": "347"
+  },
+  "id_to_images": {
+    "001": {
+      "default": "001-base.webp",
+      "base": "001-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "002": {
+      "default": "002-base.webp",
+      "base": "002-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "003": {
+      "default": "003-base.webp",
+      "base": "003-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "004": {
+      "default": "004-base.webp",
+      "base": "004-base.webp",
+      "forms": {},
+      "bossForms": {
+        "叶冕魔力猫": "004-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "005": {
+      "default": "005-base.webp",
+      "base": "005-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "006": {
+      "default": "006-base.webp",
+      "base": "006-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "007": {
+      "default": "007-base.webp",
+      "base": "007-base.webp",
+      "forms": {},
+      "bossForms": {
+        "烈火战神": "007-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "008": {
+      "default": "008-base.webp",
+      "base": "008-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "009": {
+      "default": "009-base.webp",
+      "base": "009-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "010": {
+      "default": "010-base.webp",
+      "base": "010-base.webp",
+      "forms": {},
+      "bossForms": {
+        "圣水守护": "010-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "011": {
+      "default": "011-form-01.webp",
+      "base": "",
+      "forms": {
+        "蓬松的样子": "011-form-01.webp",
+        "紧实的样子": "011-form-02.webp",
+        "起来鸭": "011-form-03.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {
+        "鸭吉吉国王": {
+          "蓬松的样子": "011-bossform-01-01.webp",
+          "紧实的样子": "011-bossform-01-02.webp",
+          "起来鸭": "011-bossform-01-03.webp"
+        }
+      }
+    },
+    "012": {
+      "default": "012-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "012-form-01.webp",
+        "蜕皮时的样子": "012-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "013": {
+      "default": "013-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "013-form-01.webp",
+        "蜕皮时的样子": "013-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "014": {
+      "default": "014-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "014-form-01.webp",
+        "蜕皮时的样子": "014-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "015": {
+      "default": "015-base.webp",
+      "base": "015-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "016": {
+      "default": "016-base.webp",
+      "base": "016-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "017": {
+      "default": "017-base.webp",
+      "base": "017-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "018": {
+      "default": "018-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "018-form-01.webp",
+        "春天的样子": "018-form-02.webp",
+        "夏天的样子": "018-form-03.webp",
+        "秋天的样子": "018-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "019": {
+      "default": "019-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "019-form-01.webp",
+        "春天的样子": "019-form-02.webp",
+        "夏天的样子": "019-form-03.webp",
+        "秋天的样子": "019-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "020": {
+      "default": "020-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "020-form-01.webp",
+        "春天的样子": "020-form-02.webp",
+        "夏天的样子": "020-form-03.webp",
+        "秋天的样子": "020-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {
+        "霜翼领主": {
+          "本来的样子": "020-bossform-01-01.webp",
+          "春天的样子": "020-bossform-01-02.webp",
+          "夏天的样子": "020-bossform-01-03.webp",
+          "秋天的样子": "020-bossform-01-04.webp"
+        }
+      }
+    },
+    "021": {
+      "default": "021-base.webp",
+      "base": "021-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "022": {
+      "default": "022-base.webp",
+      "base": "022-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "023": {
+      "default": "023-base.webp",
+      "base": "023-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "024": {
+      "default": "024-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "024-form-01.webp",
+        "球球尾巴的样子": "024-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "025": {
+      "default": "025-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "025-form-01.webp",
+        "球球尾巴的样子": "025-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "026": {
+      "default": "026-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "026-form-01.webp",
+        "球球尾巴的样子": "026-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "027": {
+      "default": "027-base.webp",
+      "base": "027-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "028": {
+      "default": "028-base.webp",
+      "base": "028-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "029": {
+      "default": "029-base.webp",
+      "base": "029-base.webp",
+      "forms": {},
+      "bossForms": {
+        "迷嶂布莱克": "029-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "030": {
+      "default": "030-base.webp",
+      "base": "030-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "031": {
+      "default": "031-base.webp",
+      "base": "031-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "032": {
+      "default": "032-base.webp",
+      "base": "032-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "033": {
+      "default": "033-base.webp",
+      "base": "033-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "034": {
+      "default": "034-form-01.webp",
+      "base": "",
+      "forms": {
+        "平常的样子": "034-form-01.webp",
+        "幽冥眼的样子": "034-form-02.webp",
+        "喵喵的样子": "034-form-03.webp",
+        "奇丽花的样子": "034-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "035": {
+      "default": "035-base.webp",
+      "base": "035-base.webp",
+      "forms": {},
+      "bossForms": {
+        "幻影荆棘": "035-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "036": {
+      "default": "036-base.webp",
+      "base": "036-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "037": {
+      "default": "037-base.webp",
+      "base": "037-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "038": {
+      "default": "038-base.webp",
+      "base": "038-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "039": {
+      "default": "039-base.webp",
+      "base": "039-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "040": {
+      "default": "040-form-01.webp",
+      "base": "",
+      "forms": {
+        "西瓜碧玺的样子": "040-form-01.webp",
+        "莲花刚玉的样子": "040-form-02.webp",
+        "星彩榴石的样子": "040-form-03.webp",
+        "火山琉璃的样子": "040-form-04.webp",
+        "蓝锥矿的样子": "040-form-05.webp",
+        "烧蓝黄金的样子": "040-form-06.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {
+        "钻石蜗": {
+          "西瓜碧玺的样子": "040-bossform-01-01.webp",
+          "莲花刚玉的样子": "040-bossform-01-02.webp",
+          "星彩榴石的样子": "040-bossform-01-03.webp",
+          "火山琉璃的样子": "040-bossform-01-04.webp",
+          "蓝锥矿的样子": "040-bossform-01-05.webp",
+          "烧蓝黄金的样子": "040-bossform-01-06.webp"
+        }
+      }
+    },
+    "041": {
+      "default": "041-base.webp",
+      "base": "041-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "042": {
+      "default": "042-base.webp",
+      "base": "042-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "043": {
+      "default": "043-base.webp",
+      "base": "043-base.webp",
+      "forms": {},
+      "bossForms": {
+        "奇丽果": "043-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "044": {
+      "default": "044-form-01.webp",
+      "base": "",
+      "forms": {
+        "草地附近的样子": "044-form-01.webp",
+        "沙地附近的样子": "044-form-02.webp",
+        "雪山附近的样子": "044-form-03.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "045": {
+      "default": "045-form-01.webp",
+      "base": "",
+      "forms": {
+        "草地附近的样子": "045-form-01.webp",
+        "沙地附近的样子": "045-form-02.webp",
+        "雪山附近的样子": "045-form-03.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "046": {
+      "default": "046-form-01.webp",
+      "base": "",
+      "forms": {
+        "草地附近的样子": "046-form-01.webp",
+        "沙地附近的样子": "046-form-02.webp",
+        "雪山附近的样子": "046-form-03.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "047": {
+      "default": "047-base.webp",
+      "base": "047-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "048": {
+      "default": "048-base.webp",
+      "base": "048-base.webp",
+      "forms": {},
+      "bossForms": {
+        "风暴战犬": "048-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "049": {
+      "default": "049-base.webp",
+      "base": "049-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "050": {
+      "default": "050-base.webp",
+      "base": "050-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "051": {
+      "default": "051-base.webp",
+      "base": "051-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "052": {
+      "default": "052-base.webp",
+      "base": "052-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "053": {
+      "default": "053-base.webp",
+      "base": "053-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "054": {
+      "default": "054-base.webp",
+      "base": "054-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "055": {
+      "default": "055-form-01.webp",
+      "base": "",
+      "forms": {
+        "睁眼的样子": "055-form-01.webp",
+        "闭眼的样子": "055-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "056": {
+      "default": "056-form-01.webp",
+      "base": "",
+      "forms": {
+        "睁眼的样子": "056-form-01.webp",
+        "闭眼的样子": "056-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "057": {
+      "default": "057-form-01.webp",
+      "base": "",
+      "forms": {
+        "穿旧睡衣的样子": "057-form-01.webp",
+        "穿星星睡衣的样子": "057-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "058": {
+      "default": "058-form-01.webp",
+      "base": "",
+      "forms": {
+        "穿旧睡衣的样子": "058-form-01.webp",
+        "穿星星睡衣的样子": "058-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "059": {
+      "default": "059-base.webp",
+      "base": "059-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "060": {
+      "default": "060-base.webp",
+      "base": "060-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "061": {
+      "default": "061-base.webp",
+      "base": "061-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "062": {
+      "default": "062-base.webp",
+      "base": "062-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "063": {
+      "default": "063-form-01.webp",
+      "base": "",
+      "forms": {
+        "海神球形态": "063-form-01.webp",
+        "彩玉球形态": "063-form-02.webp",
+        "短毛球形态": "063-form-03.webp",
+        "象牙球形态": "063-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "064": {
+      "default": "064-form-01.webp",
+      "base": "",
+      "forms": {
+        "海神球形态": "064-form-01.webp",
+        "彩玉球形态": "064-form-02.webp",
+        "短毛球形态": "064-form-03.webp",
+        "象牙球形态": "064-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "065": {
+      "default": "065-form-01.webp",
+      "base": "",
+      "forms": {
+        "海神球形态": "065-form-01.webp",
+        "彩玉球形态": "065-form-02.webp",
+        "短毛球形态": "065-form-03.webp",
+        "象牙球形态": "065-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {
+        "蹦蹦果": {
+          "海神球形态": "065-bossform-01-01.webp",
+          "彩玉球形态": "065-bossform-01-02.webp",
+          "短毛球形态": "065-bossform-01-03.webp",
+          "象牙球形态": "065-bossform-01-04.webp"
+        }
+      }
+    },
+    "066": {
+      "default": "066-base.webp",
+      "base": "066-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "067": {
+      "default": "067-base.webp",
+      "base": "067-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "068": {
+      "default": "068-base.webp",
+      "base": "068-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "069": {
+      "default": "069-base.webp",
+      "base": "069-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "070": {
+      "default": "070-base.webp",
+      "base": "070-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "071": {
+      "default": "071-base.webp",
+      "base": "071-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "072": {
+      "default": "072-base.webp",
+      "base": "072-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "073": {
+      "default": "073-base.webp",
+      "base": "073-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "074": {
+      "default": "074-base.webp",
+      "base": "074-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "075": {
+      "default": "075-base.webp",
+      "base": "075-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "076": {
+      "default": "076-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "076-form-01.webp",
+        "磨损的样子": "076-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "077": {
+      "default": "077-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "077-form-01.webp",
+        "磨损的样子": "077-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "078": {
+      "default": "078-form-01.webp",
+      "base": "",
+      "forms": {
+        "本来的样子": "078-form-01.webp",
+        "磨损的样子": "078-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {
+        "千棘海针": {
+          "本来的样子": "078-bossform-01-01.webp",
+          "磨损的样子": "078-bossform-01-02.webp"
+        }
+      }
+    },
+    "079": {
+      "default": "079-base.webp",
+      "base": "079-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "080": {
+      "default": "080-form-01.webp",
+      "base": "",
+      "forms": {
+        "星光能量的样子": "080-form-01.webp",
+        "月光能量的样子": "080-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "081": {
+      "default": "081-form-01.webp",
+      "base": "",
+      "forms": {
+        "星光能量的样子": "081-form-01.webp",
+        "月光能量的样子": "081-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "082": {
+      "default": "082-base.webp",
+      "base": "082-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "083": {
+      "default": "083-base.webp",
+      "base": "083-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "084": {
+      "default": "084-base.webp",
+      "base": "084-base.webp",
+      "forms": {},
+      "bossForms": {
+        "女王蜂": "084-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "085": {
+      "default": "085-base.webp",
+      "base": "085-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "086": {
+      "default": "086-base.webp",
+      "base": "086-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "087": {
+      "default": "087-base.webp",
+      "base": "087-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "088": {
+      "default": "088-base.webp",
+      "base": "088-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "089": {
+      "default": "089-base.webp",
+      "base": "089-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "090": {
+      "default": "090-base.webp",
+      "base": "090-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "091": {
+      "default": "091-base.webp",
+      "base": "091-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "092": {
+      "default": "092-base.webp",
+      "base": "092-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "093": {
+      "default": "093-base.webp",
+      "base": "093-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "094": {
+      "default": "094-base.webp",
+      "base": "094-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "095": {
+      "default": "095-base.webp",
+      "base": "095-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "096": {
+      "default": "096-base.webp",
+      "base": "096-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "097": {
+      "default": "097-base.webp",
+      "base": "097-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "098": {
+      "default": "098-base.webp",
+      "base": "098-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "099": {
+      "default": "099-base.webp",
+      "base": "099-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "100": {
+      "default": "100-base.webp",
+      "base": "100-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "101": {
+      "default": "101-base.webp",
+      "base": "101-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "102": {
+      "default": "102-base.webp",
+      "base": "102-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "103": {
+      "default": "103-base.webp",
+      "base": "103-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "104": {
+      "default": "104-base.webp",
+      "base": "104-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "105": {
+      "default": "105-base.webp",
+      "base": "105-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "106": {
+      "default": "106-base.webp",
+      "base": "106-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "107": {
+      "default": "107-base.webp",
+      "base": "107-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "108": {
+      "default": "108-base.webp",
+      "base": "108-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "109": {
+      "default": "109-base.webp",
+      "base": "109-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "110": {
+      "default": "110-base.webp",
+      "base": "110-base.webp",
+      "forms": {},
+      "bossForms": {
+        "神谕鲨": "110-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "111": {
+      "default": "111-base.webp",
+      "base": "111-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "112": {
+      "default": "112-base.webp",
+      "base": "112-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "113": {
+      "default": "113-base.webp",
+      "base": "113-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "114": {
+      "default": "114-base.webp",
+      "base": "114-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "115": {
+      "default": "115-base.webp",
+      "base": "115-base.webp",
+      "forms": {},
+      "bossForms": {
+        "祭礼巨像": "115-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "116": {
+      "default": "116-base.webp",
+      "base": "116-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "117": {
+      "default": "117-base.webp",
+      "base": "117-base.webp",
+      "forms": {},
+      "bossForms": {
+        "彩虹独角兽": "117-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "118": {
+      "default": "118-form-01.webp",
+      "base": "",
+      "forms": {
+        "金黄的样子": "118-form-01.webp",
+        "枯叶的样子": "118-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "119": {
+      "default": "119-form-01.webp",
+      "base": "",
+      "forms": {
+        "金黄的样子": "119-form-01.webp",
+        "枯叶的样子": "119-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "120": {
+      "default": "120-form-01.webp",
+      "base": "",
+      "forms": {
+        "金黄的样子": "120-form-01.webp",
+        "枯叶的样子": "120-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "121": {
+      "default": "121-base.webp",
+      "base": "121-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "122": {
+      "default": "122-base.webp",
+      "base": "122-base.webp",
+      "forms": {},
+      "bossForms": {
+        "黑猫密探": "122-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "123": {
+      "default": "123-base.webp",
+      "base": "123-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "124": {
+      "default": "124-base.webp",
+      "base": "124-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "125": {
+      "default": "125-base.webp",
+      "base": "125-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "126": {
+      "default": "126-base.webp",
+      "base": "126-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "127": {
+      "default": "127-base.webp",
+      "base": "127-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "128": {
+      "default": "128-base.webp",
+      "base": "128-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "129": {
+      "default": "129-base.webp",
+      "base": "129-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "130": {
+      "default": "130-base.webp",
+      "base": "130-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "131": {
+      "default": "131-base.webp",
+      "base": "131-base.webp",
+      "forms": {},
+      "bossForms": {
+        "恶魔狼王": "131-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "132": {
+      "default": "132-base.webp",
+      "base": "132-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "133": {
+      "default": "133-base.webp",
+      "base": "133-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "134": {
+      "default": "134-base.webp",
+      "base": "134-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "135": {
+      "default": "135-base.webp",
+      "base": "135-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "136": {
+      "default": "136-base.webp",
+      "base": "136-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "137": {
+      "default": "137-base.webp",
+      "base": "137-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "138": {
+      "default": "138-base.webp",
+      "base": "138-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "139": {
+      "default": "139-base.webp",
+      "base": "139-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "140": {
+      "default": "140-base.webp",
+      "base": "140-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "141": {
+      "default": "141-base.webp",
+      "base": "141-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "142": {
+      "default": "142-base.webp",
+      "base": "142-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "143": {
+      "default": "143-base.webp",
+      "base": "143-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "144": {
+      "default": "144-base.webp",
+      "base": "144-base.webp",
+      "forms": {},
+      "bossForms": {
+        "雪影冰灵": "144-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "145": {
+      "default": "145-base.webp",
+      "base": "145-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "146": {
+      "default": "146-base.webp",
+      "base": "146-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "147": {
+      "default": "147-base.webp",
+      "base": "147-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "148": {
+      "default": "148-base.webp",
+      "base": "148-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "149": {
+      "default": "149-base.webp",
+      "base": "149-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "150": {
+      "default": "150-base.webp",
+      "base": "150-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "151": {
+      "default": "151-base.webp",
+      "base": "151-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "152": {
+      "default": "152-base.webp",
+      "base": "152-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "153": {
+      "default": "153-base.webp",
+      "base": "153-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "154": {
+      "default": "154-base.webp",
+      "base": "154-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "155": {
+      "default": "155-base.webp",
+      "base": "155-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "156": {
+      "default": "156-base.webp",
+      "base": "156-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "157": {
+      "default": "157-base.webp",
+      "base": "157-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "158": {
+      "default": "158-base.webp",
+      "base": "158-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "159": {
+      "default": "159-base.webp",
+      "base": "159-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "160": {
+      "default": "160-base.webp",
+      "base": "160-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "161": {
+      "default": "161-base.webp",
+      "base": "161-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "162": {
+      "default": "162-base.webp",
+      "base": "162-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "163": {
+      "default": "163-base.webp",
+      "base": "163-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "164": {
+      "default": "164-base.webp",
+      "base": "164-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "165": {
+      "default": "165-form-01.webp",
+      "base": "",
+      "forms": {
+        "崖间地的样子": "165-form-01.webp",
+        "高山地的样子": "165-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "166": {
+      "default": "166-form-01.webp",
+      "base": "",
+      "forms": {
+        "崖间地的样子": "166-form-01.webp",
+        "高山地的样子": "166-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "167": {
+      "default": "167-form-01.webp",
+      "base": "",
+      "forms": {
+        "崖间地的样子": "167-form-01.webp",
+        "高山地的样子": "167-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "168": {
+      "default": "168-base.webp",
+      "base": "168-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "169": {
+      "default": "169-base.webp",
+      "base": "169-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "170": {
+      "default": "170-base.webp",
+      "base": "170-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "171": {
+      "default": "171-base.webp",
+      "base": "171-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "172": {
+      "default": "172-base.webp",
+      "base": "172-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "173": {
+      "default": "173-base.webp",
+      "base": "173-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "174": {
+      "default": "174-base.webp",
+      "base": "174-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "175": {
+      "default": "175-base.webp",
+      "base": "175-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "176": {
+      "default": "176-base.webp",
+      "base": "176-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "177": {
+      "default": "177-base.webp",
+      "base": "177-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "178": {
+      "default": "178-base.webp",
+      "base": "178-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "179": {
+      "default": "179-base.webp",
+      "base": "179-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "180": {
+      "default": "180-base.webp",
+      "base": "180-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "181": {
+      "default": "181-base.webp",
+      "base": "181-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "182": {
+      "default": "182-base.webp",
+      "base": "182-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "183": {
+      "default": "183-base.webp",
+      "base": "183-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "184": {
+      "default": "184-base.webp",
+      "base": "184-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "185": {
+      "default": "185-base.webp",
+      "base": "185-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "186": {
+      "default": "186-base.webp",
+      "base": "186-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "187": {
+      "default": "187-base.webp",
+      "base": "187-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "188": {
+      "default": "188-form-01.webp",
+      "base": "",
+      "forms": {
+        "白子": "188-form-01.webp",
+        "黑子": "188-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "189": {
+      "default": "189-form-01.webp",
+      "base": "",
+      "forms": {
+        "白子": "189-form-01.webp",
+        "黑子": "189-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "190": {
+      "default": "190-form-01.webp",
+      "base": "",
+      "forms": {
+        "白子": "190-form-01.webp",
+        "黑子": "190-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "191": {
+      "default": "191-form-01.webp",
+      "base": "",
+      "forms": {
+        "白子": "191-form-01.webp",
+        "黑子": "191-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "192": {
+      "default": "192-form-01.webp",
+      "base": "",
+      "forms": {
+        "白子": "192-form-01.webp",
+        "黑子": "192-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "193": {
+      "default": "193-base.webp",
+      "base": "193-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "194": {
+      "default": "194-base.webp",
+      "base": "194-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "195": {
+      "default": "195-base.webp",
+      "base": "195-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "196": {
+      "default": "196-base.webp",
+      "base": "196-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "197": {
+      "default": "197-base.webp",
+      "base": "197-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "198": {
+      "default": "198-base.webp",
+      "base": "198-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "199": {
+      "default": "199-base.webp",
+      "base": "199-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "200": {
+      "default": "200-base.webp",
+      "base": "200-base.webp",
+      "forms": {},
+      "bossForms": {
+        "奇梦咪": "200-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "201": {
+      "default": "201-base.webp",
+      "base": "201-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "202": {
+      "default": "202-base.webp",
+      "base": "202-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "203": {
+      "default": "203-base.webp",
+      "base": "203-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "204": {
+      "default": "204-base.webp",
+      "base": "204-base.webp",
+      "forms": {},
+      "bossForms": {
+        "伊兰龙": "204-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "205": {
+      "default": "205-base.webp",
+      "base": "205-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "206": {
+      "default": "206-base.webp",
+      "base": "206-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "207": {
+      "default": "207-base.webp",
+      "base": "207-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "208": {
+      "default": "208-base.webp",
+      "base": "208-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "209": {
+      "default": "209-base.webp",
+      "base": "209-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "210": {
+      "default": "210-base.webp",
+      "base": "210-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "211": {
+      "default": "211-base.webp",
+      "base": "211-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "212": {
+      "default": "212-base.webp",
+      "base": "212-base.webp",
+      "forms": {
+        "本命年的样子": "212-form-01.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "213": {
+      "default": "213-base.webp",
+      "base": "213-base.webp",
+      "forms": {
+        "本命年的样子": "213-form-01.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "214": {
+      "default": "214-base.webp",
+      "base": "214-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "215": {
+      "default": "215-base.webp",
+      "base": "215-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "216": {
+      "default": "216-base.webp",
+      "base": "216-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "217": {
+      "default": "217-base.webp",
+      "base": "217-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "218": {
+      "default": "218-base.webp",
+      "base": "218-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "219": {
+      "default": "219-base.webp",
+      "base": "219-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "220": {
+      "default": "220-form-01.webp",
+      "base": "",
+      "forms": {
+        "碧蓝珊瑚": "220-form-01.webp",
+        "杏黄百合": "220-form-02.webp",
+        "洋红沙丁": "220-form-03.webp",
+        "翠绿纶布": "220-form-04.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "221": {
+      "default": "221-base.webp",
+      "base": "221-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "222": {
+      "default": "222-base.webp",
+      "base": "222-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "223": {
+      "default": "223-base.webp",
+      "base": "223-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "224": {
+      "default": "224-base.webp",
+      "base": "224-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "225": {
+      "default": "225-base.webp",
+      "base": "225-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "226": {
+      "default": "226-base.webp",
+      "base": "226-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "227": {
+      "default": "227-base.webp",
+      "base": "227-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "228": {
+      "default": "228-base.webp",
+      "base": "228-base.webp",
+      "forms": {},
+      "bossForms": {
+        "波普鹿": "228-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "229": {
+      "default": "229-base.webp",
+      "base": "229-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "230": {
+      "default": "230-base.webp",
+      "base": "230-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "231": {
+      "default": "231-base.webp",
+      "base": "231-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "232": {
+      "default": "232-base.webp",
+      "base": "232-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "233": {
+      "default": "233-base.webp",
+      "base": "233-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "234": {
+      "default": "234-base.webp",
+      "base": "234-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "235": {
+      "default": "235-form-01.webp",
+      "base": "",
+      "forms": {
+        "杨桃饰品": "235-form-01.webp",
+        "蓝莓饰品": "235-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "236": {
+      "default": "236-form-01.webp",
+      "base": "",
+      "forms": {
+        "樱桃草莓口味": "236-form-01.webp",
+        "樱桃抹茶口味": "236-form-02.webp",
+        "杨桃巧克力口味": "236-form-03.webp",
+        "杨桃抹茶口味": "236-form-04.webp",
+        "杨桃草莓口味": "236-form-05.webp",
+        "蓝莓巧克力口味": "236-form-06.webp",
+        "蓝莓抹茶口味": "236-form-07.webp",
+        "蓝莓草莓口味": "236-form-08.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "237": {
+      "default": "237-form-01.webp",
+      "base": "",
+      "forms": {
+        "上弦的样子": "237-form-01.webp",
+        "下弦的样子": "237-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "238": {
+      "default": "238-form-01.webp",
+      "base": "",
+      "forms": {
+        "上弦的样子": "238-form-01.webp",
+        "下弦的样子": "238-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "239": {
+      "default": "239-base.webp",
+      "base": "239-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "240": {
+      "default": "240-base.webp",
+      "base": "240-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "241": {
+      "default": "241-base.webp",
+      "base": "241-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "242": {
+      "default": "242-base.webp",
+      "base": "242-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "243": {
+      "default": "243-base.webp",
+      "base": "243-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "244": {
+      "default": "244-base.webp",
+      "base": "244-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "245": {
+      "default": "245-base.webp",
+      "base": "245-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "246": {
+      "default": "246-base.webp",
+      "base": "246-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "247": {
+      "default": "247-base.webp",
+      "base": "247-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "248": {
+      "default": "248-base.webp",
+      "base": "248-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "249": {
+      "default": "249-base.webp",
+      "base": "249-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "250": {
+      "default": "250-base.webp",
+      "base": "250-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "251": {
+      "default": "251-base.webp",
+      "base": "251-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "252": {
+      "default": "252-base.webp",
+      "base": "252-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "253": {
+      "default": "253-base.webp",
+      "base": "253-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "254": {
+      "default": "254-base.webp",
+      "base": "254-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "255": {
+      "default": "255-base.webp",
+      "base": "255-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "256": {
+      "default": "256-base.webp",
+      "base": "256-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "257": {
+      "default": "257-base.webp",
+      "base": "257-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "258": {
+      "default": "258-form-01.webp",
+      "base": "",
+      "forms": {
+        "极昼的样子": "258-form-01.webp",
+        "极夜的样子": "258-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "259": {
+      "default": "259-form-01.webp",
+      "base": "",
+      "forms": {
+        "极昼的样子": "259-form-01.webp",
+        "极夜的样子": "259-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "260": {
+      "default": "260-form-01.webp",
+      "base": "",
+      "forms": {
+        "极昼的样子": "260-form-01.webp",
+        "极夜的样子": "260-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "261": {
+      "default": "261-base.webp",
+      "base": "261-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "262": {
+      "default": "262-base.webp",
+      "base": "262-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "263": {
+      "default": "263-base.webp",
+      "base": "263-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "264": {
+      "default": "264-base.webp",
+      "base": "264-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "265": {
+      "default": "265-base.webp",
+      "base": "265-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "266": {
+      "default": "266-base.webp",
+      "base": "266-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "267": {
+      "default": "267-base.webp",
+      "base": "267-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "268": {
+      "default": "268-base.webp",
+      "base": "268-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "269": {
+      "default": "269-base.webp",
+      "base": "269-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "270": {
+      "default": "270-base.webp",
+      "base": "270-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "271": {
+      "default": "271-base.webp",
+      "base": "271-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "272": {
+      "default": "272-base.webp",
+      "base": "272-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "273": {
+      "default": "273-base.webp",
+      "base": "273-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "274": {
+      "default": "274-base.webp",
+      "base": "274-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "275": {
+      "default": "275-base.webp",
+      "base": "275-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "276": {
+      "default": "276-base.webp",
+      "base": "276-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "277": {
+      "default": "277-form-01.webp",
+      "base": "",
+      "forms": {
+        "枯水期的样子": "277-form-01.webp",
+        "储水期的样子": "277-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "278": {
+      "default": "278-form-01.webp",
+      "base": "",
+      "forms": {
+        "枯水期的样子": "278-form-01.webp",
+        "储水期的样子": "278-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "279": {
+      "default": "279-form-01.webp",
+      "base": "",
+      "forms": {
+        "枯水期的样子": "279-form-01.webp",
+        "储水期的样子": "279-form-02.webp"
+      },
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "280": {
+      "default": "280-base.webp",
+      "base": "280-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "281": {
+      "default": "281-base.webp",
+      "base": "281-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "282": {
+      "default": "282-base.webp",
+      "base": "282-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "283": {
+      "default": "283-base.webp",
+      "base": "283-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "284": {
+      "default": "284-base.webp",
+      "base": "284-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "285": {
+      "default": "285-base.webp",
+      "base": "285-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "286": {
+      "default": "286-base.webp",
+      "base": "286-base.webp",
+      "forms": {},
+      "bossForms": {
+        "圣剑骑士": "286-boss-01.webp"
+      },
+      "bossFormVariants": {}
+    },
+    "287": {
+      "default": "287-base.webp",
+      "base": "287-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "288": {
+      "default": "288-base.webp",
+      "base": "288-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "289": {
+      "default": "289-base.webp",
+      "base": "289-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "290": {
+      "default": "290-base.webp",
+      "base": "290-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "291": {
+      "default": "291-base.webp",
+      "base": "291-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "292": {
+      "default": "292-base.webp",
+      "base": "292-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "293": {
+      "default": "293-base.webp",
+      "base": "293-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "294": {
+      "default": "294-base.webp",
+      "base": "294-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "295": {
+      "default": "295-base.webp",
+      "base": "295-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "296": {
+      "default": "296-base.webp",
+      "base": "296-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "297": {
+      "default": "297-base.webp",
+      "base": "297-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "298": {
+      "default": "298-base.webp",
+      "base": "298-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "299": {
+      "default": "299-base.webp",
+      "base": "299-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "300": {
+      "default": "300-base.webp",
+      "base": "300-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "301": {
+      "default": "301-base.webp",
+      "base": "301-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "302": {
+      "default": "302-base.webp",
+      "base": "302-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "303": {
+      "default": "303-base.webp",
+      "base": "303-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "304": {
+      "default": "304-base.webp",
+      "base": "304-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "305": {
+      "default": "305-base.webp",
+      "base": "305-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "306": {
+      "default": "306-base.webp",
+      "base": "306-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "307": {
+      "default": "307-base.webp",
+      "base": "307-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "308": {
+      "default": "308-base.webp",
+      "base": "308-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "309": {
+      "default": "309-base.webp",
+      "base": "309-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "310": {
+      "default": "310-base.webp",
+      "base": "310-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "311": {
+      "default": "311-base.webp",
+      "base": "311-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "312": {
+      "default": "312-base.webp",
+      "base": "312-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "313": {
+      "default": "313-base.webp",
+      "base": "313-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "314": {
+      "default": "314-base.webp",
+      "base": "314-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "315": {
+      "default": "315-base.webp",
+      "base": "315-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "316": {
+      "default": "316-base.webp",
+      "base": "316-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "317": {
+      "default": "317-base.webp",
+      "base": "317-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "318": {
+      "default": "318-base.webp",
+      "base": "318-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "319": {
+      "default": "319-base.webp",
+      "base": "319-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "320": {
+      "default": "320-base.webp",
+      "base": "320-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "321": {
+      "default": "321-base.webp",
+      "base": "321-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "322": {
+      "default": "322-base.webp",
+      "base": "322-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "323": {
+      "default": "323-base.webp",
+      "base": "323-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "324": {
+      "default": "324-base.webp",
+      "base": "324-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "325": {
+      "default": "325-base.webp",
+      "base": "325-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "326": {
+      "default": "326-base.webp",
+      "base": "326-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "327": {
+      "default": "327-base.webp",
+      "base": "327-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "328": {
+      "default": "328-base.webp",
+      "base": "328-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "329": {
+      "default": "329-base.webp",
+      "base": "329-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "330": {
+      "default": "330-base.webp",
+      "base": "330-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "331": {
+      "default": "331-base.webp",
+      "base": "331-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "332": {
+      "default": "332-base.webp",
+      "base": "332-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "333": {
+      "default": "333-base.webp",
+      "base": "333-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "334": {
+      "default": "334-base.webp",
+      "base": "334-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "335": {
+      "default": "335-base.webp",
+      "base": "335-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "336": {
+      "default": "336-base.webp",
+      "base": "336-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "337": {
+      "default": "337-base.webp",
+      "base": "337-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "338": {
+      "default": "338-base.webp",
+      "base": "338-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "339": {
+      "default": "339-base.webp",
+      "base": "339-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "340": {
+      "default": "340-base.webp",
+      "base": "340-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "341": {
+      "default": "341-base.webp",
+      "base": "341-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "342": {
+      "default": "342-base.webp",
+      "base": "342-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "343": {
+      "default": "343-base.webp",
+      "base": "343-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "344": {
+      "default": "344-base.webp",
+      "base": "344-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "345": {
+      "default": "345-base.webp",
+      "base": "345-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "346": {
+      "default": "346-base.webp",
+      "base": "346-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    },
+    "347": {
+      "default": "347-base.webp",
+      "base": "347-base.webp",
+      "forms": {},
+      "bossForms": {},
+      "bossFormVariants": {}
+    }
+  }
+}
