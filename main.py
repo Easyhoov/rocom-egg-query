@@ -47,18 +47,16 @@ if ASSETS_DIR.exists():
 
 # ========== 页面路由 ==========
 
-@app.get("/")
-async def serve_root():
+@app.get("/egg-query")
+async def serve_egg_query():
     """旧版孵蛋查询页面"""
     return FileResponse(PROJECT_DIR / "index.html")
-
 
 @app.get("/compendium")
 @app.get("/compendium/{path:path}")
 async def serve_compendium(path: str = ""):
     """Vue 图鉴页面"""
     return FileResponse(INDEX_HTML)
-
 
 @app.get("/index.html")
 async def serve_index_html():

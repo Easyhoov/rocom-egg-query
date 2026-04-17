@@ -1,19 +1,20 @@
 {
   "index.html": {
-    "file": "assets/index-VwkR2Jqz.js",
+    "file": "assets/index-gj5w_wr_.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
+      "src/views/Home.vue",
       "src/views/CompendiumPage.vue",
       "src/views/SpiritDetail.vue"
     ],
     "css": [
-      "assets/index-C6C_wTH6.css"
+      "assets/index-BLDf4pNl.css"
     ]
   },
   "src/views/CompendiumPage.vue": {
-    "file": "assets/CompendiumPage-CF5EzGCL.js",
+    "file": "assets/CompendiumPage-DHfR_C37.js",
     "name": "CompendiumPage",
     "src": "src/views/CompendiumPage.vue",
     "isDynamicEntry": true,
@@ -21,8 +22,17 @@
       "index.html"
     ]
   },
+  "src/views/Home.vue": {
+    "file": "assets/Home-BsLlurLp.js",
+    "name": "Home",
+    "src": "src/views/Home.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ]
+  },
   "src/views/SpiritDetail.vue": {
-    "file": "assets/SpiritDetail-CNplDrWw.js",
+    "file": "assets/SpiritDetail-rKysOVM1.js",
     "name": "SpiritDetail",
     "src": "src/views/SpiritDetail.vue",
     "isDynamicEntry": true,

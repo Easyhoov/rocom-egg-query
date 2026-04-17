@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EggQuery from '../views/EggQuery.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'EggQuery',
-    component: EggQuery
+    name: 'Home',
+    component: () => import('../views/Home.vue')
   },
   {
     path: '/compendium',
