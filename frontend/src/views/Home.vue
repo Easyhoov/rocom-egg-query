@@ -14,13 +14,18 @@ const features = [
     href: '/compendium',
     done: true,
   },
+  {
+    icon: '🎯',
+    title: '蛋组配对',
+    desc: '查看各蛋组可繁殖精灵，同组可互相配对',
+    href: '/egg-group',
+    done: true,
+  },
 ]
 
 const upcoming = [
-  { icon: '🎯', title: '蛋组配对查询', desc: '查看哪些精灵可以互相繁殖' },
   { icon: '🌈', title: '异色孵化路径', desc: '异色精灵的孵化概率与流程' },
   { icon: '📊', title: '六维雷达图', desc: '精灵属性六维可视化对比' },
-  { icon: '🔗', title: '孵蛋↔图鉴联动', desc: '从图鉴详情直接跳转孵蛋查询' },
 ]
 </script>
 

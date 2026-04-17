@@ -16,6 +16,11 @@ const routes = [
     name: 'SpiritDetail',
     component: () => import('../views/SpiritDetail.vue'),
   },
+  {
+    path: '/egg-group',
+    name: 'EggGroup',
+    component: () => import('../views/EggGroup.vue'),
+  },
 ]
 
 const router = createRouter({
