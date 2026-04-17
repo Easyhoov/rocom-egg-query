@@ -13,7 +13,7 @@ const props = defineProps({
 <template>
   <div class="result-card">
     <div class="result-card__header">
-      <img :src="pet.image" alt="" class="result-card__avatar" />
+      <img v-if="pet.image" :src="pet.image" alt="" class="result-card__avatar" />
       <span class="result-card__name">{{ pet.name }}</span>
       <span class="result-card__type" v-if="pet.egg_type_name">
         {{ pet.egg_type_icon }} {{ pet.egg_type_name }}

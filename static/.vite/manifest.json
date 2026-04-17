@@ -1,6 +1,6 @@
 {
   "index.html": {
-    "file": "assets/index-C9ikp55m.js",
+    "file": "assets/index-VwkR2Jqz.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -9,11 +9,11 @@
       "src/views/SpiritDetail.vue"
     ],
     "css": [
-      "assets/index-Dt371wYw.css"
+      "assets/index-C6C_wTH6.css"
     ]
   },
   "src/views/CompendiumPage.vue": {
-    "file": "assets/CompendiumPage-BfZ1hSsZ.js",
+    "file": "assets/CompendiumPage-CF5EzGCL.js",
     "name": "CompendiumPage",
     "src": "src/views/CompendiumPage.vue",
     "isDynamicEntry": true,
@@ -22,7 +22,7 @@
     ]
   },
   "src/views/SpiritDetail.vue": {
-    "file": "assets/SpiritDetail-BiApXWc8.js",
+    "file": "assets/SpiritDetail-CNplDrWw.js",
     "name": "SpiritDetail",
     "src": "src/views/SpiritDetail.vue",
     "isDynamicEntry": true,

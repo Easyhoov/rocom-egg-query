@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+"""图鉴 API"""
+
+import math
+from typing import Optional
+from fastapi import APIRouter, HTTPException, Query
+from services.spirits import SPIRITS, SPIRITS_BY_ID, OFFICIAL_EGG_GROUPS
+from services.image import get_spirit_image
+
+router = APIRouter(prefix="/api", tags=["图鉴"])
+
+
+@router.get("/spirits")
+async def list_spirits(
+    q: Optional[str] = Query(None, description="搜索（名称/编号）"),
+    attribute: Optional[str] = Query(None, description="属性筛选"),
+    egg_group: Optional[str] = Query(None, description="蛋组筛选"),
+    page: int = Query(1, ge=1, description="页码"),
+    page_size: int = Query(24, ge=1, le=100, description="每页数量"),
+):
+    """图鉴列表（搜索+筛选+分页）"""
+    filtered = SPIRITS
+
+    if q:
+        q_lower = q.lower().strip()
+        filtered = [
+            s for s in filtered
+            if q_lower in s['base_name'].lower()
+            or q_lower in s.get('display_name', '').lower()
+            or q_lower in s.get('spirit_no', '').lower()
+            or (q.isdigit() and s['spirit_no_number'] == int(q))
+        ]
+
+    if attribute:
+        filtered = [
+            s for s in filtered
+            if s.get('primary_attribute') == attribute
+            or s.get('secondary_attribute') == attribute
+        ]
+
+    if egg_group:
+        filtered = [
+            s for s in filtered
+            if egg_group in s.get('egg_groups', [])
+        ]
+
+    filtered.sort(key=lambda s: s['spirit_no_number'])
+
+    total = len(filtered)
+    total_pages = math.ceil(total / page_size) if total > 0 else 1
+    start = (page - 1) * page_size
+    end = start + page_size
+    items = filtered[start:end]
+
+    return {
+        "success": True,
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+        "total_pages": total_pages,
+        "items": [_format_spirit_card(s) for s in items],
+    }
+
+
+@router.get("/spirits/{spirit_id}")
+async def get_spirit(spirit_id: int):
+    """精灵详情"""
+    spirit = SPIRITS_BY_ID.get(spirit_id)
+    if not spirit:
+        raise HTTPException(status_code=404, detail=f"精灵 ID {spirit_id} 不存在")
+    return {
+        "success": True,
+        "spirit": _format_spirit_detail(spirit),
+    }
+
+
+@router.get("/official-egg-groups")
+async def list_official_egg_groups():
+    """官方蛋组列表"""
+    groups_with_count = []
+    for g in OFFICIAL_EGG_GROUPS:
+        name = g['egg_group_name']
+        count = sum(1 for s in SPIRITS if name in s.get('egg_groups', []))
+        groups_with_count.append({**g, "spirit_count": count})
+    return {"success": True, "groups": groups_with_count}
+
+
+def _format_spirit_card(s: dict) -> dict:
+    """格式化精灵卡片（列表用）"""
+    return {
+        "spirit_id": s['spirit_id'],
+        "spirit_no": s['spirit_no'],
+        "base_name": s['base_name'],
+        "display_name": s.get('display_name', s['base_name']),
+        "form_name": s.get('form_name'),
+        "primary_attribute": s.get('primary_attribute'),
+        "egg_groups": s.get('egg_groups', []),
+        "can_breed": s.get('can_breed', False),
+        "image": get_spirit_image(s['spirit_no_number']),
+        "race_total": s.get('race_total', 0),
+    }
+
+
+def _format_spirit_detail(s: dict) -> dict:
+    """格式化精灵详情"""
+    evolution = []
+    for e in s.get('evolution_chain', []):
+        evolution.append({
+            "spirit_id": e['spirit_id'],
+            "spirit_no": e['spirit_no'],
+            "base_name": e['base_name'],
+            "display_name": e.get('display_name', e['base_name']),
+            "form_name": e.get('form_name'),
+            "stage_name": e.get('stage_name'),
+            "evolution_level": e.get('evolution_level'),
+            "evolution_level_text": e.get('evolution_level_text'),
+            "image": get_spirit_image(e['spirit_no_number']),
+        })
+
+    forms = []
+    for f in s.get('forms', []):
+        forms.append({
+            "spirit_id": f['spirit_id'],
+            "spirit_no": f['spirit_no'],
+            "base_name": f['base_name'],
+            "display_name": f.get('display_name', f['base_name']),
+            "form_name": f.get('form_name'),
+            "image": get_spirit_image(f['spirit_no_number']),
+        })
+
+    return {
+        "spirit_id": s['spirit_id'],
+        "spirit_no": s['spirit_no'],
+        "base_name": s['base_name'],
+        "display_name": s.get('display_name', s['base_name']),
+        "form_name": s.get('form_name'),
+        "stage_name": s.get('stage_name'),
+        "primary_attribute": s.get('primary_attribute'),
+        "secondary_attribute": s.get('secondary_attribute'),
+        "trait_name": s.get('trait_name'),
+        "trait_effect": s.get('trait_effect'),
+        "description": s.get('description'),
+        "height_text": s.get('height_text'),
+        "weight_text": s.get('weight_text'),
+        "location_text": s.get('location_text'),
+        "locations": s.get('locations', []),
+        "egg_groups": s.get('egg_groups', []),
+        "can_breed": s.get('can_breed', False),
+        "race_total": s.get('race_total', 0),
+        "hp": s.get('hp', 0),
+        "attack": s.get('attack', 0),
+        "magic_attack": s.get('magic_attack', 0),
+        "defense": s.get('defense', 0),
+        "magic_defense": s.get('magic_defense', 0),
+        "speed": s.get('speed', 0),
+        "image": get_spirit_image(s['spirit_no_number']),
+        "has_shiny_variant": s.get('has_shiny_variant', False),
+        "evolution_chain": evolution,
+        "forms": forms,
+    }

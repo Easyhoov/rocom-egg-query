@@ -41,7 +41,12 @@ async function doSearch() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const data = await res.json()
     results.value = data.results || []
-    summary.value = data.tier_counts || null
+    // 从结果中统计各层级数量
+    const counts = { exact: 0, tolerance1: 0, tolerance2: 0, nearest: 0 }
+    for (const r of data.results || []) {
+      if (r.match_tier && counts[r.match_tier] !== undefined) counts[r.match_tier]++
+    }
+    summary.value = Object.values(counts).some(v => v > 0) ? counts : null
 
     // Update URL hash for sharing
     const hash = `#h=${h}&w=${w}`
