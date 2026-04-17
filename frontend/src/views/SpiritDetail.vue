@@ -8,6 +8,21 @@ const spirit = ref(null)
 const loading = ref(true)
 const spiritId = computed(() => route.params.id)
 
+// 解析身高体重文本，计算中位值
+function parseRange(text) {
+  if (!text) return null
+  const m = text.replace(/[^\d.~]/g, '').match(/([\d.]+)~([\d.]+)/)
+  if (!m) return null
+  return ((parseFloat(m[1]) + parseFloat(m[2])) / 2).toFixed(2)
+}
+const eggQueryLink = computed(() => {
+  if (!spirit.value) return null
+  const h = parseRange(spirit.value.height_text)
+  const w = parseRange(spirit.value.weight_text)
+  if (!h || !w) return null
+  return `/egg-query#h=${h}&w=${w}`
+})
+
 const statLabels = {
   hp: { label: '生命', color: '#4caf50', icon: '❤️' },
   attack: { label: '物攻', color: '#e74c3c', icon: '⚔️' },
@@ -98,6 +113,10 @@ watch(spiritId, fetchDetail)
             </div>
           </div>
           <p v-if="spirit.description" class="detail__desc">{{ spirit.description }}</p>
+          <!-- 查询孵蛋按钮 -->
+          <a v-if="eggQueryLink" :href="eggQueryLink" class="detail__egg-btn">
+            🔍 查询孵蛋
+          </a>
         </div>
 
         <!-- 特性 -->
@@ -224,6 +243,13 @@ watch(spiritId, fetchDetail)
 .detail__egg-label { color: #aaa; }
 .detail__egg-tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 6px; background: #f5f0ff; color: #764ba2; margin-left: 4px; }
 .detail__desc { font-size: 13px; color: #999; line-height: 1.6; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+.detail__egg-btn {
+  display: block; width: 100%; margin-top: 12px; padding: 12px;
+  background: linear-gradient(135deg, #667eea, #764ba2); color: #fff;
+  border-radius: 12px; text-align: center; text-decoration: none;
+  font-size: 15px; font-weight: 600; transition: .15s; box-sizing: border-box;
+}
+.detail__egg-btn:active { transform: scale(.97); }
 
 .detail__trait { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
 .detail__trait-name { font-size: 13px; font-weight: 600; background: #fff8e1; color: #f57f17; padding: 4px 10px; border-radius: 8px; }

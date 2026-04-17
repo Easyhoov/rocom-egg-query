@@ -90,6 +90,14 @@ const API=location.origin;
 let R=[],tab='all',eggT='magic',userR=0;
 document.querySelectorAll('.tag').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tag').forEach(x=>x.classList.remove('on'));t.classList.add('on');eggT=t.dataset.t});
 
+// 从URL hash读取预填参数 #h=0.24&w=1.6
+(function(){
+    const p=new URLSearchParams(location.hash.slice(1));
+    if(p.get('h'))document.getElementById('h').value=p.get('h');
+    if(p.get('w'))document.getElementById('w').value=p.get('w');
+    if(p.get('h')&&p.get('w'))go();
+})();
+
 async function go(){
     const h=+document.getElementById('h').value,w=+document.getElementById('w').value,b=document.getElementById('btn');
     if(!h||!w){document.querySelector('.row').style.animation='none';document.querySelector('.row').offsetHeight;document.querySelector('.row').style.animation='sk .3s';return}
