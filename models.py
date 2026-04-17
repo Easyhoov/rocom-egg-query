@@ -28,6 +28,7 @@ class PetResult(BaseModel):
     r_diff: float = 0
     match_tier: str = "nearest"  # exact / tolerance1 / tolerance2 / nearest
     probability: int = 0  # 0-100
+    spirit_id: Optional[int] = None  # 图鉴精灵ID
     image: Optional[str] = None
 
 

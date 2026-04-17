@@ -127,14 +127,16 @@ function render(){
         const icBg=r.precious_type>0?`background:linear-gradient(135deg,#fff3cd,#ffe082)`:`background:linear-gradient(135deg,#e8f0fe,#d4e0ff)`;
         const rDiff=r.r_diff!=null?r.r_diff.toFixed(2):'-';
         const imgHtml=r.image?`<img src="${r.image}" style="width:48px;height:48px;object-fit:contain;" onerror="this.outerHTML='${ico(r.name)}'" loading="lazy">`:ico(r.name);
-        return `<div class="pc" style="${bg}">
+        const link=r.spirit_id?`href="/compendium/${r.spirit_id}"`:'';
+        const tag=r.spirit_id?'a':'div';
+        return `<${tag} ${link} class="pc" style="${bg};${r.spirit_id?'cursor:pointer;text-decoration:none;color:inherit;':''}">
             <div class="badge" style="background:${r.egg_type_color}">${r.egg_type_icon} ${r.egg_type_name.replace('蛋','')}</div>
             <div class="ic" style="${icBg}">${imgHtml}</div>
             <div class="nm" title="${r.name}">${r.name}</div>
             <div class="rg">${r.height_min.toFixed(2)}-${r.height_max.toFixed(2)}m</div>
             <div class="rv">🎯R值: ${r.r_value?r.r_value.toFixed(2):'-'}</div>
             <div class="rd">📏差值: ${rDiff}</div>
-        </div>`}).join('')+'</div>';
+        </${tag}>`}).join('')+'</div>';
 }
 
 function ico(n){

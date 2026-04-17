@@ -141,10 +141,13 @@ def query_egg(height_m: float, weight_kg: float, egg_filter: Optional[int] = Non
 
     # 按R值差距排序
     results.sort(key=lambda x: x['r_diff'])
-
-    # 补充图片路径
+    # 补充图片路径和图鉴链接
+    from services.image import get_image_matcher
+    from services.spirits import SPIRITS_BY_NAME
     matcher = get_image_matcher()
     for r in results:
         r['image'] = matcher.match(r['name'])
+        spirit = SPIRITS_BY_NAME.get(r['name'])
+        r['spirit_id'] = spirit['spirit_id'] if spirit else None
 
     return results, round(user_r, 2)
