@@ -28,7 +28,7 @@ async function selectGroup(group) {
   try {
     const params = new URLSearchParams({
       egg_group: group.egg_group_name,
-      page_size: '200',
+      page_size: '100',
       page: '1',
     })
     const res = await fetch(`/api/spirits?${params}`)
