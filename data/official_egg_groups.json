@@ -1,0 +1,122 @@
+[
+  {
+    "egg_group_id": 1,
+    "egg_group_name": "两栖组",
+    "egg_group_icon": "🐸",
+    "egg_group_description": "能在陆地和水中生活的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 1
+  },
+  {
+    "egg_group_id": 2,
+    "egg_group_name": "动物组",
+    "egg_group_icon": "🐾",
+    "egg_group_description": "包含各类陆生动物形态的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 2
+  },
+  {
+    "egg_group_id": 3,
+    "egg_group_name": "大地组",
+    "egg_group_icon": "⛰️",
+    "egg_group_description": "与岩石矿物相关的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 3
+  },
+  {
+    "egg_group_id": 4,
+    "egg_group_name": "天空组",
+    "egg_group_icon": "🦅",
+    "egg_group_description": "拥有翅膀或能飞行的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 4
+  },
+  {
+    "egg_group_id": 5,
+    "egg_group_name": "妖精组",
+    "egg_group_icon": "🧚",
+    "egg_group_description": "可爱梦幻的妖精型精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 5
+  },
+  {
+    "egg_group_id": 6,
+    "egg_group_name": "巨灵组",
+    "egg_group_icon": "👹",
+    "egg_group_description": "体型庞大或外形奇特的巨兽型精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 6
+  },
+  {
+    "egg_group_id": 7,
+    "egg_group_name": "拟人组",
+    "egg_group_icon": "🧑",
+    "egg_group_description": "拥有类人体态的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 7
+  },
+  {
+    "egg_group_id": 8,
+    "egg_group_name": "无法孵蛋",
+    "egg_group_icon": "🚫",
+    "egg_group_description": "特殊精灵，无法通过孵蛋获得",
+    "is_unbreedable_group": true,
+    "sort_order": 8
+  },
+  {
+    "egg_group_id": 9,
+    "egg_group_name": "昆虫组",
+    "egg_group_icon": "🐛",
+    "egg_group_description": "以昆虫为原型的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 9
+  },
+  {
+    "egg_group_id": 10,
+    "egg_group_name": "机械组",
+    "egg_group_icon": "⚙️",
+    "egg_group_description": "由机械构成的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 10
+  },
+  {
+    "egg_group_id": 11,
+    "egg_group_name": "植物组",
+    "egg_group_icon": "🌿",
+    "egg_group_description": "以植物为原型的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 11
+  },
+  {
+    "egg_group_id": 12,
+    "egg_group_name": "海洋组",
+    "egg_group_icon": "🌊",
+    "egg_group_description": "主要生活在海洋中的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 12
+  },
+  {
+    "egg_group_id": 13,
+    "egg_group_name": "软体组",
+    "egg_group_icon": "🫧",
+    "egg_group_description": "身体柔软或形态不定的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 13
+  },
+  {
+    "egg_group_id": 14,
+    "egg_group_name": "魔力组",
+    "egg_group_icon": "✨",
+    "egg_group_description": "拥有强大魔法力量的神秘精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 14
+  },
+  {
+    "egg_group_id": 15,
+    "egg_group_name": "龙组",
+    "egg_group_icon": "🐲",
+    "egg_group_description": "具有龙族血统的精灵",
+    "is_unbreedable_group": false,
+    "sort_order": 15
+  }
+]

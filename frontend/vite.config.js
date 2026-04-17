@@ -19,7 +19,7 @@ export default defineConfig({
   },
   build: {
     outDir: resolve(__dirname, '../static'),
-    emptyOutDir: true,
+    emptyOutDir: false,
     assetsDir: 'assets',
     manifest: true
   }

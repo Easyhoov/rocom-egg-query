@@ -7,17 +7,16 @@ const routes = [
     name: 'EggQuery',
     component: EggQuery
   },
-  // 二期预留
-  // {
-  //   path: '/egg-group',
-  //   name: 'EggGroup',
-  //   component: () => import('../views/EggGroup.vue')
-  // },
-  // {
-  //   path: '/breeding',
-  //   name: 'Breeding',
-  //   component: () => import('../views/Breeding.vue')
-  // },
+  {
+    path: '/compendium',
+    name: 'Compendium',
+    component: () => import('../views/CompendiumPage.vue'),
+  },
+  {
+    path: '/compendium/:id',
+    name: 'SpiritDetail',
+    component: () => import('../views/SpiritDetail.vue'),
+  },
 ]
 
 const router = createRouter({

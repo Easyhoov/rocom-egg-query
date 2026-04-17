@@ -15,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
+import math
 
 # 图片匹配模块
 from image_matcher_fastapi import get_image_matcher
@@ -41,6 +42,81 @@ def load_breeding_data():
 # 全局数据
 PETS = load_breeding_data()
 
+# ========== 图鉴数据加载 ==========
+
+SPIRITS_FILE = DATA_DIR / "spirits.json"
+OFFICIAL_EGG_GROUPS_FILE = DATA_DIR / "official_egg_groups.json"
+
+def load_spirits_data():
+    """加载图鉴数据"""
+    if not SPIRITS_FILE.exists():
+        print(f"⚠️ 图鉴数据不存在: {SPIRITS_FILE}")
+        return [], {}, {}
+    
+    with open(SPIRITS_FILE, 'r', encoding='utf-8') as f:
+        spirits = json.load(f)
+    
+    # 按 spirit_id 建索引
+    by_id = {s['spirit_id']: s for s in spirits}
+    
+    # 按名字建索引（用于孵蛋结果关联）
+    by_name = {}
+    for s in spirits:
+        name = s['base_name']
+        if name not in by_name or s.get('form_name') is None:
+            by_name[name] = s
+    
+    print(f"✅ 已加载 {len(spirits)} 只精灵图鉴数据")
+    return spirits, by_id, by_name
+
+def load_official_egg_groups():
+    """加载官方蛋组数据"""
+    if not OFFICIAL_EGG_GROUPS_FILE.exists():
+        return []
+    with open(OFFICIAL_EGG_GROUPS_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+SPIRITS, SPIRITS_BY_ID, SPIRITS_BY_NAME = load_spirits_data()
+OFFICIAL_EGG_GROUPS = load_official_egg_groups()
+
+# 本地图片文件索引（按编号）
+STATIC_DIR = Path(__file__).parent / "static"
+ATLAS_DIR = STATIC_DIR / "creature-atlas"
+_local_image_cache: dict[int, str] = {}
+
+def _build_image_index():
+    """构建本地图片索引"""
+    if not ATLAS_DIR.exists():
+        return
+    # 按编号收集所有可用图片
+    by_number: dict[int, list[str]] = {}
+    for p in ATLAS_DIR.glob("*.webp"):
+        stem = p.stem  # e.g. "001-base", "011-form-02"
+        try:
+            num = int(stem.split("-")[0])
+            by_number.setdefault(num, []).append(stem)
+        except ValueError:
+            continue
+    
+    # 优先 base → form-01 → 第一个
+    for num, files in by_number.items():
+        base = f"{num:03d}-base"
+        if base in files:
+            _local_image_cache[num] = f"/creature-atlas/{base}.webp"
+        else:
+            # 找 form-01
+            form01 = [f for f in files if "form-01" in f]
+            if form01:
+                _local_image_cache[num] = f"/creature-atlas/{form01[0]}.webp"
+            else:
+                _local_image_cache[num] = f"/creature-atlas/{files[0]}.webp"
+
+_build_image_index()
+
+def get_spirit_image(spirit_no_number: int) -> Optional[str]:
+    """获取精灵本地图片路径"""
+    return _local_image_cache.get(spirit_no_number)
+
 # ========== API 定义 ==========
 
 app = FastAPI(
@@ -54,14 +130,20 @@ app = FastAPI(
 # 允许跨域 (小程序需要)
 # 静态文件 - 图片资源
 STATIC_DIR = Path(__file__).parent / "static"
-if STATIC_DIR.exists():
+if (STATIC_DIR / "creature-atlas").exists():
     app.mount("/creature-atlas", StaticFiles(directory=STATIC_DIR / "creature-atlas"), name="creature-atlas")
 
 # 静态文件 - 首页
+INDEX_HTML = Path(__file__).parent / "static" / "index.html"
+
 @app.get("/index.html")
 async def serve_index():
-    from pathlib import Path
-    return FileResponse(Path(__file__).parent / "index.html")
+    return FileResponse(INDEX_HTML)
+
+# 静态资源 (Vite 构建产物)
+ASSETS_DIR = Path(__file__).parent / "static" / "assets"
+if ASSETS_DIR.exists():
+    app.mount("/assets", StaticFiles(directory=str(ASSETS_DIR)), name="assets")
 
 app.add_middleware(
     CORSMiddleware,
@@ -205,9 +287,15 @@ def query_egg(height_m: float, weight_kg: float, egg_filter: Optional[int] = Non
 # ========== API 路由 ==========
 
 @app.get("/")
-async def serve_index():
-    """返回前端页面"""
+async def serve_root():
+    """返回旧版孵蛋查询页面"""
     return FileResponse(Path(__file__).parent / "index.html")
+
+@app.get("/compendium")
+@app.get("/compendium/{path:path}")
+async def serve_compendium(path: str = ""):
+    """返回 Vue 图鉴页面"""
+    return FileResponse(INDEX_HTML)
 
 
 @app.get("/api/health", response_model=HealthResponse)
@@ -335,7 +423,166 @@ async def get_stats():
     }
 
 
-# ========== 启动事件 ==========
+# ========== 图鉴 API ==========
+
+@app.get("/api/spirits")
+async def list_spirits(
+    q: Optional[str] = Query(None, description="搜索（名称/编号）"),
+    attribute: Optional[str] = Query(None, description="属性筛选"),
+    egg_group: Optional[str] = Query(None, description="蛋组筛选"),
+    page: int = Query(1, ge=1, description="页码"),
+    page_size: int = Query(24, ge=1, le=100, description="每页数量"),
+):
+    """图鉴列表（搜索+筛选+分页）"""
+    filtered = SPIRITS
+    
+    # 搜索
+    if q:
+        q_lower = q.lower().strip()
+        filtered = [
+            s for s in filtered
+            if q_lower in s['base_name'].lower()
+            or q_lower in s.get('display_name', '').lower()
+            or q_lower in s.get('spirit_no', '').lower()
+            or (q.isdigit() and s['spirit_no_number'] == int(q))
+        ]
+    
+    # 属性筛选
+    if attribute:
+        filtered = [
+            s for s in filtered
+            if s.get('primary_attribute') == attribute
+            or s.get('secondary_attribute') == attribute
+        ]
+    
+    # 蛋组筛选
+    if egg_group:
+        filtered = [
+            s for s in filtered
+            if egg_group in s.get('egg_groups', [])
+        ]
+    
+    # 排序：按编号
+    filtered.sort(key=lambda s: s['spirit_no_number'])
+    
+    # 分页
+    total = len(filtered)
+    total_pages = math.ceil(total / page_size) if total > 0 else 1
+    start = (page - 1) * page_size
+    end = start + page_size
+    items = filtered[start:end]
+    
+    return {
+        "success": True,
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+        "total_pages": total_pages,
+        "items": [_format_spirit_card(s) for s in items],
+    }
+
+
+@app.get("/api/spirits/{spirit_id}")
+async def get_spirit(spirit_id: int):
+    """精灵详情"""
+    spirit = SPIRITS_BY_ID.get(spirit_id)
+    if not spirit:
+        raise HTTPException(status_code=404, detail=f"精灵 ID {spirit_id} 不存在")
+    return {
+        "success": True,
+        "spirit": _format_spirit_detail(spirit),
+    }
+
+
+@app.get("/api/official-egg-groups")
+async def list_official_egg_groups():
+    """官方蛋组列表"""
+    groups_with_count = []
+    for g in OFFICIAL_EGG_GROUPS:
+        name = g['egg_group_name']
+        count = sum(1 for s in SPIRITS if name in s.get('egg_groups', []))
+        groups_with_count.append({**g, "spirit_count": count})
+    return {"success": True, "groups": groups_with_count}
+
+
+def _format_spirit_card(s: dict) -> dict:
+    """格式化精灵卡片（列表用）"""
+    return {
+        "spirit_id": s['spirit_id'],
+        "spirit_no": s['spirit_no'],
+        "base_name": s['base_name'],
+        "display_name": s.get('display_name', s['base_name']),
+        "form_name": s.get('form_name'),
+        "primary_attribute": s.get('primary_attribute'),
+        "egg_groups": s.get('egg_groups', []),
+        "can_breed": s.get('can_breed', False),
+        "image": get_spirit_image(s['spirit_no_number']),
+        "race_total": s.get('race_total', 0),
+    }
+
+
+def _format_spirit_detail(s: dict) -> dict:
+    """格式化精灵详情"""
+    # 进化链附带图片
+    evolution = []
+    for e in s.get('evolution_chain', []):
+        evolution.append({
+            "spirit_id": e['spirit_id'],
+            "spirit_no": e['spirit_no'],
+            "base_name": e['base_name'],
+            "display_name": e.get('display_name', e['base_name']),
+            "form_name": e.get('form_name'),
+            "stage_name": e.get('stage_name'),
+            "evolution_level": e.get('evolution_level'),
+            "evolution_level_text": e.get('evolution_level_text'),
+            "image": get_spirit_image(e['spirit_no_number']),
+        })
+    
+    # 形态
+    forms = []
+    for f in s.get('forms', []):
+        forms.append({
+            "spirit_id": f['spirit_id'],
+            "spirit_no": f['spirit_no'],
+            "base_name": f['base_name'],
+            "display_name": f.get('display_name', f['base_name']),
+            "form_name": f.get('form_name'),
+            "image": get_spirit_image(f['spirit_no_number']),
+        })
+    
+    return {
+        "spirit_id": s['spirit_id'],
+        "spirit_no": s['spirit_no'],
+        "base_name": s['base_name'],
+        "display_name": s.get('display_name', s['base_name']),
+        "form_name": s.get('form_name'),
+        "stage_name": s.get('stage_name'),
+        "primary_attribute": s.get('primary_attribute'),
+        "secondary_attribute": s.get('secondary_attribute'),
+        "trait_name": s.get('trait_name'),
+        "trait_effect": s.get('trait_effect'),
+        "description": s.get('description'),
+        "height_text": s.get('height_text'),
+        "weight_text": s.get('weight_text'),
+        "location_text": s.get('location_text'),
+        "locations": s.get('locations', []),
+        "egg_groups": s.get('egg_groups', []),
+        "can_breed": s.get('can_breed', False),
+        "race_total": s.get('race_total', 0),
+        "hp": s.get('hp', 0),
+        "attack": s.get('attack', 0),
+        "magic_attack": s.get('magic_attack', 0),
+        "defense": s.get('defense', 0),
+        "magic_defense": s.get('magic_defense', 0),
+        "speed": s.get('speed', 0),
+        "image": get_spirit_image(s['spirit_no_number']),
+        "has_shiny_variant": s.get('has_shiny_variant', False),
+        "evolution_chain": evolution,
+        "forms": forms,
+    }
+
+
+# ========== 图鉴 API (CDN 图片版) ==========
 
 @app.on_event("startup")
 async def startup_event():
@@ -350,6 +597,12 @@ async def refresh_image_cache():
     matcher = get_image_matcher()
     matcher.refresh_cache()
     return {"success": True, "message": "缓存已刷新"}
+
+
+# SPA fallback — 所有非 API 路由返回 index.html
+@app.get("/{full_path:path}")
+async def spa_fallback(full_path: str):
+    return FileResponse(INDEX_HTML)
 
 
 # ========== 启动 ==========
