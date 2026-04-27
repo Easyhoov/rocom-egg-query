@@ -94,7 +94,7 @@ const upcoming = [
 <style scoped>
 .home {
   min-height: 100vh;
-  background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
+  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
   padding: 16px 16px 80px;
 }
 .home__box {
@@ -138,9 +138,9 @@ const upcoming = [
 }
 .home__card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -155,7 +155,7 @@ const upcoming = [
   transform: scale(.97);
 }
 .home__card--active:hover {
-  box-shadow: 0 4px 20px rgba(102,126,234,.15);
+  box-shadow: 0 8px 24px rgba(139,61,255,0.12);
 }
 .home__card--disabled {
   opacity: .45;
@@ -171,7 +171,7 @@ const upcoming = [
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f2ff;
+  background: #f0ecff;
   border-radius: 14px;
   flex-shrink: 0;
 }
@@ -192,7 +192,7 @@ const upcoming = [
 }
 .home__card-arrow {
   font-size: 18px;
-  color: #667eea;
+  color: #8b3dff;
   font-weight: 600;
   flex-shrink: 0;
 }

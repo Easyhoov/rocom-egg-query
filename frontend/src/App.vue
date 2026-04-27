@@ -18,7 +18,7 @@ body {
   color: #1a1a2e;
   line-height: 1.5;
 }
-a { color: #667eea; text-decoration: none; }
+a { color: #8b3dff; text-decoration: none; }
 a:hover { text-decoration: none; }
 img { max-width: 100%; display: block; }
 
@@ -40,7 +40,7 @@ img { max-width: 100%; display: block; }
   font-size: 12px;
   font-weight: 500;
   padding: 4px 8px;
-  border-radius: 16px;
+  border-radius: 18px;
   transition: .2s;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@ img { max-width: 100%; display: block; }
 }
 .app-nav__item--active,
 .app-nav__item:hover {
-  color: #667eea;
-  background: #f0f4ff;
+  color: #8b3dff;
+  background: #f0ecff;
 }
 </style>

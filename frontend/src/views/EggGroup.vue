@@ -120,14 +120,14 @@ onMounted(loadGroups)
 <style scoped>
 .egg {
   min-height: 100vh;
-  background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
+  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
   padding: 16px 16px 80px;
   overflow-x: hidden;
 }
 .egg__box { max-width: 420px; width: 100%; margin: 0 auto; }
 .egg__hd { text-align: center; padding: 24px 0 20px; position: relative; }
 .egg__hd h1 { font-size: 22px; color: #1a1a2e; font-weight: 700; margin: 0; }
-.egg__back { font-size: 13px; color: #667eea; cursor: pointer; margin-bottom: 10px; }
+.egg__back { font-size: 13px; color: #8b3dff; cursor: pointer; margin-bottom: 10px; }
 .egg__sub { font-size: 13px; color: #888; margin-top: 6px; }
 
 /* 蛋组卡片 */
@@ -136,7 +136,7 @@ onMounted(loadGroups)
   background: #fff;
   border-radius: 14px;
   padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -148,14 +148,14 @@ onMounted(loadGroups)
   width: 48px; height: 48px;
   display: flex; align-items: center; justify-content: center;
   font-size: 28px;
-  background: #f0f2ff;
+  background: #f0ecff;
   border-radius: 14px;
   flex-shrink: 0;
 }
 .egg__group-info { flex: 1; }
 .egg__group-name { font-size: 16px; font-weight: 700; color: #1a1a2e; }
 .egg__group-count { font-size: 12px; color: #aaa; margin-top: 2px; }
-.egg__group-arrow { font-size: 18px; color: #667eea; font-weight: 600; }
+.egg__group-arrow { font-size: 18px; color: #8b3dff; font-weight: 600; }
 
 /* 精灵网格 */
 .egg__spirits { margin-top: 8px; }
@@ -171,25 +171,26 @@ onMounted(loadGroups)
   text-align: center;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  box-shadow: 0 8px 24px rgba(15,16,21,0.08);
   transition: .2s;
 }
+.egg__spirit:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
 .egg__spirit:active { transform: scale(.96); }
 .egg__spirit-img {
   width: 56px; height: 56px;
   margin: 0 auto 4px;
   display: flex; align-items: center; justify-content: center;
-  background: #f8f9ff;
+  background: #f5f2ff;
   border-radius: 50%;
 }
 .egg__spirit-img img { width: 48px; height: 48px; object-fit: contain; }
 .egg__spirit-no { font-size: 10px; color: #bbb; }
 .egg__spirit-name { font-size: 13px; font-weight: 600; color: #1a1a2e; margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.egg__spirit-attr { font-size: 9px; padding: 1px 5px; border-radius: 6px; background: #667eea15; color: #667eea; }
+.egg__spirit-attr { font-size: 9px; padding: 1px 5px; border-radius: 6px; background: #f0ecff; color: #8b3dff; }
 
 .egg__loading { text-align: center; padding: 60px 0; color: #ccc; }
 .egg__spinner {
-  width: 32px; height: 32px; border: 3px solid #e8e8e8; border-top-color: #667eea;
+  width: 32px; height: 32px; border: 3px solid #e8e8e8; border-top-color: #8b3dff;
   border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 12px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }

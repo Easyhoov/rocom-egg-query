@@ -175,7 +175,7 @@ const resetAll = () => {
 <style scoped>
 .garden {
   min-height: 100vh;
-  background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
+  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
   padding: 16px 16px 80px;
 }
 .garden__box { max-width: 420px; margin: 0 auto; }
@@ -188,15 +188,17 @@ const resetAll = () => {
 /* Card */
 .garden__card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
-  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
+  margin-bottom: 12px;
   display: flex;
   gap: 12px;
   align-items: flex-end;
   flex-wrap: wrap;
+  transition: box-shadow .2s;
 }
+.garden__card:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
 
 /* Error */
 .error-msg {
@@ -232,13 +234,13 @@ const resetAll = () => {
 }
 .form-input:focus, .form-select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #8b3dff;
   background: #fff;
 }
 
 .query-btn {
   padding: 10px 24px;
-  background: #667eea;
+  background: #8b3dff;
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -280,12 +282,12 @@ const resetAll = () => {
   border-radius: 12px;
   padding: 12px 8px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  box-shadow: 0 8px 24px rgba(15,16,21,0.08);
 }
 .summary-val {
   font-size: 16px;
   font-weight: 700;
-  color: #667eea;
+  color: #8b3dff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -323,7 +325,7 @@ const resetAll = () => {
   margin-bottom: 16px;
 }
 .item-card {
-  background: #f8f9ff;
+  background: #f5f2ff;
   border-radius: 12px;
   padding: 14px;
   text-align: center;
@@ -354,7 +356,7 @@ const resetAll = () => {
   position: absolute;
   top: 6px;
   right: 6px;
-  background: #667eea;
+  background: #8b3dff;
   color: #fff;
   padding: 2px 8px;
   border-radius: 10px;
@@ -363,7 +365,7 @@ const resetAll = () => {
 .plus, .equal {
   font-size: 20px;
   font-weight: bold;
-  color: #667eea;
+  color: #8b3dff;
 }
 
 .exp-info {
@@ -373,8 +375,8 @@ const resetAll = () => {
   flex-wrap: wrap;
 }
 .exp-badge, .level-badge {
-  background: #f0f4ff;
-  color: #667eea;
+  background: #f0ecff;
+  color: #8b3dff;
   padding: 6px 14px;
   border-radius: 20px;
   font-weight: 500;
@@ -388,7 +390,7 @@ const resetAll = () => {
   gap: 12px;
 }
 .ball-card {
-  background: #f8f9ff;
+  background: #f5f2ff;
   border-radius: 12px;
   padding: 14px;
   text-align: center;
@@ -399,7 +401,7 @@ const resetAll = () => {
 .ball-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(102,126,234,.2);
-  border-color: #667eea;
+  border-color: #8b3dff;
 }
 .ball-card:active { transform: scale(.97); }
 .ball-icon {
@@ -421,7 +423,7 @@ const resetAll = () => {
   gap: 8px;
 }
 .ball-recipe-card {
-  background: #f8f9ff;
+  background: #f5f2ff;
   border-radius: 12px;
   padding: 14px;
   display: flex;
@@ -429,12 +431,12 @@ const resetAll = () => {
   gap: 14px;
   transition: .2s;
 }
-.ball-recipe-card:hover { background: #f0f4ff; }
+.ball-recipe-card:hover { background: #f0ecff; }
 .recipe-rank {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #667eea;
+  background: #8b3dff;
   color: #fff;
   display: flex;
   align-items: center;
@@ -450,7 +452,7 @@ const resetAll = () => {
   margin-bottom: 4px;
   font-weight: 500;
 }
-.recipe-items .food-name { color: #667eea; }
+.recipe-items .food-name { color: #8b3dff; }
 .recipe-meta {
   display: flex;
   gap: 16px;

@@ -229,7 +229,7 @@ onUnmounted(() => {
 <style scoped>
 .garden {
   min-height: 100vh;
-  background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
+  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
   padding: 16px 16px 80px;
 }
 .garden__box { max-width: 420px; margin: 0 auto; }
@@ -238,9 +238,9 @@ onUnmounted(() => {
 .garden__sub { font-size: 13px; color: #888; margin: 0; }
 .garden__card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
   margin-bottom: 12px;
 }
 .garden__result {
@@ -250,10 +250,10 @@ onUnmounted(() => {
 .query-btn {
   width: 100%;
   padding: 12px;
-  background: #667eea;
+  background: #8b3dff;
   color: #fff;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -267,7 +267,7 @@ onUnmounted(() => {
   background: #fff0f0;
   color: #e74c3c;
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 14px;
   text-align: center;
   margin-bottom: 12px;
@@ -288,7 +288,7 @@ onUnmounted(() => {
   transition: .2s;
   box-sizing: border-box;
 }
-.eq-input:focus { outline: none; border-color: #667eea; background: #fff; }
+.eq-input:focus { outline: none; border-color: #8b3dff; background: #fff; }
 
 /* Tags */
 .eq-tags { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
@@ -303,7 +303,7 @@ onUnmounted(() => {
   transition: .2s;
   user-select: none;
 }
-.eq-tag--on { border-color: #667eea; background: #667eea; color: #fff; }
+.eq-tag--on { border-color: #8b3dff; background: #8b3dff; color: #fff; }
 
 /* Tabs */
 .eq-tabs { display: flex; background: #f5f5f5; border-radius: 10px; padding: 3px; margin-bottom: 8px; }
@@ -320,17 +320,17 @@ onUnmounted(() => {
   transition: .2s;
 }
 .eq-tb--on { background: #fff; color: #333; font-weight: 600; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-.eq-n { font-weight: 700; color: #667eea; }
+.eq-n { font-weight: 700; color: #8b3dff; }
 
 /* R值 */
-.eq-rval { text-align: center; font-size: 10px; color: #7c4dff; margin: 4px 0; font-weight: 500; }
+.eq-rval { text-align: center; font-size: 10px; color: #8b3dff; margin: 4px 0; font-weight: 500; }
 
 /* 3列网格 */
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
 
 /* Pet card */
 .pc {
-  background: #f8f9ff;
+  background: #f5f2ff;
   border-radius: 10px;
   padding: 28px 4px 8px;
   text-align: center;
@@ -340,6 +340,7 @@ onUnmounted(() => {
   overflow: hidden;
   cursor: pointer;
 }
+.pc:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
 .pc:active { transform: scale(.96); }
 .pc--precious {
   background: linear-gradient(135deg, #fffdf0, #fff8dc);
@@ -368,7 +369,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  background: linear-gradient(135deg, #e8f0fe, #d4e0ff);
+  background: linear-gradient(135deg, #f0ecff, #e2d6ff);
   overflow: hidden;
 }
 .pc--precious .pc__ico { background: linear-gradient(135deg, #fff3cd, #ffe082); }
@@ -386,7 +387,7 @@ onUnmounted(() => {
   padding: 0 2px;
 }
 .pc__range { font-size: 9px; color: #bbb; margin-top: 1px; }
-.pc__rval { font-size: 9px; color: #7c4dff; font-weight: 500; margin-top: 1px; }
+.pc__rval { font-size: 9px; color: #8b3dff; font-weight: 500; margin-top: 1px; }
 .pc__rdiff { font-size: 9px; color: #ff6d00; font-weight: 500; margin-top: 1px; }
 
 /* Footer */
@@ -406,7 +407,7 @@ onUnmounted(() => {
 .eq-tip--on { display: flex; }
 .eq-tip--box {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 24px;
   width: 85%;
   max-width: 320px;
@@ -418,7 +419,7 @@ onUnmounted(() => {
   width: 100%;
   padding: 10px;
   border: none;
-  background: #667eea;
+  background: #8b3dff;
   color: #fff;
   border-radius: 8px;
   font-size: 14px;

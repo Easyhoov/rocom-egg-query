@@ -206,11 +206,11 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
           <div class="comp__pet-no">{{ s.spirit_no }}</div>
           <div class="comp__pet-name">{{ s.display_name }}</div>
           <div class="comp__pet-tags">
-            <span v-if="s.primary_attribute" class="comp__pet-tag" style="background:#667eea15;color:#667eea">
+            <span v-if="s.primary_attribute" class="comp__pet-tag" style="background:#8b3dff15;color:#8b3dff">
               <img v-if="getAttrIcon(s.primary_attribute)" :src="getAttrIcon(s.primary_attribute)" class="comp__pet-tag-icon" />
               {{ s.primary_attribute }}
             </span>
-            <span v-for="g in (s.egg_groups || []).slice(0,2)" :key="g" class="comp__pet-tag" style="background:#f5f0ff;color:#764ba2">{{ g }}</span>
+            <span v-for="g in (s.egg_groups || []).slice(0,2)" :key="g" class="comp__pet-tag" style="background:#f5f0ff;color:#8b3dff">{{ g }}</span>
           </div>
         </router-link>
       </div>
@@ -239,7 +239,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
 <style scoped>
 .comp {
   min-height: 100vh;
-  background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
+  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
   padding: 16px 16px 80px;
 }
 .comp__box { max-width: 420px; margin: 0 auto; }
@@ -251,7 +251,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   background: #fff;
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
   margin-bottom: 12px;
 }
 .comp__input {
@@ -265,7 +265,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   transition: .2s;
   box-sizing: border-box;
 }
-.comp__input:focus { border-color: #667eea; background: #fff; }
+.comp__input:focus { border-color: #8b3dff; background: #fff; }
 .comp__label { font-size: 12px; color: #aaa; font-weight: 600; margin-bottom: 8px; }
 .comp__tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .comp__tag {
@@ -283,7 +283,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   gap: 3px;
 }
 .comp__tag-icon { width: 14px; height: 14px; }
-.comp__tag--on { border-color: #667eea; background: #667eea; color: #fff; }
+.comp__tag--on { border-color: #8b3dff; background: #8b3dff; color: #fff; }
 .comp__tag--shiny { border-color: #ffd700; }
 
 .comp__grid {
@@ -299,11 +299,12 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   text-align: center;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  box-shadow: 0 8px 24px rgba(15,16,21,0.08);
   transition: .2s;
   position: relative;
   overflow: hidden;
 }
+.comp__pet:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
 .comp__pet:active { transform: scale(.96); }
 .comp__pet-badge {
   position: absolute;
@@ -322,7 +323,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9ff;
+  background: #f5f2ff;
   border-radius: 50%;
 }
 .comp__pet-img img { width: 48px; height: 48px; object-fit: contain; }
@@ -347,7 +348,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   cursor: pointer;
   transition: .2s;
 }
-.comp__page-btn--on { border-color: #667eea; background: #667eea; color: #fff; font-weight: 600; }
+.comp__page-btn--on { border-color: #8b3dff; background: #8b3dff; color: #fff; font-weight: 600; }
 .comp__page-dots { color: #ccc; padding: 0 4px; }
 
 .comp__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: #ccc; }

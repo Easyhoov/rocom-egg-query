@@ -141,7 +141,7 @@ watch(spiritId, fetchDetail)
             <div class="detail__info">
               <h1>{{ spirit.display_name || spirit.base_name }}</h1>
               <div class="detail__tags">
-                <span v-if="spirit.primary_attribute" class="detail__tag" style="background:#667eea;color:#fff">
+                <span v-if="spirit.primary_attribute" class="detail__tag" style="background:#8b3dff;color:#fff">
                   <img v-if="getAttrIcon(spirit.primary_attribute)" :src="getAttrIcon(spirit.primary_attribute)" class="detail__tag-icon" />
                   {{ spirit.primary_attribute }}
                 </span>
@@ -149,7 +149,7 @@ watch(spiritId, fetchDetail)
                   <img v-if="getAttrIcon(spirit.secondary_attribute)" :src="getAttrIcon(spirit.secondary_attribute)" class="detail__tag-icon" />
                   {{ spirit.secondary_attribute }}
                 </span>
-                <span v-if="spirit.form_name" class="detail__tag" style="background:#f5f0ff;color:#764ba2">{{ spirit.form_name }}</span>
+                <span v-if="spirit.form_name" class="detail__tag" style="background:#f5f0ff;color:#8b3dff">{{ spirit.form_name }}</span>
                 <span v-if="!spirit.can_breed" class="detail__tag" style="background:#fee;color:#e74c3c">不可孵蛋</span>
                 <span v-if="spirit.has_shiny_variant" class="detail__tag" style="background:#f5f0ff;color:#9b59b6">✨ 异色</span>
               </div>
@@ -204,7 +204,7 @@ watch(spiritId, fetchDetail)
                 v-if="radarPoints"
                 :points="radarPoints"
                 fill="rgba(102, 126, 234, 0.2)"
-                stroke="#667eea"
+                stroke="#8b3dff"
                 stroke-width="2"
               />
               <!-- 数据点 -->
@@ -293,19 +293,19 @@ watch(spiritId, fetchDetail)
 <style scoped>
 .detail {
   min-height: 100vh;
-  background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
+  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
   padding: 16px 16px 80px;
 }
 .detail__box { max-width: 420px; margin: 0 auto; }
 .detail__nav { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 12px; }
-.detail__back { font-size: 13px; color: #667eea; text-decoration: none; }
+.detail__back { font-size: 13px; color: #8b3dff; text-decoration: none; }
 .detail__nav-no { font-size: 12px; color: #bbb; }
 
 .detail__card {
   background: #fff;
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
   margin-bottom: 12px;
 }
 .detail__card-title {
@@ -314,13 +314,13 @@ watch(spiritId, fetchDetail)
   color: #1a1a2e;
   margin-bottom: 12px;
 }
-.detail__card-sub { font-size: 12px; color: #667eea; font-weight: 400; margin-left: 6px; }
+.detail__card-sub { font-size: 12px; color: #8b3dff; font-weight: 400; margin-left: 6px; }
 
 .detail__hero { display: flex; gap: 14px; align-items: flex-start; }
 .detail__img {
   width: 100px; height: 100px; flex-shrink: 0; position: relative;
   display: flex; align-items: center; justify-content: center;
-  background: #f8f9ff; border-radius: 14px; overflow: visible;
+  background: #f5f2ff; border-radius: 14px; overflow: visible;
 }
 .detail__img img { width: 88px; height: 88px; object-fit: contain; }
 .detail__noimg { font-size: 40px; opacity: .3; }
@@ -340,7 +340,7 @@ watch(spiritId, fetchDetail)
 .detail__race { color: #f39c12; font-weight: 600; }
 .detail__egg-groups { font-size: 12px; }
 .detail__egg-label { color: #aaa; }
-.detail__egg-tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 6px; background: #f5f0ff; color: #764ba2; margin-left: 4px; }
+.detail__egg-tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 6px; background: #f5f0ff; color: #8b3dff; margin-left: 4px; }
 .detail__desc { font-size: 13px; color: #999; line-height: 1.6; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
 
 .detail__trait { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
@@ -360,10 +360,10 @@ watch(spiritId, fetchDetail)
   transition: .2s; min-width: 72px;
 }
 .detail__evo-node:active { transform: scale(.95); }
-.detail__evo-node--current { background: #f5f0ff; box-shadow: 0 0 0 2px #667eea40; }
+.detail__evo-node--current { background: #f5f0ff; box-shadow: 0 0 0 2px #8b3dff40; }
 .detail__evo-img {
   width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
-  background: #f8f9ff; border-radius: 50%; margin-bottom: 4px; overflow: hidden;
+  background: #f5f2ff; border-radius: 50%; margin-bottom: 4px; overflow: hidden;
 }
 .detail__evo-img img { width: 40px; height: 40px; object-fit: contain; }
 .detail__evo-name { font-size: 12px; font-weight: 600; color: #1a1a2e; }
@@ -372,23 +372,23 @@ watch(spiritId, fetchDetail)
 .detail__forms { display: flex; flex-wrap: wrap; gap: 6px; }
 .detail__form-tag {
   padding: 6px 12px; border-radius: 10px; font-size: 13px; font-weight: 500;
-  background: #f8f9ff; color: #666; text-decoration: none; border: 1.5px solid #e8e8e8; transition: .2s;
+  background: #f5f2ff; color: #666; text-decoration: none; border: 1.5px solid #e8e8e8; transition: .2s;
 }
-.detail__form-tag--current { background: #667eea; color: #fff; border-color: #667eea; }
+.detail__form-tag--current { background: #8b3dff; color: #fff; border-color: #8b3dff; }
 .detail__form-sub { font-size: 11px; color: inherit; opacity: .6; }
 
 .detail__locations { display: flex; flex-wrap: wrap; gap: 6px; }
-.detail__loc { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: #f0f2ff; color: #667eea; }
+.detail__loc { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: #f0ecff; color: #8b3dff; }
 
 .detail__loading { text-align: center; padding: 60px 0; color: #ccc; }
 .detail__spinner {
-  width: 32px; height: 32px; border: 3px solid #e8e8e8; border-top-color: #667eea;
+  width: 32px; height: 32px; border: 3px solid #e8e8e8; border-top-color: #8b3dff;
   border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 12px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .detail__empty { text-align: center; padding: 60px 0; color: #ccc; }
 .detail__empty-icon { font-size: 48px; margin-bottom: 8px; }
-.detail__btn { display: inline-block; margin-top: 12px; padding: 8px 20px; background: #667eea; color: #fff; border-radius: 10px; text-decoration: none; font-size: 14px; }
+.detail__btn { display: inline-block; margin-top: 12px; padding: 8px 20px; background: #8b3dff; color: #fff; border-radius: 10px; text-decoration: none; font-size: 14px; }
 
 .detail__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: #ccc; }
 </style>

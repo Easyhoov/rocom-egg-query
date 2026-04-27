@@ -4,7 +4,7 @@
     "name": "attrIcons"
   },
   "index.html": {
-    "file": "assets/index-BfL17cZ7.js",
+    "file": "assets/index-fYG99VYs.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -17,11 +17,11 @@
       "src/views/Garden.vue"
     ],
     "css": [
-      "assets/index-B-oi2r_E.css"
+      "assets/index-nGV2I_XL.css"
     ]
   },
   "src/views/CompendiumPage.vue": {
-    "file": "assets/CompendiumPage-BxrhHASy.js",
+    "file": "assets/CompendiumPage-Dvudl45Y.js",
     "name": "CompendiumPage",
     "src": "src/views/CompendiumPage.vue",
     "isDynamicEntry": true,
@@ -30,11 +30,11 @@
       "_attrIcons-C98OJ0VA.js"
     ],
     "css": [
-      "assets/CompendiumPage-DEhGJ6KL.css"
+      "assets/CompendiumPage-CCU-3Sp2.css"
     ]
   },
   "src/views/EggGroup.vue": {
-    "file": "assets/EggGroup-6o4Q3VDN.js",
+    "file": "assets/EggGroup-ia6s3Dzy.js",
     "name": "EggGroup",
     "src": "src/views/EggGroup.vue",
     "isDynamicEntry": true,
@@ -42,11 +42,11 @@
       "index.html"
     ],
     "css": [
-      "assets/EggGroup-DRmY7zCM.css"
+      "assets/EggGroup-Bg0SAjeF.css"
     ]
   },
   "src/views/EggQuery.vue": {
-    "file": "assets/EggQuery-DHOSKjF9.js",
+    "file": "assets/EggQuery-DenOV1Jx.js",
     "name": "EggQuery",
     "src": "src/views/EggQuery.vue",
     "isDynamicEntry": true,
@@ -54,11 +54,11 @@
       "index.html"
     ],
     "css": [
-      "assets/EggQuery-DxRCqzfB.css"
+      "assets/EggQuery-2lV8Avrf.css"
     ]
   },
   "src/views/Garden.vue": {
-    "file": "assets/Garden-6XPw9FgR.js",
+    "file": "assets/Garden-B_YC7ZoK.js",
     "name": "Garden",
     "src": "src/views/Garden.vue",
     "isDynamicEntry": true,
@@ -66,11 +66,11 @@
       "index.html"
     ],
     "css": [
-      "assets/Garden-dZok1Kp6.css"
+      "assets/Garden-Bq6Mxpkk.css"
     ]
   },
   "src/views/Home.vue": {
-    "file": "assets/Home-BmbD7s3t.js",
+    "file": "assets/Home-CoOZPP5K.js",
     "name": "Home",
     "src": "src/views/Home.vue",
     "isDynamicEntry": true,
@@ -78,11 +78,11 @@
       "index.html"
     ],
     "css": [
-      "assets/Home-DGS3bizi.css"
+      "assets/Home-DpzklYZF.css"
     ]
   },
   "src/views/SpiritDetail.vue": {
-    "file": "assets/SpiritDetail-ZLkroTL0.js",
+    "file": "assets/SpiritDetail-kayg92hk.js",
     "name": "SpiritDetail",
     "src": "src/views/SpiritDetail.vue",
     "isDynamicEntry": true,
@@ -91,7 +91,7 @@
       "_attrIcons-C98OJ0VA.js"
     ],
     "css": [
-      "assets/SpiritDetail-D1AcNRRP.css"
+      "assets/SpiritDetail-gZN8J4mL.css"
     ]
   }
 }
