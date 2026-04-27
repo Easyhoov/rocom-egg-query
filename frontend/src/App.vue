@@ -9,6 +9,19 @@
 </template>
 
 <style>
+/* Global reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               'Helvetica Neue', Arial, 'Noto Sans SC', sans-serif;
+  color: #1a1a2e;
+  line-height: 1.5;
+}
+a { color: #667eea; text-decoration: none; }
+a:hover { text-decoration: none; }
+img { max-width: 100%; display: block; }
+
 .app-nav {
   position: fixed;
   bottom: 0;

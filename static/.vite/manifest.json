@@ -4,7 +4,7 @@
     "name": "attrIcons"
   },
   "index.html": {
-    "file": "assets/index-Bt27q98r.js",
+    "file": "assets/index-BfL17cZ7.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -17,11 +17,11 @@
       "src/views/Garden.vue"
     ],
     "css": [
-      "assets/index-DgQxVzob.css"
+      "assets/index-B-oi2r_E.css"
     ]
   },
   "src/views/CompendiumPage.vue": {
-    "file": "assets/CompendiumPage-CTh3NMEM.js",
+    "file": "assets/CompendiumPage-BxrhHASy.js",
     "name": "CompendiumPage",
     "src": "src/views/CompendiumPage.vue",
     "isDynamicEntry": true,
@@ -34,7 +34,7 @@
     ]
   },
   "src/views/EggGroup.vue": {
-    "file": "assets/EggGroup-C1rTeWI8.js",
+    "file": "assets/EggGroup-6o4Q3VDN.js",
     "name": "EggGroup",
     "src": "src/views/EggGroup.vue",
     "isDynamicEntry": true,
@@ -46,7 +46,7 @@
     ]
   },
   "src/views/EggQuery.vue": {
-    "file": "assets/EggQuery-mFieg7TH.js",
+    "file": "assets/EggQuery-DHOSKjF9.js",
     "name": "EggQuery",
     "src": "src/views/EggQuery.vue",
     "isDynamicEntry": true,
@@ -58,7 +58,7 @@
     ]
   },
   "src/views/Garden.vue": {
-    "file": "assets/Garden-DiVUV9LN.js",
+    "file": "assets/Garden-6XPw9FgR.js",
     "name": "Garden",
     "src": "src/views/Garden.vue",
     "isDynamicEntry": true,
@@ -70,7 +70,7 @@
     ]
   },
   "src/views/Home.vue": {
-    "file": "assets/Home-7waBEpA6.js",
+    "file": "assets/Home-BmbD7s3t.js",
     "name": "Home",
     "src": "src/views/Home.vue",
     "isDynamicEntry": true,
@@ -82,7 +82,7 @@
     ]
   },
   "src/views/SpiritDetail.vue": {
-    "file": "assets/SpiritDetail-CtUwkCSp.js",
+    "file": "assets/SpiritDetail-ZLkroTL0.js",
     "name": "SpiritDetail",
     "src": "src/views/SpiritDetail.vue",
     "isDynamicEntry": true,
