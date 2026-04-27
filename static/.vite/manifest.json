@@ -1,33 +1,40 @@
 {
+  "_attrIcons-C98OJ0VA.js": {
+    "file": "assets/attrIcons-C98OJ0VA.js",
+    "name": "attrIcons"
+  },
   "index.html": {
-    "file": "assets/index-C_glUzVs.js",
+    "file": "assets/index-Bt27q98r.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
       "src/views/Home.vue",
+      "src/views/EggQuery.vue",
       "src/views/CompendiumPage.vue",
       "src/views/SpiritDetail.vue",
-      "src/views/EggGroup.vue"
+      "src/views/EggGroup.vue",
+      "src/views/Garden.vue"
     ],
     "css": [
-      "assets/index-BjSkZOaG.css"
+      "assets/index-DgQxVzob.css"
     ]
   },
   "src/views/CompendiumPage.vue": {
-    "file": "assets/CompendiumPage-TcV-dAeh.js",
+    "file": "assets/CompendiumPage-CTh3NMEM.js",
     "name": "CompendiumPage",
     "src": "src/views/CompendiumPage.vue",
     "isDynamicEntry": true,
     "imports": [
-      "index.html"
+      "index.html",
+      "_attrIcons-C98OJ0VA.js"
     ],
     "css": [
-      "assets/CompendiumPage-Dp7qM64b.css"
+      "assets/CompendiumPage-DEhGJ6KL.css"
     ]
   },
   "src/views/EggGroup.vue": {
-    "file": "assets/EggGroup-WBwXaH5n.js",
+    "file": "assets/EggGroup-C1rTeWI8.js",
     "name": "EggGroup",
     "src": "src/views/EggGroup.vue",
     "isDynamicEntry": true,
@@ -35,11 +42,35 @@
       "index.html"
     ],
     "css": [
-      "assets/EggGroup-dCPwGfRz.css"
+      "assets/EggGroup-DRmY7zCM.css"
+    ]
+  },
+  "src/views/EggQuery.vue": {
+    "file": "assets/EggQuery-mFieg7TH.js",
+    "name": "EggQuery",
+    "src": "src/views/EggQuery.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/EggQuery-DxRCqzfB.css"
+    ]
+  },
+  "src/views/Garden.vue": {
+    "file": "assets/Garden-DiVUV9LN.js",
+    "name": "Garden",
+    "src": "src/views/Garden.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Garden-dZok1Kp6.css"
     ]
   },
   "src/views/Home.vue": {
-    "file": "assets/Home-CcWHna2O.js",
+    "file": "assets/Home-7waBEpA6.js",
     "name": "Home",
     "src": "src/views/Home.vue",
     "isDynamicEntry": true,
@@ -47,19 +78,20 @@
       "index.html"
     ],
     "css": [
-      "assets/Home-IPvNyJ8S.css"
+      "assets/Home-DGS3bizi.css"
     ]
   },
   "src/views/SpiritDetail.vue": {
-    "file": "assets/SpiritDetail-CLM7Y9x-.js",
+    "file": "assets/SpiritDetail-CtUwkCSp.js",
     "name": "SpiritDetail",
     "src": "src/views/SpiritDetail.vue",
     "isDynamicEntry": true,
     "imports": [
-      "index.html"
+      "index.html",
+      "_attrIcons-C98OJ0VA.js"
     ],
     "css": [
-      "assets/SpiritDetail-DBkVHdD4.css"
+      "assets/SpiritDetail-D1AcNRRP.css"
     ]
   }
 }

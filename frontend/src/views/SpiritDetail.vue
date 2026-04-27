@@ -1,27 +1,84 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { getAttrIcon } from '../utils/attrIcons'
 
 const route = useRoute()
 const router = useRouter()
 const spirit = ref(null)
 const loading = ref(true)
+const showShiny = ref(false)
 const spiritId = computed(() => route.params.id)
 
+// 六维雷达图配置
+const statOrder = ['hp', 'attack', 'defense', 'magic_defense', 'magic_attack', 'speed']
 const statLabels = {
-  hp: { label: '生命', color: '#4caf50', icon: '❤️' },
-  attack: { label: '物攻', color: '#e74c3c', icon: '⚔️' },
-  magic_attack: { label: '魔攻', color: '#9b59b6', icon: '✨' },
-  defense: { label: '物防', color: '#3498db', icon: '🛡️' },
-  magic_defense: { label: '魔防', color: '#f39c12', icon: '🔮' },
-  speed: { label: '速度', color: '#1abc9c', icon: '💨' },
+  hp: { label: '生命', color: '#4caf50' },
+  attack: { label: '物攻', color: '#e74c3c' },
+  defense: { label: '物防', color: '#3498db' },
+  magic_defense: { label: '魔防', color: '#f39c12' },
+  magic_attack: { label: '魔攻', color: '#9b59b6' },
+  speed: { label: '速度', color: '#1abc9c' },
+}
+
+const RADAR_CX = 150, RADAR_CY = 150, RADAR_R = 110
+const MAX_STAT = 150
+const GRID_LEVELS = 5
+
+// 每个轴的角度（从顶部顺时针，6轴60°间隔）
+function axisAngle(i) {
+  return (-90 + i * 60) * Math.PI / 180
+}
+
+function polarToXY(i, r) {
+  const a = axisAngle(i)
+  return { x: RADAR_CX + r * Math.cos(a), y: RADAR_CY + r * Math.sin(a) }
+}
+
+// 网格多边形点
+function gridPoints(level) {
+  const r = RADAR_R * level / GRID_LEVELS
+  return Array.from({ length: 6 }, (_, i) => {
+    const p = polarToXY(i, r)
+    return `${p.x},${p.y}`
+  }).join(' ')
+}
+
+// 轴线端点
+function axisEnd(i) {
+  return polarToXY(i, RADAR_R)
+}
+
+// 数据多边形点
+const radarPoints = computed(() => {
+  if (!spirit.value) return ''
+  return statOrder.map((key, i) => {
+    const val = spirit.value[key] || 0
+    const r = RADAR_R * Math.min(val / MAX_STAT, 1)
+    const p = polarToXY(i, r)
+    return `${p.x},${p.y}`
+  }).join(' ')
+})
+
+// 标签位置（稍微超出雷达半径）
+function labelPos(i) {
+  const p = polarToXY(i, RADAR_R + 24)
+  return p
+}
+
+function labelAnchor(i) {
+  const a = axisAngle(i)
+  const cos = Math.cos(a)
+  if (Math.abs(cos) < 0.1) return 'middle'
+  return cos > 0 ? 'start' : 'end'
 }
 
 const stats = computed(() => {
   if (!spirit.value) return []
-  const s = spirit.value
-  return Object.entries(statLabels).map(([key, meta]) => ({
-    key, ...meta, value: s[key] || 0
+  return statOrder.map(key => ({
+    key,
+    ...statLabels[key],
+    value: spirit.value[key] || 0
   }))
 })
 
@@ -74,14 +131,24 @@ watch(spiritId, fetchDetail)
         <div class="detail__card">
           <div class="detail__hero">
             <div class="detail__img">
-              <img v-if="spirit.image" :src="spirit.image" :alt="spirit.base_name" />
+              <img v-if="spirit.has_shiny_variant && showShiny && spirit.shiny_image" :src="spirit.shiny_image" :alt="spirit.base_name + ' 异色'" />
+              <img v-else-if="spirit.image" :src="spirit.image" :alt="spirit.base_name" />
               <span v-else class="detail__noimg">❓</span>
+              <button v-if="spirit.has_shiny_variant && spirit.shiny_image" class="detail__shiny-toggle" @click="showShiny = !showShiny">
+                {{ showShiny ? '✨ 异色' : '🥚 普通' }}
+              </button>
             </div>
             <div class="detail__info">
               <h1>{{ spirit.display_name || spirit.base_name }}</h1>
               <div class="detail__tags">
-                <span v-if="spirit.primary_attribute" class="detail__tag" style="background:#667eea;color:#fff">{{ spirit.primary_attribute }}</span>
-                <span v-if="spirit.secondary_attribute" class="detail__tag" style="background:#4caf50;color:#fff">{{ spirit.secondary_attribute }}</span>
+                <span v-if="spirit.primary_attribute" class="detail__tag" style="background:#667eea;color:#fff">
+                  <img v-if="getAttrIcon(spirit.primary_attribute)" :src="getAttrIcon(spirit.primary_attribute)" class="detail__tag-icon" />
+                  {{ spirit.primary_attribute }}
+                </span>
+                <span v-if="spirit.secondary_attribute" class="detail__tag" style="background:#4caf50;color:#fff">
+                  <img v-if="getAttrIcon(spirit.secondary_attribute)" :src="getAttrIcon(spirit.secondary_attribute)" class="detail__tag-icon" />
+                  {{ spirit.secondary_attribute }}
+                </span>
                 <span v-if="spirit.form_name" class="detail__tag" style="background:#f5f0ff;color:#764ba2">{{ spirit.form_name }}</span>
                 <span v-if="!spirit.can_breed" class="detail__tag" style="background:#fee;color:#e74c3c">不可孵蛋</span>
                 <span v-if="spirit.has_shiny_variant" class="detail__tag" style="background:#f5f0ff;color:#9b59b6">✨ 异色</span>
@@ -112,14 +179,58 @@ watch(spiritId, fetchDetail)
         <!-- 种族值 -->
         <div v-if="spirit.race_total" class="detail__card">
           <h2 class="detail__card-title">📊 种族值 <span class="detail__card-sub">总和 {{ spirit.race_total }}</span></h2>
-          <div class="detail__stats">
-            <div v-for="s in stats" :key="s.key" class="detail__stat">
-              <span class="detail__stat-label">{{ s.icon }} {{ s.label }}</span>
-              <div class="detail__stat-bar">
-                <div class="detail__stat-fill" :style="{ width: Math.min(s.value / 150 * 100, 100) + '%', background: s.color }"></div>
-              </div>
-              <span class="detail__stat-value" :style="{ color: s.color }">{{ s.value }}</span>
-            </div>
+          <div class="detail__radar">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- 网格线 -->
+              <polygon
+                v-for="lv in GRID_LEVELS"
+                :key="'g' + lv"
+                :points="gridPoints(lv)"
+                fill="none"
+                stroke="#e8e8f0"
+                stroke-width="1"
+              />
+              <!-- 轴线 -->
+              <line
+                v-for="i in 6"
+                :key="'a' + i"
+                :x1="RADAR_CX" :y1="RADAR_CY"
+                :x2="axisEnd(i - 1).x" :y2="axisEnd(i - 1).y"
+                stroke="#e0e0e8"
+                stroke-width="1"
+              />
+              <!-- 数据区域 -->
+              <polygon
+                v-if="radarPoints"
+                :points="radarPoints"
+                fill="rgba(102, 126, 234, 0.2)"
+                stroke="#667eea"
+                stroke-width="2"
+              />
+              <!-- 数据点 -->
+              <circle
+                v-for="(s, i) in stats"
+                :key="'d' + s.key"
+                :cx="polarToXY(i, RADAR_R * Math.min(s.value / MAX_STAT, 1)).x"
+                :cy="polarToXY(i, RADAR_R * Math.min(s.value / MAX_STAT, 1)).y"
+                r="4"
+                :fill="s.color"
+                stroke="#fff"
+                stroke-width="1.5"
+              />
+              <!-- 标签 -->
+              <text
+                v-for="(s, i) in stats"
+                :key="'l' + s.key"
+                :x="labelPos(i).x"
+                :y="labelPos(i).y"
+                :text-anchor="labelAnchor(i)"
+                dominant-baseline="middle"
+                font-size="12"
+                font-weight="600"
+                :fill="s.color"
+              >{{ s.label }} {{ s.value }}</text>
+            </svg>
           </div>
         </div>
 
@@ -183,8 +294,7 @@ watch(spiritId, fetchDetail)
 .detail {
   min-height: 100vh;
   background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
-  padding: 16px;
-  padding-bottom: env(safe-area-inset-bottom, 16px);
+  padding: 16px 16px 80px;
 }
 .detail__box { max-width: 420px; margin: 0 auto; }
 .detail__nav { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 12px; }
@@ -208,16 +318,24 @@ watch(spiritId, fetchDetail)
 
 .detail__hero { display: flex; gap: 14px; align-items: flex-start; }
 .detail__img {
-  width: 100px; height: 100px; flex-shrink: 0;
+  width: 100px; height: 100px; flex-shrink: 0; position: relative;
   display: flex; align-items: center; justify-content: center;
-  background: #f8f9ff; border-radius: 14px; overflow: hidden;
+  background: #f8f9ff; border-radius: 14px; overflow: visible;
 }
 .detail__img img { width: 88px; height: 88px; object-fit: contain; }
 .detail__noimg { font-size: 40px; opacity: .3; }
+.detail__shiny-toggle {
+  position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; padding: 2px 8px; border-radius: 8px;
+  background: #fff8e1; color: #f57f17; border: 1px solid #ffe082;
+  cursor: pointer; white-space: nowrap; font-weight: 600;
+}
+.detail__shiny-toggle:active { transform: translateX(-50%) scale(.95); }
 .detail__info { flex: 1; min-width: 0; }
 .detail__info h1 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
 .detail__tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-.detail__tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.detail__tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; display: inline-flex; align-items: center; gap: 3px; }
+.detail__tag-icon { width: 14px; height: 14px; }
 .detail__meta { font-size: 12px; color: #888; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 6px; }
 .detail__race { color: #f39c12; font-weight: 600; }
 .detail__egg-groups { font-size: 12px; }
@@ -229,12 +347,8 @@ watch(spiritId, fetchDetail)
 .detail__trait-name { font-size: 13px; font-weight: 600; background: #fff8e1; color: #f57f17; padding: 4px 10px; border-radius: 8px; }
 .detail__trait-desc { font-size: 13px; color: #888; line-height: 1.6; flex: 1; min-width: 200px; }
 
-.detail__stats { display: flex; flex-direction: column; gap: 8px; }
-.detail__stat { display: flex; align-items: center; gap: 8px; }
-.detail__stat-label { width: 56px; font-size: 12px; color: #888; text-align: right; }
-.detail__stat-bar { flex: 1; height: 8px; background: #f0f0f5; border-radius: 4px; overflow: hidden; }
-.detail__stat-fill { height: 100%; border-radius: 4px; transition: width .5s; }
-.detail__stat-value { width: 32px; font-size: 12px; font-weight: 600; text-align: right; }
+.detail__radar { display: flex; justify-content: center; }
+.detail__radar svg { width: 100%; max-width: 300px; }
 
 .detail__evo { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
 .detail__evo-arrow { display: flex; flex-direction: column; align-items: center; padding: 0 2px; }

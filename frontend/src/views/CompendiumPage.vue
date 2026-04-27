@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { getAttrIcon } from '../utils/attrIcons'
 
 const route = useRoute()
 const router = useRouter()
@@ -8,6 +9,7 @@ const router = useRouter()
 const search = ref(String(route.query.q || ''))
 const selectedAttr = ref(String(route.query.attribute || ''))
 const selectedEggGroup = ref(String(route.query.egg_group || ''))
+const selectedShiny = ref(route.query.shiny === 'true' ? true : false)
 const page = ref(Number(route.query.page) || 1)
 const pageSize = 24
 
@@ -27,6 +29,7 @@ async function loadSpirits() {
     if (search.value) params.set('q', search.value)
     if (selectedAttr.value) params.set('attribute', selectedAttr.value)
     if (selectedEggGroup.value) params.set('egg_group', selectedEggGroup.value)
+    if (selectedShiny.value) params.set('shiny', 'true')
     params.set('page', String(page.value))
     params.set('page_size', String(pageSize))
 
@@ -55,6 +58,7 @@ function syncUrl() {
   if (search.value) q.q = search.value
   if (selectedAttr.value) q.attribute = selectedAttr.value
   if (selectedEggGroup.value) q.egg_group = selectedEggGroup.value
+  if (selectedShiny.value) q.shiny = 'true'
   if (page.value > 1) q.page = String(page.value)
   router.replace({ query: q })
 }
@@ -81,6 +85,11 @@ function clearAttr() {
 
 function clearEggGroup() {
   selectedEggGroup.value = ''
+  onFilterChange()
+}
+
+function clearShiny() {
+  selectedShiny.value = false
   onFilterChange()
 }
 
@@ -112,10 +121,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
     <div class="comp__box">
       <!-- 标题 -->
       <div class="comp__hd">
-        <div class="comp__hd-row">
-          <h1>📖 精灵图鉴</h1>
-          <a href="/" class="comp__back">← 首页</a>
-        </div>
+        <h1>📖 精灵图鉴</h1>
         <p class="comp__sub">共 {{ total }} 只精灵{{ loading ? ' · 加载中...' : '' }}</p>
       </div>
 
@@ -144,7 +150,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
             class="comp__tag"
             :class="{ 'comp__tag--on': selectedAttr === attr }"
             @click="selectedAttr = attr; onFilterChange()"
-          >{{ attr }}</span>
+          ><img v-if="getAttrIcon(attr)" :src="getAttrIcon(attr)" class="comp__tag-icon" />{{ attr }}</span>
         </div>
       </div>
 
@@ -167,13 +173,30 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
         </div>
       </div>
 
+      <!-- 异色筛选 -->
+      <div class="comp__card">
+        <div class="comp__label">异色</div>
+        <div class="comp__tags">
+          <span
+            class="comp__tag"
+            :class="{ 'comp__tag--on': !selectedShiny }"
+            @click="clearShiny"
+          >全部</span>
+          <span
+            class="comp__tag comp__tag--shiny"
+            :class="{ 'comp__tag--on': selectedShiny }"
+            @click="selectedShiny = !selectedShiny; onFilterChange()"
+          >✨ 有异色</span>
+        </div>
+      </div>
+
       <!-- 精灵卡片网格 -->
       <div class="comp__grid">
         <router-link
           v-for="s in spirits"
           :key="s.spirit_id"
           :to="`/compendium/${s.spirit_id}`"
-          class="comp__pet"
+          class="comp__pet spirit-card"
         >
           <div class="comp__pet-badge" v-if="!s.can_breed" style="background:#e74c3c">不可孵蛋</div>
           <div class="comp__pet-img">
@@ -183,7 +206,10 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
           <div class="comp__pet-no">{{ s.spirit_no }}</div>
           <div class="comp__pet-name">{{ s.display_name }}</div>
           <div class="comp__pet-tags">
-            <span v-if="s.primary_attribute" class="comp__pet-tag" style="background:#667eea15;color:#667eea">{{ s.primary_attribute }}</span>
+            <span v-if="s.primary_attribute" class="comp__pet-tag" style="background:#667eea15;color:#667eea">
+              <img v-if="getAttrIcon(s.primary_attribute)" :src="getAttrIcon(s.primary_attribute)" class="comp__pet-tag-icon" />
+              {{ s.primary_attribute }}
+            </span>
             <span v-for="g in (s.egg_groups || []).slice(0,2)" :key="g" class="comp__pet-tag" style="background:#f5f0ff;color:#764ba2">{{ g }}</span>
           </div>
         </router-link>
@@ -214,22 +240,19 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
 .comp {
   min-height: 100vh;
   background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
-  padding: 16px;
-  padding-bottom: env(safe-area-inset-bottom, 16px);
+  padding: 16px 16px 80px;
 }
 .comp__box { max-width: 420px; margin: 0 auto; }
-.comp__hd { text-align: center; padding: 16px 0 12px; }
-.comp__hd-row { display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; }
-.comp__hd h1 { font-size: 20px; color: #1a1a2e; font-weight: 700; }
-.comp__back { font-size: 13px; color: #667eea; text-decoration: none; position: absolute; right: 0; }
-.comp__sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+.comp__hd { text-align: center; padding: 24px 0 20px; }
+.comp__hd h1 { font-size: 22px; color: #1a1a2e; font-weight: 700; margin: 0; }
+.comp__sub { font-size: 13px; color: #888; margin-top: 6px; }
 
 .comp__card {
   background: #fff;
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.05);
-  margin-bottom: 10px;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  margin-bottom: 12px;
 }
 .comp__input {
   width: 100%;
@@ -255,8 +278,13 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   cursor: pointer;
   transition: .2s;
   user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
 }
+.comp__tag-icon { width: 14px; height: 14px; }
 .comp__tag--on { border-color: #667eea; background: #667eea; color: #fff; }
+.comp__tag--shiny { border-color: #ffd700; }
 
 .comp__grid {
   display: grid;
@@ -302,7 +330,8 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
 .comp__pet-no { font-size: 10px; color: #bbb; }
 .comp__pet-name { font-size: 13px; font-weight: 600; color: #1a1a2e; margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .comp__pet-tags { display: flex; gap: 3px; justify-content: center; flex-wrap: wrap; }
-.comp__pet-tag { font-size: 9px; padding: 1px 5px; border-radius: 6px; }
+.comp__pet-tag { font-size: 9px; padding: 1px 5px; border-radius: 6px; display: inline-flex; align-items: center; gap: 2px; }
+.comp__pet-tag-icon { width: 12px; height: 12px; }
 
 .comp__empty { text-align: center; padding: 40px 0; color: #ccc; }
 .comp__empty-icon { font-size: 48px; margin-bottom: 8px; }

@@ -1,0 +1,1218 @@
+{
+  "ball_options": [
+    {
+      "description": "受热不均的球。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100274.webp?sign=e744b24a4f0350bd3f78c24ba3563b0b&t=69e83e05",
+      "item_id": 100274,
+      "material_names": [
+        "向阳花",
+        "星霜花",
+        "伞伞菌",
+        "火焰花"
+      ],
+      "min_unlock_level": 1,
+      "name": "调温球",
+      "source": "精灵首领·风暴战犬掉落；精灵首领·雪影冰灵掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 4
+      },
+      "usage": "更适合用来捕捉火系、冰系精灵。"
+    },
+    {
+      "description": "沉重的球，没法扔太远。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100283.webp?sign=aab4fefb93eef5f02502aa510715cec7&t=69e83e05",
+      "item_id": 100283,
+      "material_names": [
+        "蜜黄菌",
+        "彩玉花"
+      ],
+      "min_unlock_level": 2,
+      "name": "淘沙球",
+      "source": "精灵首领·女王蜂掉落；精灵首领·迷嶂布莱克掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 2
+      },
+      "usage": "更适合用来捕捉地系、虫系的精灵。"
+    },
+    {
+      "description": "爱捉弄的球，喜欢偷袭精灵。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100273.webp?sign=5806a6f0d57ddf9b786a2534e44cff87&t=69e83e05",
+      "item_id": 100273,
+      "material_names": [
+        "幽幽草",
+        "恶魔雪茄"
+      ],
+      "min_unlock_level": 4,
+      "name": "暗星球",
+      "source": "精灵首领·恶魔狼王掉落；精灵首领·幻影荆棘掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 2
+      },
+      "usage": "更适合用来捕捉幽系、恶系精灵。"
+    },
+    {
+      "description": "轻快的球，能直线飞跃很远的距离。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100272.webp?sign=d97d6190e81c765efd6d88b2b7eee64e&t=69e83e05",
+      "item_id": 100272,
+      "material_names": [
+        "喷气菇",
+        "海神花",
+        "蓝掌"
+      ],
+      "min_unlock_level": 5,
+      "name": "网兜球",
+      "source": "精灵首领·霜翼领主掉落；精灵首领·千棘海针掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 3
+      },
+      "usage": "更适合用来捕捉水系、翼系精灵。"
+    },
+    {
+      "description": "青草味道的球。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100271.webp?sign=49c2d4fd2f1da6dd13090021d221e0dd&t=69e83e05",
+      "item_id": 100271,
+      "material_names": [
+        "喵喵草",
+        "象牙花"
+      ],
+      "min_unlock_level": 7,
+      "name": "光合球",
+      "source": "精灵首领·奇丽果掉落；精灵首领·钻石蜗掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 2
+      },
+      "usage": "更适合用来捕捉草系、光系精灵。"
+    },
+    {
+      "description": "活泼的球，开心的精灵会被吸引。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100262.webp?sign=4a242c0f6c36ddd501974f90b3d11c2f&t=69e83e05",
+      "item_id": 100262,
+      "material_names": [
+        "天使草",
+        "雪菇",
+        "短木莲",
+        "荧光兰"
+      ],
+      "min_unlock_level": 9,
+      "name": "美妙球",
+      "source": "精灵首领·黑猫密探掉落；精灵首领·奇梦咪掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 4
+      },
+      "usage": "更适合用来捕捉萌系、普通系的精灵。"
+    },
+    {
+      "description": "好斗的球，攻击中的精灵会被吸引。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100263.webp?sign=6e765c8c1d972f0eb85b5672e9f2d308&t=69e83e05",
+      "item_id": 100263,
+      "material_names": [
+        "大嘴花",
+        "睡铃"
+      ],
+      "min_unlock_level": 10,
+      "name": "好战球",
+      "source": "精灵首领·棋契陛下掉落；精灵首领·伊兰龙掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 2
+      },
+      "usage": "更适合用来捕捉武系、龙系的精灵。"
+    },
+    {
+      "description": "难以揣测的球。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100284.webp?sign=dd4d088e27448027b181da01e888ff0c&t=69e83e05",
+      "item_id": 100284,
+      "material_names": [
+        "紫雀花",
+        "紫晶菇",
+        "流星兰"
+      ],
+      "min_unlock_level": 11,
+      "name": "变幻球",
+      "source": "精灵首领·祭礼巨像掉落；精灵首领·圣剑骑士；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 3
+      },
+      "usage": "更适合用来捕捉幻系、机械系的精灵。"
+    },
+    {
+      "description": "蹦蹦跳跳的球，有着弹性十足的手感。",
+      "icon_url": "https://rococdn.gptvip.chat/webp/balls/100275.webp?sign=4232f578935b2fd3b8ed9be9ba08c31f&t=69e83e05",
+      "item_id": 100275,
+      "material_names": [
+        "海桑花",
+        "花星角"
+      ],
+      "min_unlock_level": 14,
+      "name": "绝缘球",
+      "source": "精灵首领·波普鹿掉落；精灵首领·蹦蹦果掉落；炼金造物获得",
+      "status_counts": {
+        "craftable_direct": 2
+      },
+      "usage": "更适合用来捕捉电系、毒系精灵。"
+    }
+  ],
+  "cards": [
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "受热不均的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "向阳花 / 伞伞菌 / 星霜花 / 火焰花",
+          "group_names": [
+            "向阳花",
+            "伞伞菌",
+            "星霜花",
+            "火焰花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100274.webp?sign=e744b24a4f0350bd3f78c24ba3563b0b&t=69e83e05",
+          "item_id": 100274,
+          "name": "调温球",
+          "source": "精灵首领·风暴战犬掉落；精灵首领·雪影冰灵掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉火系、冰系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 50.0,
+      "food_duration_label": "2小时",
+      "food_duration_minutes": 120,
+      "food_home_coin": 40,
+      "food_home_exp": 100,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350001.webp?sign=98d77302cacfdc90ef84072ae031e24e&t=69e83e05",
+      "food_name": "向阳花软糖",
+      "food_recipe_count": 1,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100604.webp?sign=230315765e4263825a17e843f1029249&t=69e83e05",
+      "material_item_id": 100604,
+      "material_name": "向阳花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370001.webp?sign=2540eeade9b16cac96193850c860d52c&t=69e83e05",
+      "recipe_name": "向阳花软糖",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360001.webp?sign=546f4e5b9527fff8c62120e669ea5be9&t=69e83e05",
+      "seed_name": "向阳花种子",
+      "special_ball_count": 0,
+      "unlock_level": 1
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "沉重的球，没法扔太远。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "蜜黄菌 / 石耳 / 幽幽鬼火 / 彩玉花",
+          "group_names": [
+            "蜜黄菌",
+            "石耳",
+            "幽幽鬼火",
+            "彩玉花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100283.webp?sign=aab4fefb93eef5f02502aa510715cec7&t=69e83e05",
+          "item_id": 100283,
+          "name": "淘沙球",
+          "source": "精灵首领·女王蜂掉落；精灵首领·迷嶂布莱克掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉地系、虫系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 47.5,
+      "food_duration_label": "4小时",
+      "food_duration_minutes": 240,
+      "food_home_coin": 80,
+      "food_home_exp": 190,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350007.webp?sign=b4a787f2536750a9028d4992db88397a&t=69e83e05",
+      "food_name": "蜜黄菌曲奇",
+      "food_recipe_count": 2,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100623.webp?sign=5baefea15209b0ae8e2b9394eb35af11&t=69e83e05",
+      "material_item_id": 100623,
+      "material_name": "蜜黄菌",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370007.webp?sign=756351283aa27a1a3303158ae93689b4&t=69e83e05",
+      "recipe_name": "蜜黄菌曲奇",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360007.webp?sign=d68950e33e0f8a1a7c9cc7790cc149d3&t=69e83e05",
+      "seed_name": "蜜黄菌种子",
+      "special_ball_count": 0,
+      "unlock_level": 2
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "受热不均的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "向阳花 / 伞伞菌 / 星霜花 / 火焰花",
+          "group_names": [
+            "向阳花",
+            "伞伞菌",
+            "星霜花",
+            "火焰花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100274.webp?sign=e744b24a4f0350bd3f78c24ba3563b0b&t=69e83e05",
+          "item_id": 100274,
+          "name": "调温球",
+          "source": "精灵首领·风暴战犬掉落；精灵首领·雪影冰灵掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉火系、冰系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 45.0,
+      "food_duration_label": "8小时",
+      "food_duration_minutes": 480,
+      "food_home_coin": 160,
+      "food_home_exp": 360,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350010.webp?sign=a3b8e7d1d218a108cac4b8a48afad81f&t=69e83e05",
+      "food_name": "星霜花汽水",
+      "food_recipe_count": 4,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100661.webp?sign=5eeb96d5f322cd136eab28f5d3140974&t=69e83e05",
+      "material_item_id": 100661,
+      "material_name": "星霜花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370010.webp?sign=425c72a059b0c9d3bd549d66c1f7679d&t=69e83e05",
+      "recipe_name": "星霜花汽水",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360010.webp?sign=9acb1a6e4613b290225623b4fe0bfb2c&t=69e83e05",
+      "seed_name": "星霜花种子",
+      "special_ball_count": 0,
+      "unlock_level": 3
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "爱捉弄的球，喜欢偷袭精灵。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "恶魔雪茄 / 幽幽草 / 骨片",
+          "group_names": [
+            "恶魔雪茄",
+            "幽幽草",
+            "骨片"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100273.webp?sign=5806a6f0d57ddf9b786a2534e44cff87&t=69e83e05",
+          "item_id": 100273,
+          "name": "暗星球",
+          "source": "精灵首领·恶魔狼王掉落；精灵首领·幻影荆棘掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉幽系、恶系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 42.5,
+      "food_duration_label": "12小时",
+      "food_duration_minutes": 720,
+      "food_home_coin": 240,
+      "food_home_exp": 510,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350009.webp?sign=a2a957d946ea57b693c96a4f2f9c44e8&t=69e83e05",
+      "food_name": "幽幽草酱吐司",
+      "food_recipe_count": 6,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100627.webp?sign=38275d76ff68d2401239a5f2dac65cae&t=69e83e05",
+      "material_item_id": 100627,
+      "material_name": "幽幽草",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370009.webp?sign=c83d47c53e0577579d9a78268f43aa9d&t=69e83e05",
+      "recipe_name": "幽幽草酱吐司",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360009.webp?sign=de7e409a0ef340fb7f6a3994dcbd8921&t=69e83e05",
+      "seed_name": "幽幽草种子",
+      "special_ball_count": 0,
+      "unlock_level": 4
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "轻快的球，能直线飞跃很远的距离。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "风卷草 / 喷气菇 / 海神花 / 蓝掌",
+          "group_names": [
+            "风卷草",
+            "喷气菇",
+            "海神花",
+            "蓝掌"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100272.webp?sign=d97d6190e81c765efd6d88b2b7eee64e&t=69e83e05",
+          "item_id": 100272,
+          "name": "网兜球",
+          "source": "精灵首领·霜翼领主掉落；精灵首领·千棘海针掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉水系、翼系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 40.0,
+      "food_duration_label": "20小时",
+      "food_duration_minutes": 1200,
+      "food_home_coin": 400,
+      "food_home_exp": 800,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350008.webp?sign=e813ac6890ca4d78b346fbf64854429c&t=69e83e05",
+      "food_name": "喷气菇布丁",
+      "food_recipe_count": 10,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100624.webp?sign=c222acc04729dc59d055b35bacb08c34&t=69e83e05",
+      "material_item_id": 100624,
+      "material_name": "喷气菇",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370008.webp?sign=fa57af87745490bc16824aab57fd31dc&t=69e83e05",
+      "recipe_name": "喷气菇布丁",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360008.webp?sign=84dcc6352e59658f6d0da1bd1b5a343a&t=69e83e05",
+      "seed_name": "喷气菇种子",
+      "special_ball_count": 0,
+      "unlock_level": 5
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "受热不均的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "向阳花 / 伞伞菌 / 星霜花 / 火焰花",
+          "group_names": [
+            "向阳花",
+            "伞伞菌",
+            "星霜花",
+            "火焰花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100274.webp?sign=e744b24a4f0350bd3f78c24ba3563b0b&t=69e83e05",
+          "item_id": 100274,
+          "name": "调温球",
+          "source": "精灵首领·风暴战犬掉落；精灵首领·雪影冰灵掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉火系、冰系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 37.5,
+      "food_duration_label": "40小时",
+      "food_duration_minutes": 2400,
+      "food_home_coin": 800,
+      "food_home_exp": 1500,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350006.webp?sign=7286f34d366f644592d84ae02a6252c2&t=69e83e05",
+      "food_name": "伞伞菌甜酱",
+      "food_recipe_count": 20,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100622.webp?sign=cd3556b9cedf012472a6ed80d38fa6a7&t=69e83e05",
+      "material_item_id": 100622,
+      "material_name": "伞伞菌",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370006.webp?sign=fde2f99b07a4a87e2e38ad88b5c2dbeb&t=69e83e05",
+      "recipe_name": "伞伞菌甜酱",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360006.webp?sign=5ca0d797583ba8885e6d67465c70fedf&t=69e83e05",
+      "seed_name": "伞伞菌种子",
+      "special_ball_count": 0,
+      "unlock_level": 6
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "青草味道的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "凤眼莲 / 象牙花 / 喵喵草",
+          "group_names": [
+            "凤眼莲",
+            "象牙花",
+            "喵喵草"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100271.webp?sign=49c2d4fd2f1da6dd13090021d221e0dd&t=69e83e05",
+          "item_id": 100271,
+          "name": "光合球",
+          "source": "精灵首领·奇丽果掉落；精灵首领·钻石蜗掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉草系、光系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 75.0,
+      "food_duration_label": "2小时",
+      "food_duration_minutes": 120,
+      "food_home_coin": 40,
+      "food_home_exp": 150,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350002.webp?sign=c29062a367eb59d9b813c70f19db0e90&t=69e83e05",
+      "food_name": "喵喵草软糖",
+      "food_recipe_count": 1,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100605.webp?sign=ee8a5e1b26fdfcebc86c65b1a07e2efd&t=69e83e05",
+      "material_item_id": 100605,
+      "material_name": "喵喵草",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370002.webp?sign=ebd91d873717677a797c7be3367fc642&t=69e83e05",
+      "recipe_name": "喵喵草软糖",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360002.webp?sign=b1d3b1b6653fbf26773d849327da1020&t=69e83e05",
+      "seed_name": "喵喵草种子",
+      "special_ball_count": 0,
+      "unlock_level": 7
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "轻快的球，能直线飞跃很远的距离。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "风卷草 / 喷气菇 / 海神花 / 蓝掌",
+          "group_names": [
+            "风卷草",
+            "喷气菇",
+            "海神花",
+            "蓝掌"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100272.webp?sign=d97d6190e81c765efd6d88b2b7eee64e&t=69e83e05",
+          "item_id": 100272,
+          "name": "网兜球",
+          "source": "精灵首领·霜翼领主掉落；精灵首领·千棘海针掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉水系、翼系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 71.25,
+      "food_duration_label": "4小时",
+      "food_duration_minutes": 240,
+      "food_home_coin": 80,
+      "food_home_exp": 285,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350022.webp?sign=88184ef13dc79b90e89513fd2f2411bf&t=69e83e05",
+      "food_name": "海神花曲奇",
+      "food_recipe_count": 2,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100844.webp?sign=5cc5084d67d5f290785adedfada7e1df&t=69e83e05",
+      "material_item_id": 100844,
+      "material_name": "海神花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370022.webp?sign=532a08fac54aff860c68ee46af9ccb84&t=69e83e05",
+      "recipe_name": "海神花曲奇",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360022.webp?sign=1a6cff838eed37dab506416020c19ff6&t=69e83e05",
+      "seed_name": "海神花种子",
+      "special_ball_count": 0,
+      "unlock_level": 8
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "活泼的球，开心的精灵会被吸引。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "天使草 / 雪菇 / 短木莲 / 荧光兰",
+          "group_names": [
+            "天使草",
+            "雪菇",
+            "短木莲",
+            "荧光兰"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100262.webp?sign=4a242c0f6c36ddd501974f90b3d11c2f&t=69e83e05",
+          "item_id": 100262,
+          "name": "美妙球",
+          "source": "精灵首领·黑猫密探掉落；精灵首领·奇梦咪掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉萌系、普通系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 67.5,
+      "food_duration_label": "8小时",
+      "food_duration_minutes": 480,
+      "food_home_coin": 160,
+      "food_home_exp": 540,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350005.webp?sign=5b63150d5d7c79b9c2d7b25708020939&t=69e83e05",
+      "food_name": "天使草汽水",
+      "food_recipe_count": 4,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100608.webp?sign=53e86217bd9b324a50c4dbf3125d2953&t=69e83e05",
+      "material_item_id": 100608,
+      "material_name": "天使草",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370005.webp?sign=6e066e4d15e5d44e13b0a94713640833&t=69e83e05",
+      "recipe_name": "天使草汽水",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360005.webp?sign=0bf817c1205d7cb653d9b2d626c4e2db&t=69e83e05",
+      "seed_name": "天使草种子",
+      "special_ball_count": 0,
+      "unlock_level": 9
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "好斗的球，攻击中的精灵会被吸引。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "藻羽花 / 海珊瑚 / 大嘴花 / 睡铃",
+          "group_names": [
+            "藻羽花",
+            "海珊瑚",
+            "大嘴花",
+            "睡铃"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100263.webp?sign=6e765c8c1d972f0eb85b5672e9f2d308&t=69e83e05",
+          "item_id": 100263,
+          "name": "好战球",
+          "source": "精灵首领·棋契陛下掉落；精灵首领·伊兰龙掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉武系、龙系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 63.75,
+      "food_duration_label": "12小时",
+      "food_duration_minutes": 720,
+      "food_home_coin": 240,
+      "food_home_exp": 765,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350014.webp?sign=865cfe1ec5f71eba241077cdcefa7693&t=69e83e05",
+      "food_name": "大嘴花酱吐司",
+      "food_recipe_count": 6,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100666.webp?sign=5ca7ac6cb3aeb9e2e4c4c3f8bd02320a&t=69e83e05",
+      "material_item_id": 100666,
+      "material_name": "大嘴花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370014.webp?sign=936f8edcb5bbae4187bd7b76697636e5&t=69e83e05",
+      "recipe_name": "大嘴花酱吐司",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360014.webp?sign=d607057d6c7047a4f91650f8d7b3ee70&t=69e83e05",
+      "seed_name": "大嘴花种子",
+      "special_ball_count": 0,
+      "unlock_level": 10
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "难以揣测的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "流星兰 / 紫晶菇 / 紫雀花",
+          "group_names": [
+            "流星兰",
+            "紫晶菇",
+            "紫雀花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100284.webp?sign=dd4d088e27448027b181da01e888ff0c&t=69e83e05",
+          "item_id": 100284,
+          "name": "变幻球",
+          "source": "精灵首领·祭礼巨像掉落；精灵首领·圣剑骑士；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉幻系、机械系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 60.0,
+      "food_duration_label": "20小时",
+      "food_duration_minutes": 1200,
+      "food_home_coin": 400,
+      "food_home_exp": 1200,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350023.webp?sign=94c205bd4ba476b7f94548177ec9048a&t=69e83e05",
+      "food_name": "紫雀花布丁",
+      "food_recipe_count": 10,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100846.webp?sign=97317c40c7d86fe976df2bf5fc14c272&t=69e83e05",
+      "material_item_id": 100846,
+      "material_name": "紫雀花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370023.webp?sign=cf205a7e305496db7745d029573dea5a&t=69e83e05",
+      "recipe_name": "紫雀花布丁",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360023.webp?sign=8fa2db338532ac27c4c195ed67e24365&t=69e83e05",
+      "seed_name": "紫雀花种子",
+      "special_ball_count": 0,
+      "unlock_level": 11
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "活泼的球，开心的精灵会被吸引。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "天使草 / 雪菇 / 短木莲 / 荧光兰",
+          "group_names": [
+            "天使草",
+            "雪菇",
+            "短木莲",
+            "荧光兰"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100262.webp?sign=4a242c0f6c36ddd501974f90b3d11c2f&t=69e83e05",
+          "item_id": 100262,
+          "name": "美妙球",
+          "source": "精灵首领·黑猫密探掉落；精灵首领·奇梦咪掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉萌系、普通系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 56.25,
+      "food_duration_label": "40小时",
+      "food_duration_minutes": 2400,
+      "food_home_coin": 800,
+      "food_home_exp": 2250,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350011.webp?sign=e5616fe1a4ffe7d404f54a413514f24c&t=69e83e05",
+      "food_name": "雪菇甜酱",
+      "food_recipe_count": 20,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100662.webp?sign=528ff57a8c9c5bc3b079140bce192b87&t=69e83e05",
+      "material_item_id": 100662,
+      "material_name": "雪菇",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370011.webp?sign=e43c5d3735cc861bebd9f5a71ccc58a7&t=69e83e05",
+      "recipe_name": "雪菇甜酱",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360011.webp?sign=5334cc99e97f79ab8d0f7e826a788a1b&t=69e83e05",
+      "seed_name": "雪菇种子",
+      "special_ball_count": 0,
+      "unlock_level": 12
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "好斗的球，攻击中的精灵会被吸引。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "藻羽花 / 海珊瑚 / 大嘴花 / 睡铃",
+          "group_names": [
+            "藻羽花",
+            "海珊瑚",
+            "大嘴花",
+            "睡铃"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100263.webp?sign=6e765c8c1d972f0eb85b5672e9f2d308&t=69e83e05",
+          "item_id": 100263,
+          "name": "好战球",
+          "source": "精灵首领·棋契陛下掉落；精灵首领·伊兰龙掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉武系、龙系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 100.0,
+      "food_duration_label": "2小时",
+      "food_duration_minutes": 120,
+      "food_home_coin": 40,
+      "food_home_exp": 200,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350004.webp?sign=c42d1b5aabef562d03216d1b5f138d17&t=69e83e05",
+      "food_name": "睡铃软糖",
+      "food_recipe_count": 1,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100607.webp?sign=8b7e329b14637e450f5142b50ca2812c&t=69e83e05",
+      "material_item_id": 100607,
+      "material_name": "睡铃",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370004.webp?sign=c51d84f9fb1cd2c3b5f379f31512c251&t=69e83e05",
+      "recipe_name": "睡铃软糖",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360004.webp?sign=9e4948d3da3994090395f991dd5c91cb&t=69e83e05",
+      "seed_name": "睡铃种子",
+      "special_ball_count": 0,
+      "unlock_level": 13
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "蹦蹦跳跳的球，有着弹性十足的手感。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "洋红珊瑚 / 杏黄贝 / 海桑花 / 花星角",
+          "group_names": [
+            "洋红珊瑚",
+            "杏黄贝",
+            "海桑花",
+            "花星角"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100275.webp?sign=4232f578935b2fd3b8ed9be9ba08c31f&t=69e83e05",
+          "item_id": 100275,
+          "name": "绝缘球",
+          "source": "精灵首领·波普鹿掉落；精灵首领·蹦蹦果掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉电系、毒系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 95.0,
+      "food_duration_label": "4小时",
+      "food_duration_minutes": 240,
+      "food_home_coin": 80,
+      "food_home_exp": 380,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350017.webp?sign=6909f8128186257f1e867bbb4aa01ed2&t=69e83e05",
+      "food_name": "海桑花曲奇",
+      "food_recipe_count": 2,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100669.webp?sign=4ba70c8e11d16d1db18ddc485ea6cbb6&t=69e83e05",
+      "material_item_id": 100669,
+      "material_name": "海桑花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370017.webp?sign=3ef6d515e7d771574f573027fc0936e7&t=69e83e05",
+      "recipe_name": "海桑花曲奇",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360017.webp?sign=66d46f3b24b9f0c5b353c88499d0df35&t=69e83e05",
+      "seed_name": "海桑花种子",
+      "special_ball_count": 0,
+      "unlock_level": 14
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "沉重的球，没法扔太远。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "蜜黄菌 / 石耳 / 幽幽鬼火 / 彩玉花",
+          "group_names": [
+            "蜜黄菌",
+            "石耳",
+            "幽幽鬼火",
+            "彩玉花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100283.webp?sign=aab4fefb93eef5f02502aa510715cec7&t=69e83e05",
+          "item_id": 100283,
+          "name": "淘沙球",
+          "source": "精灵首领·女王蜂掉落；精灵首领·迷嶂布莱克掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉地系、虫系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 90.0,
+      "food_duration_label": "8小时",
+      "food_duration_minutes": 480,
+      "food_home_coin": 160,
+      "food_home_exp": 720,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350020.webp?sign=6bb48781f2306d5caa5a2e011a599b27&t=69e83e05",
+      "food_name": "彩玉花汽水",
+      "food_recipe_count": 4,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100840.webp?sign=aba77f5e41a3b4dc8946107334bf9316&t=69e83e05",
+      "material_item_id": 100840,
+      "material_name": "彩玉花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370020.webp?sign=7ff5a5fbfa75679172c635b2d2881417&t=69e83e05",
+      "recipe_name": "彩玉花汽水",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360020.webp?sign=6713933251cdd461f2578eede5b2625b&t=69e83e05",
+      "seed_name": "彩玉花种子",
+      "special_ball_count": 0,
+      "unlock_level": 15
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "活泼的球，开心的精灵会被吸引。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "天使草 / 雪菇 / 短木莲 / 荧光兰",
+          "group_names": [
+            "天使草",
+            "雪菇",
+            "短木莲",
+            "荧光兰"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100262.webp?sign=4a242c0f6c36ddd501974f90b3d11c2f&t=69e83e05",
+          "item_id": 100262,
+          "name": "美妙球",
+          "source": "精灵首领·黑猫密探掉落；精灵首领·奇梦咪掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉萌系、普通系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 85.0,
+      "food_duration_label": "12小时",
+      "food_duration_minutes": 720,
+      "food_home_coin": 240,
+      "food_home_exp": 1020,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350024.webp?sign=7c1e5e02da77774bf55015668a95cd19&t=69e83e05",
+      "food_name": "短木莲酱吐司",
+      "food_recipe_count": 6,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100850.webp?sign=20b76c38dfa11b969633432f987edcb0&t=69e83e05",
+      "material_item_id": 100850,
+      "material_name": "短木莲",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370024.webp?sign=6fe38d46cf7c7194a04e8f2e456e35cd&t=69e83e05",
+      "recipe_name": "短木莲酱吐司",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360024.webp?sign=6c36f9ba1ea6a577694d43a2cbab3b30&t=69e83e05",
+      "seed_name": "短木莲种子",
+      "special_ball_count": 0,
+      "unlock_level": 16
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "活泼的球，开心的精灵会被吸引。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "天使草 / 雪菇 / 短木莲 / 荧光兰",
+          "group_names": [
+            "天使草",
+            "雪菇",
+            "短木莲",
+            "荧光兰"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100262.webp?sign=4a242c0f6c36ddd501974f90b3d11c2f&t=69e83e05",
+          "item_id": 100262,
+          "name": "美妙球",
+          "source": "精灵首领·黑猫密探掉落；精灵首领·奇梦咪掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉萌系、普通系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 80.0,
+      "food_duration_label": "20小时",
+      "food_duration_minutes": 1200,
+      "food_home_coin": 400,
+      "food_home_exp": 1600,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350013.webp?sign=8a2fd909616b5814cd7961391b9e7fe6&t=69e83e05",
+      "food_name": "荧光兰布丁",
+      "food_recipe_count": 10,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100665.webp?sign=1084e94732d91c41e2c41bddffb14545&t=69e83e05",
+      "material_item_id": 100665,
+      "material_name": "荧光兰",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370013.webp?sign=330078caa101178d639cf24812b86a18&t=69e83e05",
+      "recipe_name": "荧光兰布丁",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360013.webp?sign=95f7714cdd4b52113d4ce1ac86137962&t=69e83e05",
+      "seed_name": "荧光兰种子",
+      "special_ball_count": 0,
+      "unlock_level": 17
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "难以揣测的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "流星兰 / 紫晶菇 / 紫雀花",
+          "group_names": [
+            "流星兰",
+            "紫晶菇",
+            "紫雀花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100284.webp?sign=dd4d088e27448027b181da01e888ff0c&t=69e83e05",
+          "item_id": 100284,
+          "name": "变幻球",
+          "source": "精灵首领·祭礼巨像掉落；精灵首领·圣剑骑士；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉幻系、机械系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 75.0,
+      "food_duration_label": "40小时",
+      "food_duration_minutes": 2400,
+      "food_home_coin": 800,
+      "food_home_exp": 3000,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350016.webp?sign=5a5736debe2620b79811f226d3ae410d&t=69e83e05",
+      "food_name": "紫晶菇甜酱",
+      "food_recipe_count": 20,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100668.webp?sign=66aa0df563730fc927c9c1470a1a88bc&t=69e83e05",
+      "material_item_id": 100668,
+      "material_name": "紫晶菇",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370016.webp?sign=2a44faedee8b8a69ee825fbb9a84d91e&t=69e83e05",
+      "recipe_name": "紫晶菇甜酱",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360016.webp?sign=bfb8376c6f5b689ec039140244826b5e&t=69e83e05",
+      "seed_name": "紫晶菇种子",
+      "special_ball_count": 0,
+      "unlock_level": 18
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "轻快的球，能直线飞跃很远的距离。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "风卷草 / 喷气菇 / 海神花 / 蓝掌",
+          "group_names": [
+            "风卷草",
+            "喷气菇",
+            "海神花",
+            "蓝掌"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100272.webp?sign=d97d6190e81c765efd6d88b2b7eee64e&t=69e83e05",
+          "item_id": 100272,
+          "name": "网兜球",
+          "source": "精灵首领·霜翼领主掉落；精灵首领·千棘海针掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉水系、翼系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 125.0,
+      "food_duration_label": "2小时",
+      "food_duration_minutes": 120,
+      "food_home_coin": 40,
+      "food_home_exp": 250,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350003.webp?sign=844abe62066c26ee2aa17bf1b1c2490d&t=69e83e05",
+      "food_name": "蓝掌软糖",
+      "food_recipe_count": 1,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100606.webp?sign=2c6c439fc9a491be734dd1e332002990&t=69e83e05",
+      "material_item_id": 100606,
+      "material_name": "蓝掌",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370003.webp?sign=18a9bcbe71cfbc051280f5938f9c164e&t=69e83e05",
+      "recipe_name": "蓝掌软糖",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360003.webp?sign=040cfbd5bdd75994a2809e903691d8bf&t=69e83e05",
+      "seed_name": "蓝掌种子",
+      "special_ball_count": 0,
+      "unlock_level": 19
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "蹦蹦跳跳的球，有着弹性十足的手感。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "洋红珊瑚 / 杏黄贝 / 海桑花 / 花星角",
+          "group_names": [
+            "洋红珊瑚",
+            "杏黄贝",
+            "海桑花",
+            "花星角"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100275.webp?sign=4232f578935b2fd3b8ed9be9ba08c31f&t=69e83e05",
+          "item_id": 100275,
+          "name": "绝缘球",
+          "source": "精灵首领·波普鹿掉落；精灵首领·蹦蹦果掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉电系、毒系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 118.75,
+      "food_duration_label": "4小时",
+      "food_duration_minutes": 240,
+      "food_home_coin": 80,
+      "food_home_exp": 475,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350012.webp?sign=f5b70eea63274f050b4b9d9485cb77cb&t=69e83e05",
+      "food_name": "花星角曲奇",
+      "food_recipe_count": 2,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100664.webp?sign=8b9a40a1bdc28ec6ea05e4f3ecee07aa&t=69e83e05",
+      "material_item_id": 100664,
+      "material_name": "花星角",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370012.webp?sign=0ddfc40200fe2b34af3793d8d3193432&t=69e83e05",
+      "recipe_name": "花星角曲奇",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360012.webp?sign=3b3c20f38ec93bbb2597c0d76167e482&t=69e83e05",
+      "seed_name": "花星角种子",
+      "special_ball_count": 0,
+      "unlock_level": 20
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "难以揣测的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "流星兰 / 紫晶菇 / 紫雀花",
+          "group_names": [
+            "流星兰",
+            "紫晶菇",
+            "紫雀花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100284.webp?sign=dd4d088e27448027b181da01e888ff0c&t=69e83e05",
+          "item_id": 100284,
+          "name": "变幻球",
+          "source": "精灵首领·祭礼巨像掉落；精灵首领·圣剑骑士；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉幻系、机械系的精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 112.5,
+      "food_duration_label": "8小时",
+      "food_duration_minutes": 480,
+      "food_home_coin": 160,
+      "food_home_exp": 900,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350015.webp?sign=4b1c681e3ce6a4e476f8d14dded5a85c&t=69e83e05",
+      "food_name": "流星兰汽水",
+      "food_recipe_count": 4,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100667.webp?sign=50f52ce2d741461d7070e245f81a0212&t=69e83e05",
+      "material_item_id": 100667,
+      "material_name": "流星兰",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370015.webp?sign=d18099fc9fede8cd29771730b01d5309&t=69e83e05",
+      "recipe_name": "流星兰汽水",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360015.webp?sign=1379e0ae10d747ae6bcba1d4c684282a&t=69e83e05",
+      "seed_name": "流星兰种子",
+      "special_ball_count": 0,
+      "unlock_level": 21
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "受热不均的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "向阳花 / 伞伞菌 / 星霜花 / 火焰花",
+          "group_names": [
+            "向阳花",
+            "伞伞菌",
+            "星霜花",
+            "火焰花"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100274.webp?sign=e744b24a4f0350bd3f78c24ba3563b0b&t=69e83e05",
+          "item_id": 100274,
+          "name": "调温球",
+          "source": "精灵首领·风暴战犬掉落；精灵首领·雪影冰灵掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉火系、冰系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 106.25,
+      "food_duration_label": "12小时",
+      "food_duration_minutes": 720,
+      "food_home_coin": 240,
+      "food_home_exp": 1275,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350019.webp?sign=7b3394975697848a354eb55563f7ef2c&t=69e83e05",
+      "food_name": "火焰花酱吐司",
+      "food_recipe_count": 6,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100674.webp?sign=2b473a88b564e2420ba23fdd3d325d1c&t=69e83e05",
+      "material_item_id": 100674,
+      "material_name": "火焰花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370019.webp?sign=373692daecba9f60f920d511949f9ec9&t=69e83e05",
+      "recipe_name": "火焰花酱吐司",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360019.webp?sign=e77ca5c961e066e7198d6f51ff9e8cc8&t=69e83e05",
+      "seed_name": "火焰花种子",
+      "special_ball_count": 0,
+      "unlock_level": 22
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "爱捉弄的球，喜欢偷袭精灵。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "恶魔雪茄 / 幽幽草 / 骨片",
+          "group_names": [
+            "恶魔雪茄",
+            "幽幽草",
+            "骨片"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100273.webp?sign=5806a6f0d57ddf9b786a2534e44cff87&t=69e83e05",
+          "item_id": 100273,
+          "name": "暗星球",
+          "source": "精灵首领·恶魔狼王掉落；精灵首领·幻影荆棘掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉幽系、恶系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 100.0,
+      "food_duration_label": "20小时",
+      "food_duration_minutes": 1200,
+      "food_home_coin": 400,
+      "food_home_exp": 2000,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350018.webp?sign=8a751263e547ed1f1fbacc2580dbf662&t=69e83e05",
+      "food_name": "恶魔雪茄布丁",
+      "food_recipe_count": 10,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100670.webp?sign=2cb2efc0bffc3d930cd445d27843a480&t=69e83e05",
+      "material_item_id": 100670,
+      "material_name": "恶魔雪茄",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370018.webp?sign=78d830c491b33be2805a3d459fd48f6e&t=69e83e05",
+      "recipe_name": "恶魔雪茄布丁",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360018.webp?sign=c9ca25418685a555c5c5ad25c79e6ed1&t=69e83e05",
+      "seed_name": "恶魔雪茄种子",
+      "special_ball_count": 0,
+      "unlock_level": 23
+    },
+    {
+      "coin_per_hour": 20.0,
+      "direct_ball_count": 1,
+      "direct_craft_balls": [
+        {
+          "description": "青草味道的球。",
+          "formula_label": "普通咕噜球 x1 + 同组任意花材 x2",
+          "group_label": "凤眼莲 / 象牙花 / 喵喵草",
+          "group_names": [
+            "凤眼莲",
+            "象牙花",
+            "喵喵草"
+          ],
+          "icon_url": "https://rococdn.gptvip.chat/webp/balls/100271.webp?sign=49c2d4fd2f1da6dd13090021d221e0dd&t=69e83e05",
+          "item_id": 100271,
+          "name": "光合球",
+          "source": "精灵首领·奇丽果掉落；精灵首领·钻石蜗掉落；炼金造物获得",
+          "status": "craftable_direct",
+          "status_label": "可直接炼制",
+          "usage": "更适合用来捕捉草系、光系精灵。"
+        }
+      ],
+      "disabled_balls": [],
+      "exp_per_hour": 93.75,
+      "food_duration_label": "40小时",
+      "food_duration_minutes": 2400,
+      "food_home_coin": 800,
+      "food_home_exp": 3750,
+      "food_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/foods/350021.webp?sign=4d5cb69f7ddb784f18f11f9a583adcfe&t=69e83e05",
+      "food_name": "象牙花甜酱",
+      "food_recipe_count": 20,
+      "material_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/materials/100841.webp?sign=2358c9fd83b704397c775962d037e1ee&t=69e83e05",
+      "material_item_id": 100841,
+      "material_name": "象牙花",
+      "recipe_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/recipes/370021.webp?sign=cd747f5d542bf08923398c6afd17a558&t=69e83e05",
+      "recipe_name": "象牙花甜酱",
+      "reference_only_balls": [],
+      "seed_icon_url": "https://rococdn.gptvip.chat/webp/home_garden/seeds/360021.webp?sign=1b0ef8022ae374fe70dd9a21d2c31f4d&t=69e83e05",
+      "seed_name": "象牙花种子",
+      "special_ball_count": 0,
+      "unlock_level": 24
+    }
+  ],
+  "meta": {
+    "card_count": 24,
+    "generated_at": "2026-04-13T18:00:41+08:00",
+    "max_home_level": 25,
+    "missing_material_count": 0,
+    "missing_material_names": []
+  },
+  "summary": {
+    "best_exp_food_bands": [
+      {
+        "end_level": 6,
+        "exp_per_hour": 50.0,
+        "food_name": "向阳花软糖",
+        "start_level": 1
+      },
+      {
+        "end_level": 12,
+        "exp_per_hour": 75.0,
+        "food_name": "喵喵草软糖",
+        "start_level": 7
+      },
+      {
+        "end_level": 18,
+        "exp_per_hour": 100.0,
+        "food_name": "睡铃软糖",
+        "start_level": 13
+      },
+      {
+        "end_level": 25,
+        "exp_per_hour": 125.0,
+        "food_name": "蓝掌软糖",
+        "start_level": 19
+      }
+    ],
+    "coin_per_hour": 20.0,
+    "coin_per_hour_constant": true
+  }
+}

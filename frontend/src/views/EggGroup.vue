@@ -55,14 +55,11 @@ onMounted(loadGroups)
     <div class="egg__box">
       <!-- 标题 -->
       <div class="egg__hd">
-        <div class="egg__hd-row">
-          <h1 v-if="!selectedGroup">🎯 蛋组配对</h1>
-          <template v-else>
-            <a href="javascript:void(0)" @click="goBack" class="egg__back">← 全部蛋组</a>
-            <h1>{{ selectedGroup.egg_group_icon }} {{ selectedGroup.egg_group_name }}</h1>
-          </template>
-          <a href="/" class="egg__home">首页</a>
-        </div>
+        <h1 v-if="!selectedGroup">🎯 蛋组配对</h1>
+        <template v-else>
+          <div class="egg__back" @click="goBack">← 全部蛋组</div>
+          <h1>{{ selectedGroup.egg_group_icon }} {{ selectedGroup.egg_group_name }}</h1>
+        </template>
         <p class="egg__sub" v-if="!selectedGroup">选择蛋组，查看可繁殖精灵</p>
         <p class="egg__sub" v-else>{{ spirits.length }} 只可繁殖精灵 · 同组可互相配对</p>
       </div>
@@ -124,16 +121,14 @@ onMounted(loadGroups)
 .egg {
   min-height: 100vh;
   background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
-  padding: 16px;
-  padding-bottom: env(safe-area-inset-bottom, 16px);
+  padding: 16px 16px 80px;
+  overflow-x: hidden;
 }
-.egg__box { max-width: 420px; margin: 0 auto; }
-.egg__hd { text-align: center; padding: 16px 0 12px; }
-.egg__hd-row { display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; }
-.egg__hd h1 { font-size: 20px; color: #1a1a2e; font-weight: 700; }
-.egg__back { font-size: 13px; color: #667eea; text-decoration: none; position: absolute; left: 0; }
-.egg__home { font-size: 13px; color: #667eea; text-decoration: none; position: absolute; right: 0; }
-.egg__sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+.egg__box { max-width: 420px; width: 100%; margin: 0 auto; }
+.egg__hd { text-align: center; padding: 24px 0 20px; position: relative; }
+.egg__hd h1 { font-size: 22px; color: #1a1a2e; font-weight: 700; margin: 0; }
+.egg__back { font-size: 13px; color: #667eea; cursor: pointer; margin-bottom: 10px; }
+.egg__sub { font-size: 13px; color: #888; margin-top: 6px; }
 
 /* 蛋组卡片 */
 .egg__groups { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }

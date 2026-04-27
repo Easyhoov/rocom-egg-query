@@ -8,6 +8,13 @@ const features = [
     done: true,
   },
   {
+    icon: '🏡',
+    title: '家园炼金',
+    desc: '种花、做饭、炼球最优方案推荐',
+    href: '/garden',
+    done: true,
+  },
+  {
     icon: '📖',
     title: '精灵图鉴',
     desc: '468只精灵数据，属性/蛋组筛选',
@@ -24,8 +31,6 @@ const features = [
 ]
 
 const upcoming = [
-  { icon: '🌈', title: '异色孵化路径', desc: '异色精灵的孵化概率与流程' },
-  { icon: '📊', title: '六维雷达图', desc: '精灵属性六维可视化对比' },
 ]
 </script>
 
@@ -60,7 +65,7 @@ const upcoming = [
       </div>
 
       <!-- 即将上线 -->
-      <div class="home__section">
+      <div class="home__section" v-if="upcoming.length">
         <div class="home__section-title">即将上线</div>
         <div class="home__cards">
           <div
@@ -90,8 +95,7 @@ const upcoming = [
 .home {
   min-height: 100vh;
   background: linear-gradient(180deg, #e8f0fe 0%, #f5f0ff 50%, #fff 100%);
-  padding: 16px;
-  padding-bottom: env(safe-area-inset-bottom, 16px);
+  padding: 16px 16px 80px;
 }
 .home__box {
   max-width: 420px;

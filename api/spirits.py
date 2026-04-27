@@ -15,6 +15,7 @@ async def list_spirits(
     q: Optional[str] = Query(None, description="搜索（名称/编号）"),
     attribute: Optional[str] = Query(None, description="属性筛选"),
     egg_group: Optional[str] = Query(None, description="蛋组筛选"),
+    shiny: Optional[str] = Query(None, description="异色筛选"),
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(24, ge=1, le=100, description="每页数量"),
 ):
@@ -42,6 +43,12 @@ async def list_spirits(
         filtered = [
             s for s in filtered
             if egg_group in s.get('egg_groups', [])
+        ]
+
+    if shiny == 'true':
+        filtered = [
+            s for s in filtered
+            if s.get('has_shiny_variant', False)
         ]
 
     filtered.sort(key=lambda s: s['spirit_no_number'])
@@ -97,7 +104,9 @@ def _format_spirit_card(s: dict) -> dict:
         "egg_groups": s.get('egg_groups', []),
         "can_breed": s.get('can_breed', False),
         "image": get_spirit_image(s['spirit_no_number']),
+        "shiny_image": s.get('shiny_image_url'),
         "race_total": s.get('race_total', 0),
+        "has_shiny_variant": s.get('has_shiny_variant', False),
     }
 
 
@@ -155,6 +164,7 @@ def _format_spirit_detail(s: dict) -> dict:
         "speed": s.get('speed', 0),
         "image": get_spirit_image(s['spirit_no_number']),
         "has_shiny_variant": s.get('has_shiny_variant', False),
+        "shiny_image": s.get('shiny_image_url'),
         "evolution_chain": evolution,
         "forms": forms,
     }

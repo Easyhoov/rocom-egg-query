@@ -7,6 +7,11 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
+    path: '/egg-query',
+    name: 'EggQuery',
+    component: () => import('../views/EggQuery.vue'),
+  },
+  {
     path: '/compendium',
     name: 'Compendium',
     component: () => import('../views/CompendiumPage.vue'),
@@ -20,6 +25,11 @@ const routes = [
     path: '/egg-group',
     name: 'EggGroup',
     component: () => import('../views/EggGroup.vue'),
+  },
+  {
+    path: '/garden',
+    name: 'Garden',
+    component: () => import('../views/Garden.vue'),
   },
 ]
 
