@@ -13,3 +13,32 @@ build/
 frontend/node_modules/
 frontend/.vite/
 docs/
+.hermes/
+
+# 计划文档（已实施，保留仓库中已有的）
+PLAN_CANVA_REDESIGN.md
+PLAN_DESIGN_UNIFICATION.md
+PLAN_PHASE2.md
+
+# 数据文件（大体积 JSON）
+data/*.json
+!data/*.py
+!data/*.md
+
+# 本地托管的图片资源（从外部源下载的）
+static/item-icons/
+static/item_images/
+static/skill-icons/
+static/creature-atlas/
+static/garden-icons/
+static/merchant_preview.html
+static/preview/
+static/ca.crt
+static/proxy.pac
+
+# 缓存
+rocomegg_cache.json
+item_mapping.json
+
+# 旧 vite 构建产物（经过 hash 变化的旧版本已删除跟踪）
+# 新构建产物保留在仓库中

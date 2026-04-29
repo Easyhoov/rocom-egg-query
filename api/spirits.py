@@ -1,11 +1,37 @@
 #!/usr/bin/env python3
 """图鉴 API"""
 
+import json
 import math
+from pathlib import Path
 from typing import Optional
 from fastapi import APIRouter, HTTPException, Query
 from services.spirits import SPIRITS, SPIRITS_BY_ID, OFFICIAL_EGG_GROUPS
 from services.image import get_spirit_image
+
+# 加载技能数据和克制数据
+DATA_DIR = Path(__file__).parent.parent / "data"
+SKILLS_DICT: dict[str, dict] = {}
+SPIRIT_SKILLS: dict[int, list[dict]] = {}
+SPIRIT_MATCHUPS: dict[int, dict] = {}
+SKILL_ICONS_MAP: dict[str, str] = {}
+
+_skills_file = DATA_DIR / "skills_dict.json"
+_spirit_skills_file = DATA_DIR / "spirit_skills.json"
+_spirit_matchups_file = DATA_DIR / "spirit_matchups.json"
+_skills_icons_file = DATA_DIR / "skills_icons.json"
+
+if _skills_file.exists():
+    SKILLS_DICT = json.loads(_skills_file.read_text(encoding="utf-8"))
+if _spirit_skills_file.exists():
+    raw = json.loads(_spirit_skills_file.read_text(encoding="utf-8"))
+    SPIRIT_SKILLS = {int(k): v for k, v in raw.items()}
+if _spirit_matchups_file.exists():
+    raw = json.loads(_spirit_matchups_file.read_text(encoding="utf-8"))
+    SPIRIT_MATCHUPS = {int(k): v for k, v in raw.items()}
+if _skills_icons_file.exists():
+    raw = json.loads(_skills_icons_file.read_text(encoding="utf-8"))
+    SKILL_ICONS_MAP = {k: f"/skill-icons/{k.replace(chr(47), chr(95)).replace(chr(92), chr(95)).replace(chr(63), chr(95))}.png" for k in raw}
 
 router = APIRouter(prefix="/api", tags=["图鉴"])
 
@@ -90,6 +116,43 @@ async def list_official_egg_groups():
         count = sum(1 for s in SPIRITS if name in s.get('egg_groups', []))
         groups_with_count.append({**g, "spirit_count": count})
     return {"success": True, "groups": groups_with_count}
+
+
+@router.get("/spirits/{spirit_id}/skills")
+async def get_spirit_skills(spirit_id: int):
+    """获取精灵的技能列表"""
+    skills = SPIRIT_SKILLS.get(spirit_id)
+    if skills is None:
+        return {"success": True, "skills": [], "total": 0}
+    # 附上图标 URL
+    enriched = []
+    for s in skills:
+        enriched.append({
+            **s,
+            "icon_url": SKILL_ICONS_MAP.get(s["name"], ""),
+        })
+    return {
+        "success": True,
+        "skills": enriched,
+        "total": len(enriched),
+    }
+
+
+@router.get("/spirits/{spirit_id}/type-matchups")
+async def get_spirit_matchups(spirit_id: int):
+    """获取精灵的属性克制关系"""
+    spirit = SPIRITS_BY_ID.get(spirit_id)
+    if not spirit:
+        raise HTTPException(status_code=404, detail=f"精灵 ID {spirit_id} 不存在")
+    matchups = SPIRIT_MATCHUPS.get(spirit_id, {})
+    return {
+        "success": True,
+        "spirit_id": spirit_id,
+        "strong_against": matchups.get("strong_against", []),
+        "weak_to": matchups.get("weak_to", []),
+        "resists": matchups.get("resists", []),
+        "resisted_by": matchups.get("resisted_by", []),
+    }
 
 
 def _format_spirit_card(s: dict) -> dict:

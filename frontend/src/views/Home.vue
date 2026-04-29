@@ -28,6 +28,13 @@ const features = [
     href: '/egg-group',
     done: true,
   },
+  {
+    icon: '🛒',
+    title: '远行商人',
+    desc: '查看远行商人当前轮次商品',
+    href: '/merchant',
+    done: true,
+  },
 ]
 
 const upcoming = [

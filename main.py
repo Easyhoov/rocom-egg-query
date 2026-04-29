@@ -51,16 +51,37 @@ GARDEN_ICONS_DIR = STATIC_DIR / "garden-icons"
 if GARDEN_ICONS_DIR.exists():
     app.mount("/garden-icons", StaticFiles(directory=str(GARDEN_ICONS_DIR)), name="garden-icons")
 
+SKILL_ICONS_DIR = STATIC_DIR / "skill-icons"
+if SKILL_ICONS_DIR.exists():
+    app.mount("/skill-icons", StaticFiles(directory=str(SKILL_ICONS_DIR)), name="skill-icons")
+
+ITEM_ICONS_DIR = STATIC_DIR / "item-icons"
+if ITEM_ICONS_DIR.exists():
+    app.mount("/item-icons", StaticFiles(directory=str(ITEM_ICONS_DIR)), name="item-icons")
+
+PREVIEW_HTML = STATIC_DIR / "preview" / "index.html"
+
 # ========== 页面路由 ==========
 @app.get("/")
 async def serve_home():
     """首页"""
     return FileResponse(INDEX_HTML)
 
+@app.get("/merchant-preview")
+async def serve_merchant_preview():
+    """远行商人模板预览"""
+    return FileResponse(PREVIEW_HTML)
+
 @app.get("/garden")
 @app.get("/garden/{path:path}")
 async def serve_garden(path: str = ""):
     """家园炼金页面"""
+    return FileResponse(INDEX_HTML)
+
+@app.get("/merchant")
+@app.get("/merchant/{path:path}")
+async def serve_merchant(path: str = ""):
+    """远行商人页面"""
     return FileResponse(INDEX_HTML)
 
 @app.get("/egg-group")
@@ -93,6 +114,7 @@ from api.spirits import router as spirits_router
 from api.pets import router as pets_router
 from api.stats import router as stats_router
 from api.garden import router as garden_router
+from api.merchant import router as merchant_router
 from models import HealthResponse
 from services.breeding import PETS
 from services.image import get_image_matcher
@@ -102,6 +124,7 @@ app.include_router(spirits_router)
 app.include_router(pets_router)
 app.include_router(stats_router)
 app.include_router(garden_router)
+app.include_router(merchant_router)
 
 # 测试路由
 @app.get("/api/test")
@@ -136,6 +159,25 @@ async def refresh_image_cache():
 async def startup_event():
     get_image_matcher()
     print("[FastAPI] 图片匹配器已加载")
+
+# ========== UnblockNeteaseMusic CA 证书 ==========
+CA_CRT_FILE = STATIC_DIR / "ca.crt"
+
+@app.get("/ca.crt")
+async def serve_ca_crt():
+    """提供 UnblockNeteaseMusic CA 证书下载"""
+    if CA_CRT_FILE.exists():
+        return FileResponse(CA_CRT_FILE, media_type="application/x-x509-ca-cert", filename="ca.crt")
+    return {"error": "证书文件不存在"}
+
+PAC_FILE = STATIC_DIR / "proxy.pac"
+
+@app.get("/proxy.pac")
+async def serve_pac():
+    """提供代理自动配置 PAC 文件"""
+    if PAC_FILE.exists():
+        return FileResponse(PAC_FILE, media_type="application/x-ns-proxy-autoconfig")
+    return {"error": "PAC 文件不存在"}
 
 # ========== 启动 ==========
 

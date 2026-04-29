@@ -5,6 +5,7 @@
     <a href="/egg-query" class="app-nav__item">🥚 孵蛋查询</a>
     <router-link to="/compendium" class="app-nav__item" active-class="app-nav__item--active">📖 精灵图鉴</router-link>
     <router-link to="/garden" class="app-nav__item" active-class="app-nav__item--active">🌿 家园炼金</router-link>
+    <router-link to="/merchant" class="app-nav__item" active-class="app-nav__item--active">🛒 远行商人</router-link>
   </nav>
 </template>
 

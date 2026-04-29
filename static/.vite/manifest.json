@@ -4,7 +4,7 @@
     "name": "attrIcons"
   },
   "index.html": {
-    "file": "assets/index-fYG99VYs.js",
+    "file": "assets/index-C0ME-qe-.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -14,14 +14,15 @@
       "src/views/CompendiumPage.vue",
       "src/views/SpiritDetail.vue",
       "src/views/EggGroup.vue",
-      "src/views/Garden.vue"
+      "src/views/Garden.vue",
+      "src/views/Merchant.vue"
     ],
     "css": [
       "assets/index-nGV2I_XL.css"
     ]
   },
   "src/views/CompendiumPage.vue": {
-    "file": "assets/CompendiumPage-Dvudl45Y.js",
+    "file": "assets/CompendiumPage-Rix_sHFF.js",
     "name": "CompendiumPage",
     "src": "src/views/CompendiumPage.vue",
     "isDynamicEntry": true,
@@ -34,7 +35,7 @@
     ]
   },
   "src/views/EggGroup.vue": {
-    "file": "assets/EggGroup-ia6s3Dzy.js",
+    "file": "assets/EggGroup-Dz9hxZXG.js",
     "name": "EggGroup",
     "src": "src/views/EggGroup.vue",
     "isDynamicEntry": true,
@@ -46,7 +47,7 @@
     ]
   },
   "src/views/EggQuery.vue": {
-    "file": "assets/EggQuery-DenOV1Jx.js",
+    "file": "assets/EggQuery-B0cpy744.js",
     "name": "EggQuery",
     "src": "src/views/EggQuery.vue",
     "isDynamicEntry": true,
@@ -58,7 +59,7 @@
     ]
   },
   "src/views/Garden.vue": {
-    "file": "assets/Garden-B_YC7ZoK.js",
+    "file": "assets/Garden-_aSm_sdl.js",
     "name": "Garden",
     "src": "src/views/Garden.vue",
     "isDynamicEntry": true,
@@ -70,7 +71,7 @@
     ]
   },
   "src/views/Home.vue": {
-    "file": "assets/Home-CoOZPP5K.js",
+    "file": "assets/Home-fvCPkyxL.js",
     "name": "Home",
     "src": "src/views/Home.vue",
     "isDynamicEntry": true,
@@ -78,11 +79,23 @@
       "index.html"
     ],
     "css": [
-      "assets/Home-DpzklYZF.css"
+      "assets/Home-DBI1NLiu.css"
+    ]
+  },
+  "src/views/Merchant.vue": {
+    "file": "assets/Merchant-7DIdlrKh.js",
+    "name": "Merchant",
+    "src": "src/views/Merchant.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Merchant-BADnN9Gn.css"
     ]
   },
   "src/views/SpiritDetail.vue": {
-    "file": "assets/SpiritDetail-kayg92hk.js",
+    "file": "assets/SpiritDetail-Dynue7hb.js",
     "name": "SpiritDetail",
     "src": "src/views/SpiritDetail.vue",
     "isDynamicEntry": true,
@@ -91,7 +104,7 @@
       "_attrIcons-C98OJ0VA.js"
     ],
     "css": [
-      "assets/SpiritDetail-gZN8J4mL.css"
+      "assets/SpiritDetail-BPU3Bf23.css"
     ]
   }
 }
