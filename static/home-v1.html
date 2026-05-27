@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>洛克王国：世界 - 冒险者工具箱</title>
+  <meta name="description" content="洛克王国：世界玩家工具集 — 孵蛋查询、精灵图鉴、蛋组配对、家园炼金、远行商人">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════════════
+       Design System: Figma-inspired
+       ══════════════════════════════════════════════ */
+
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Design Tokens ── */
+    :root {
+      /* Colors — Figma monochrome + vibrant accents */
+      --color-black: #000000;
+      --color-white: #ffffff;
+      --color-green: #0acf83;
+      --color-red: #f24e1e;
+      --color-purple: #a259ff;
+      --color-pink: #ff7262;
+      --color-blue: #4882ff;
+
+      /* Text — WCAG AA compliant */
+      --text-primary: #000000;            /* 21:1 */
+      --text-secondary: #3d3d3d;          /* 9.7:1 — was rgba(0,0,0,0.55) */
+      --text-tertiary: #595959;           /* 7.0:1 — was rgba(0,0,0,0.5) */
+      --text-muted: #707070;              /* 4.8:1 — was rgba(0,0,0,0.35) */
+
+      /* Spacing — 4px base grid */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+
+      /* Typography */
+      --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+      /* Shadows */
+      --shadow-card: 0 2px 24px rgba(0,0,0,0.06);
+      --shadow-card-hover: 0 8px 40px rgba(0,0,0,0.12);
+
+      /* Radius */
+      --radius-pill: 50px;
+      --radius-card: 8px;
+      --radius-circle: 50%;
+
+      /* Transitions */
+      --transition-fast: 150ms ease;
+      --transition-normal: 300ms ease;
+    }
+
+    /* ── Base ── */
+    body {
+      font-family: var(--font-primary);
+      color: var(--text-primary);
+      background: var(--color-white);
+      line-height: 1.5;
+      letter-spacing: -0.14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    *:focus-visible {
+      outline: 2px dashed var(--color-black);
+      outline-offset: 3px;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: rgba(162,89,255,0.2); color: var(--color-black); }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+
+    /* ── Pill Buttons ── */
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-black);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: var(--space-3) var(--space-8);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.14px;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+      white-space: nowrap;
+      min-height: 44px; /* touch target */
+    }
+    .pill-btn:hover { transform: scale(1.04); box-shadow: 0 4px 20px rgba(0,0,0,0.18); }
+    .pill-btn:active { transform: scale(0.98); }
+    .pill-btn--sm { padding: var(--space-2) var(--space-6); font-size: 14px; min-height: 40px; }
+
+    /* ── Navigation ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav__logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.26px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .nav__logo img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+    .nav__logo-fallback {
+      width: 28px;
+      height: 28px;
+      background: var(--color-black);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      font-size: 14px;
+    }
+    .nav__cta { display: inline-flex; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: var(--space-16) 0 var(--space-10);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__deco {
+      position: absolute;
+      border-radius: var(--radius-circle);
+      opacity: 0.07;
+      pointer-events: none;
+    }
+    .hero__deco--1 { width: 320px; height: 320px; background: var(--color-green); top: -100px; right: -80px; }
+    .hero__deco--2 { width: 200px; height: 200px; background: var(--color-purple); bottom: -60px; left: -60px; }
+    .hero__deco--3 { width: 160px; height: 160px; background: var(--color-pink); top: 40px; left: -40px; opacity: 0.04; }
+
+    .hero__label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-4);
+    }
+    .hero__title {
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: -0.96px;
+      line-height: 1.08;
+      margin-bottom: var(--space-5);
+    }
+    .hero__gradient-bar {
+      width: 240px;
+      height: 5px;
+      border-radius: 3px;
+      margin: 0 auto var(--space-6);
+      background: linear-gradient(90deg, var(--color-green) 0%, var(--color-green) 25%, var(--color-red) 25%, var(--color-red) 50%, var(--color-purple) 50%, var(--color-purple) 75%, var(--color-pink) 75%, var(--color-pink) 100%);
+    }
+    .hero__subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: -0.14px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: var(--space-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .divider__line {
+      width: 100%;
+      max-width: 1200px;
+      height: 2px;
+      border-radius: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--color-green) 10%, var(--color-red) 35%, var(--color-purple) 65%, var(--color-pink) 90%, transparent 100%);
+      opacity: 0.45;
+    }
+
+    /* ── Cards Section ── */
+    .cards-section { padding: var(--space-10) 0 var(--space-16); }
+    .cards-section__header {
+      text-align: center;
+      margin-bottom: var(--space-10);
+    }
+    .cards-section__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+    .cards-section__title {
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      padding: var(--space-8) var(--space-6) var(--space-6);
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .card:active {
+      transform: translateY(-2px) scale(1.005);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-green), var(--color-red), var(--color-purple), var(--color-pink));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .card:hover::before { opacity: 0.7; }
+
+    .card__tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-4);
+    }
+    .card__icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-circle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: var(--space-4);
+      flex-shrink: 0;
+    }
+    .card__icon-wrap--green  { background: rgba(10,207,131,0.12); }
+    .card__icon-wrap--red    { background: rgba(242,78,30,0.12); }
+    .card__icon-wrap--purple { background: rgba(162,89,255,0.12); }
+    .card__icon-wrap--pink   { background: rgba(255,114,98,0.12); }
+    .card__icon-wrap--blue   { background: rgba(72,130,255,0.12); }
+
+    .card__icon-img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .card__title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.26px;
+      margin-bottom: var(--space-2);
+    }
+    .card__desc {
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: -0.14px;
+      color: var(--text-tertiary);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+      flex: 1;
+    }
+    .card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      transition: gap var(--transition-fast);
+    }
+    .card:hover .card__link { gap: 10px; }
+    .card__link-arrow { transition: transform var(--transition-fast); }
+    .card:hover .card__link-arrow { transform: translateX(2px); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--color-black);
+      color: var(--color-white);
+      padding: 56px 0 40px;
+    }
+    .footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+    .footer__brand { display: flex; flex-direction: column; gap: var(--space-2); }
+    .footer__logo { font-size: 16px; font-weight: 700; letter-spacing: -0.26px; }
+    .footer__tagline { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.45); max-width: 300px; line-height: 1.6; }
+    .footer__links { display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: center; }
+    .footer__links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--transition-fast);
+      padding: var(--space-1) 0;
+    }
+    .footer__links a:hover { color: var(--color-white); }
+    .footer__bottom {
+      padding-top: var(--space-5);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: flex-start;
+    }
+    .footer__copy { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.3); }
+
+    /* ══════════════════════════════════════════════
+       Responsive — Mobile First
+       ══════════════════════════════════════════════ */
+
+    /* Tablet ≥560px */
+    @media (min-width: 560px) {
+      .hero { padding: 80px 0 48px; }
+      .hero__title { font-size: 56px; letter-spacing: -1.2px; }
+      .hero__gradient-bar { width: 360px; height: 6px; }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+      .footer__inner { flex-direction: row; justify-content: space-between; }
+      .footer__bottom { flex-direction: row; justify-content: space-between; width: 100%; }
+    }
+
+    /* Desktop ≥960px */
+    @media (min-width: 960px) {
+      .container { padding: 0 48px; }
+      .hero { padding: var(--space-16) 0 var(--space-16); }
+      .hero__title { font-size: 72px; letter-spacing: -1.44px; }
+      .hero__gradient-bar { width: 440px; height: 7px; }
+      .hero__subtitle { font-size: 18px; }
+
+      /* 5 cards: 3 + 2 centered */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--space-6);
+      }
+      .cards-grid > .card:nth-child(1) { grid-column: 1 / 3; }
+      .cards-grid > .card:nth-child(2) { grid-column: 3 / 5; }
+      .cards-grid > .card:nth-child(3) { grid-column: 5 / 7; }
+      .cards-grid > .card:nth-child(4) { grid-column: 2 / 4; }
+      .cards-grid > .card:nth-child(5) { grid-column: 4 / 6; }
+
+      .footer { padding: 56px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav" role="navigation" aria-label="主导航">
+    <div class="container nav__inner">
+      <a href="/" class="nav__logo" aria-label="洛克王国助手首页">
+        <img src="/img/roco-mascot.png" alt="" width="28" height="28" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="nav__logo-fallback" style="display:none" aria-hidden="true">⚔</span>
+        洛克王国助手
+      </a>
+      <a href="/egg-query" class="pill-btn nav__cta">开始查询</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero__deco hero__deco--1" aria-hidden="true"></div>
+    <div class="hero__deco hero__deco--2" aria-hidden="true"></div>
+    <div class="hero__deco hero__deco--3" aria-hidden="true"></div>
+    <div class="container">
+      <p class="hero__label">roco kingdom · toolbox</p>
+      <h1 class="hero__title">冒险者工具箱</h1>
+      <div class="hero__gradient-bar" aria-hidden="true"></div>
+      <p class="hero__subtitle">
+        为洛克王国：世界玩家打造的数据查询工具集。孵蛋、图鉴、配对、炼金、商人——一站搞定。
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Divider ── -->
+  <div class="divider" aria-hidden="true">
+    <div class="divider__line"></div>
+  </div>
+
+  <!-- ── Feature Cards ── -->
+  <section class="cards-section" id="features" aria-label="功能模块">
+    <div class="container">
+      <div class="cards-section__header">
+        <p class="cards-section__label">tools &amp; modules</p>
+        <h2 class="cards-section__title">功能模块</h2>
+      </div>
+
+      <div class="cards-grid">
+
+        <article class="card" onclick="location.href='/egg-query'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='/egg-query'">
+          <span class="card__tag">01</span>
+          <div class="card__icon-wrap card__icon-wrap--green">
+            <img src="/img/favicon.png" alt="" class="card__icon-img" onerror="this.style.display='none';this.parentElement.textContent='🥚'">
+          </div>
+          <h3 class="card__title">孵蛋查询</h3>
+          <p class="card__desc">根据身高体重查询可能孵化的精灵，支持神奇的蛋和炫彩蛋筛选，附带匹配概率。</p>
+          <span class="card__link">前往 <span class="card__link-arrow" aria-hidden="true">→</span></span>
+        </article>
+
+        <article class="card" onclick="location.href='/compendium'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='/compendium'">
+          <span class="card__tag">02</span>
+          <div class="card__icon-wrap card__icon-wrap--red">
+            <img src="/img/icon-decorative-book.6KbZJc7F.png" alt="" class="card__icon-img" onerror="this.style.display='none';this.parentElement.textContent='📖'">
+          </div>
+          <h3 class="card__title">精灵图鉴</h3>
+          <p class="card__desc">浏览全部精灵信息，属性、蛋组、异色、技能一应俱全，支持搜索和多维筛选。</p>
+          <span class="card__link">前往 <span class="card__link-arrow" aria-hidden="true">→</span></span>
+        </article>
+
+        <article class="card" onclick="location.href='/egg-group'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='/egg-group'">
+          <span class="card__tag">03</span>
+          <div class="card__icon-wrap card__icon-wrap--purple">🎯</div>
+          <h3 class="card__title">蛋组配对</h3>
+          <p class="card__desc">查看蛋组兼容性，找到最佳繁殖配对方案，规划后代培育路线。</p>
+          <span class="card__link">前往 <span class="card__link-arrow" aria-hidden="true">→</span></span>
+        </article>
+
+        <article class="card" onclick="location.href='/garden'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='/garden'">
+          <span class="card__tag">04</span>
+          <div class="card__icon-wrap card__icon-wrap--pink">
+            <img src="/img/peach-icon.png" alt="" class="card__icon-img" onerror="this.style.display='none';this.parentElement.textContent='⚗️'">
+          </div>
+          <h3 class="card__title">家园炼金</h3>
+          <p class="card__desc">查询种子配方、合成材料、精灵球和食物的炼金配方，快速定位所需材料。</p>
+          <span class="card__link">前往 <span class="card__link-arrow" aria-hidden="true">→</span></span>
+        </article>
+
+        <article class="card" onclick="location.href='/merchant'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='/merchant'">
+          <span class="card__tag">05</span>
+          <div class="card__icon-wrap card__icon-wrap--blue">
+            <img src="/img/yuanxingshangren.png" alt="" class="card__icon-img" onerror="this.style.display='none';this.parentElement.textContent='🧳'">
+          </div>
+          <h3 class="card__title">远行商人</h3>
+          <p class="card__desc">查看远行商人携带物品和刷新规律，合理安排采购计划。</p>
+          <span class="card__link">前往 <span class="card__link-arrow" aria-hidden="true">→</span></span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <div class="footer__logo">洛克王国助手</div>
+        <p class="footer__tagline">非官方玩家工具集，数据来源于开源社区，仅供游戏内参考。</p>
+      </div>
+      <nav class="footer__links" aria-label="底部链接">
+        <a href="/docs">API 文档</a>
+        <a href="https://github.com/AofeiLi-code/rocom-data" target="_blank" rel="noopener">数据源</a>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p class="footer__copy">© 2026 洛克王国助手 · 非官方工具</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Card keyboard support ── */
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') location.href = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+      });
+    });
+  </script>
+
+</body>
+</html>

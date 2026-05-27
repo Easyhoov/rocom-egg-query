@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
+const imgBase = '/img/'
 const loading = ref(true)
 const error = ref('')
 const merchant = ref(null)
@@ -57,7 +58,7 @@ onMounted(() => fetchMerchant())
 
       <!-- Error -->
       <div v-else-if="error" class="m-empty">
-        <p style="font-size: 48px; margin-bottom: 8px;">😵</p>
+        <img :src="imgBase + 'icon-decorative-book.png'" class="m-empty-img" alt="" />
         <p>{{ error }}</p>
         <button class="m-retry" @click="fetchMerchant(true)">重试</button>
       </div>
@@ -67,7 +68,7 @@ onMounted(() => fetchMerchant())
         <div class="m-header">
           <div class="m-header-left">
             <div class="m-title-row">
-              <span class="m-icon">🛒</span>
+              <img class="m-icon" :src="imgBase + 'yuanxingshangren.png'" alt="远行商人" />
               <span class="m-title">远行商人</span>
             </div>
             <div class="m-subtitle">洛克王国 · 今日特供</div>
@@ -99,19 +100,20 @@ onMounted(() => fetchMerchant())
               <div class="m-card-sub">远行商人当期商品</div>
               <div class="m-card-time">⏰ {{ g.time_label }}</div>
             </div>
-            <div class="m-card-side">
+            <div class="m-card-side" :style="{ backgroundImage: 'url(/img/win-bg.BgshV29m.png)' }">
               <span class="m-card-slot">第{{ Math.ceil((i + 1) / 3) || 1 }}轮</span>
             </div>
           </div>
 
           <!-- Empty state -->
           <div v-if="!merchant?.goods?.length" class="m-empty-card">
-            本轮暂无商品，稍后再来看看。
+            <img :src="imgBase + 'ad-card.DUI6osKw.png'" class="m-empty-card-img" alt="" />
+            <p>本轮暂无商品，稍后再来看看。</p>
           </div>
         </div>
 
-        <!-- Refresh button -->
-        <div class="m-ft">
+        <!-- Refresh button (hidden) -->
+        <div class="m-ft" v-if="false">
           <button class="m-refresh" @click="fetchMerchant(true)">🔄 刷新数据</button>
         </div>
       </template>
@@ -176,6 +178,7 @@ onMounted(() => fetchMerchant())
   display: flex;
   align-items: center;
   justify-content: center;
+  object-fit: contain;
 }
 
 .m-title {
@@ -312,6 +315,10 @@ onMounted(() => fetchMerchant())
   align-self: stretch;
   display: flex;
   align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 8px 12px;
 }
 
 .m-card-slot {
@@ -331,8 +338,14 @@ onMounted(() => fetchMerchant())
   border-radius: 22px;
   border: 1px dashed rgba(120, 102, 81, 0.35);
   color: #5c4a37;
-  font-size: 20px;
+  font-size: 18px;
   background: rgba(255,255,255,0.52);
+}
+.m-empty-card-img {
+  width: 60px;
+  height: auto;
+  margin-bottom: 8px;
+  opacity: 0.5;
 }
 
 /* Loading */
@@ -356,6 +369,12 @@ onMounted(() => fetchMerchant())
   text-align: center;
   padding: 60px 0;
   color: #999;
+}
+.m-empty-img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 12px;
+  opacity: 0.7;
 }
 .m-retry, .m-refresh {
   margin-top: 16px;

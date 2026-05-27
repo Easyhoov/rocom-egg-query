@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import '../styles/dark-theme.css'
 
 const groups = ref([])
 const selectedGroup = ref(null)
@@ -51,7 +52,7 @@ onMounted(loadGroups)
 </script>
 
 <template>
-  <div class="egg">
+  <div class="egg dark-page">
     <div class="egg__box">
       <!-- 标题 -->
       <div class="egg__hd">
@@ -69,7 +70,7 @@ onMounted(loadGroups)
         <div
           v-for="g in groups"
           :key="g.egg_group_name"
-          class="egg__group-card"
+          class="egg__group-card dark-card"
           @click="selectGroup(g)"
         >
           <div class="egg__group-icon">{{ g.egg_group_icon }}</div>
@@ -94,7 +95,7 @@ onMounted(loadGroups)
             v-for="s in spirits"
             :key="s.spirit_id"
             :to="`/compendium/${s.spirit_id}`"
-            class="egg__spirit"
+            class="egg__spirit dark-card"
           >
             <div class="egg__spirit-img">
               <img v-if="s.image" :src="s.image" :alt="s.base_name" loading="lazy" />
@@ -120,23 +121,35 @@ onMounted(loadGroups)
 <style scoped>
 .egg {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
+  background: var(--dt-bg, #1a1a2e);
+  position: relative;
   padding: 16px 16px 80px;
   overflow-x: hidden;
 }
+.egg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+}
 .egg__box { max-width: 420px; width: 100%; margin: 0 auto; }
+.egg__box { position: relative; z-index: 1; }
 .egg__hd { text-align: center; padding: 24px 0 20px; position: relative; }
-.egg__hd h1 { font-size: 22px; color: #1a1a2e; font-weight: 700; margin: 0; }
+.egg__hd h1 { font-size: 22px; color: var(--dt-text, #fff); font-weight: 700; margin: 0; }
 .egg__back { font-size: 13px; color: #8b3dff; cursor: pointer; margin-bottom: 10px; }
-.egg__sub { font-size: 13px; color: #888; margin-top: 6px; }
+.egg__sub { font-size: 13px; color: var(--dt-text-secondary, rgba(255,255,255,0.75)); margin-top: 6px; }
 
 /* 蛋组卡片 */
 .egg__groups { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
 .egg__group-card {
-  background: #fff;
-  border-radius: 14px;
+  background: var(--dt-card-bg, rgba(20,20,40,0.6));
+  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
+  border: 1px solid var(--dt-border, rgba(255,255,255,0.1));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -148,13 +161,13 @@ onMounted(loadGroups)
   width: 48px; height: 48px;
   display: flex; align-items: center; justify-content: center;
   font-size: 28px;
-  background: #f0ecff;
+  background: rgba(139,61,255,0.15);
   border-radius: 14px;
   flex-shrink: 0;
 }
 .egg__group-info { flex: 1; }
-.egg__group-name { font-size: 16px; font-weight: 700; color: #1a1a2e; }
-.egg__group-count { font-size: 12px; color: #aaa; margin-top: 2px; }
+.egg__group-name { font-size: 16px; font-weight: 700; color: var(--dt-text, #fff); }
+.egg__group-count { font-size: 12px; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); margin-top: 2px; }
 .egg__group-arrow { font-size: 18px; color: #8b3dff; font-weight: 600; }
 
 /* 精灵网格 */
@@ -165,13 +178,15 @@ onMounted(loadGroups)
   gap: 8px;
 }
 .egg__spirit {
-  background: #fff;
+  background: var(--dt-card-bg, rgba(20,20,40,0.6));
   border-radius: 14px;
   padding: 10px 6px 8px;
   text-align: center;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 8px 24px rgba(15,16,21,0.08);
+  border: 1px solid var(--dt-border, rgba(255,255,255,0.1));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   transition: .2s;
 }
 .egg__spirit:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
@@ -180,20 +195,20 @@ onMounted(loadGroups)
   width: 56px; height: 56px;
   margin: 0 auto 4px;
   display: flex; align-items: center; justify-content: center;
-  background: #f5f2ff;
+  background: rgba(139,61,255,0.15);
   border-radius: 50%;
 }
 .egg__spirit-img img { width: 48px; height: 48px; object-fit: contain; }
-.egg__spirit-no { font-size: 10px; color: #bbb; }
-.egg__spirit-name { font-size: 13px; font-weight: 600; color: #1a1a2e; margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.egg__spirit-attr { font-size: 9px; padding: 1px 5px; border-radius: 6px; background: #f0ecff; color: #8b3dff; }
+.egg__spirit-no { font-size: 10px; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
+.egg__spirit-name { font-size: 13px; font-weight: 600; color: var(--dt-text, #fff); margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.egg__spirit-attr { font-size: 9px; padding: 1px 5px; border-radius: 6px; background: rgba(139,61,255,0.2); color: #8b3dff; }
 
-.egg__loading { text-align: center; padding: 60px 0; color: #ccc; }
+.egg__loading { text-align: center; padding: 60px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 .egg__spinner {
-  width: 32px; height: 32px; border: 3px solid #e8e8e8; border-top-color: #8b3dff;
+  width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #8b3dff;
   border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 12px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.egg__empty { text-align: center; padding: 40px 0; color: #ccc; }
-.egg__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: #ccc; }
+.egg__empty { text-align: center; padding: 40px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
+.egg__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: rgba(255,255,255,0.3); }
 </style>

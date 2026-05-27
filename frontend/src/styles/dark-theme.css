@@ -1,0 +1,179 @@
+/**
+ * 深色主题公共样式
+ * 与首页 (Home.vue) 保持一致的暗色毛玻璃风格
+ */
+
+/* ===================== CSS 变量 ===================== */
+:root {
+  /* 页面背景 */
+  --dt-page-bg: #1a1a2e;
+
+  /* 卡片/容器 */
+  --dt-card-bg: rgba(20, 20, 40, 0.6);
+  --dt-card-border: rgba(255, 255, 255, 0.1);
+  --dt-card-blur: blur(8px);
+  --dt-card-radius: 18px;
+  --dt-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  /* 文字 */
+  --dt-text-primary: #fff;
+  --dt-text-secondary: rgba(255, 255, 255, 0.75);
+  --dt-text-muted: rgba(255, 255, 255, 0.5);
+
+  /* 输入框 */
+  --dt-input-bg: rgba(255, 255, 255, 0.08);
+  --dt-input-border: rgba(255, 255, 255, 0.2);
+  --dt-input-text: #fff;
+  --dt-input-placeholder: rgba(255, 255, 255, 0.4);
+
+  /* 按钮 */
+  --dt-btn-bg: rgba(20, 20, 40, 0.6);
+  --dt-btn-border: rgba(255, 255, 255, 0.3);
+  --dt-btn-text: #fff;
+  --dt-btn-hover-bg: rgba(255, 255, 255, 0.15);
+  --dt-btn-active-bg: #8b3dff;
+  --dt-btn-active-text: #fff;
+
+  /* 标签 */
+  --dt-tag-bg: rgba(255, 255, 255, 0.08);
+  --dt-tag-border: rgba(255, 255, 255, 0.15);
+  --dt-tag-text: rgba(255, 255, 255, 0.8);
+
+  /* 分割线 */
+  --dt-divider: rgba(255, 255, 255, 0.1);
+
+  /* 强调色 */
+  --dt-accent: #8b3dff;
+  --dt-accent-glow: rgba(139, 61, 255, 0.3);
+
+  /* 错误 */
+  --dt-error-bg: rgba(231, 76, 60, 0.15);
+  --dt-error-text: #ff6b6b;
+
+  /* 成功 */
+  --dt-success-bg: rgba(46, 204, 113, 0.15);
+  --dt-success-text: #6bff9e;
+
+  /* 警告 */
+  --dt-warning-bg: rgba(243, 156, 18, 0.15);
+  --dt-warning-text: #ffd700;
+}
+
+/* ===================== 通用工具类 ===================== */
+
+/* ---- 页面背景 ---- */
+.dark-page {
+  min-height: 100vh;
+  background: var(--dt-page-bg);
+  position: relative;
+  overflow: hidden;
+}
+/* pokemon-camp 背景图，opacity 0.4 */
+.dark-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ---- 卡片容器 ---- */
+.dark-card {
+  background: var(--dt-card-bg);
+  border: 1px solid var(--dt-card-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--dt-card-radius);
+  box-shadow: var(--dt-card-shadow);
+}
+
+/* ---- 文字 ---- */
+.dark-title {
+  color: var(--dt-text-primary);
+}
+.dark-desc {
+  color: var(--dt-text-secondary);
+}
+.dark-muted {
+  color: var(--dt-text-muted);
+}
+
+/* ---- 输入框 ---- */
+.dark-input {
+  background: rgba(20, 20, 40, 0.8);
+  color: var(--dt-input-text);
+  border: 1px solid var(--dt-input-border);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 17px;
+  transition: border-color 0.2s, background 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+}
+.dark-input::placeholder {
+  color: var(--dt-input-placeholder);
+}
+.dark-input:focus {
+  outline: none;
+  border-color: var(--dt-accent);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---- 按钮 ---- */
+.dark-btn {
+  background: var(--dt-btn-bg);
+  color: var(--dt-btn-text);
+  border: 1px solid var(--dt-btn-border);
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.15s, transform 0.1s;
+}
+.dark-btn:hover {
+  background: var(--dt-btn-hover-bg);
+}
+.dark-btn:active {
+  transform: scale(0.97);
+}
+.dark-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* 强调色按钮变体 */
+.dark-btn--accent {
+  background: rgba(139, 61, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.dark-btn--accent:hover {
+  background: rgba(139, 61, 255, 0.8);
+}
+
+/* ---- 表格 ---- */
+.dark-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--dt-text-primary);
+}
+.dark-table th,
+.dark-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--dt-divider);
+}
+.dark-table th {
+  color: var(--dt-text-muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.dark-table tbody tr {
+  background: rgba(255, 255, 255, 0.04);
+}
+.dark-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

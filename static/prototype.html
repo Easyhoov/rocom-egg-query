@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>孵蛋查询 — 洛克王国：世界</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== Reset & Variables ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-text: rgba(0,0,0,0.95);
+      --color-text-secondary: #615d59;
+      --color-text-muted: #a39e98;
+      --color-bg: #ffffff;
+      --color-bg-warm: #f6f5f4;
+      --color-border: rgba(0,0,0,0.1);
+      --color-accent: #0075de;
+      --color-accent-hover: #005bab;
+      --color-accent-light: #f2f9ff;
+      --color-accent-text: #097fe8;
+      --color-green: #1aae39;
+      --color-orange: #dd5b00;
+      --color-pink: #ff64c8;
+      --color-purple: #7c5cfc;
+      --shadow-card: rgba(0,0,0,0.04) 0px 4px 18px, rgba(0,0,0,0.027) 0px 2px 8px, rgba(0,0,0,0.02) 0px 1px 3px;
+      --shadow-deep: rgba(0,0,0,0.01) 0px 1px 3px, rgba(0,0,0,0.02) 0px 3px 7px, rgba(0,0,0,0.02) 0px 7px 15px, rgba(0,0,0,0.04) 0px 14px 28px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-pill: 9999px;
+      --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== Nav ========== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+    .nav-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+    }
+    .nav-brand span {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s;
+    }
+    .nav-links a:hover {
+      color: var(--color-text);
+      background: rgba(0,0,0,0.04);
+    }
+    .nav-links a.active {
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+    }
+
+    /* ========== Hero ========== */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 48px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-accent-light);
+      color: var(--color-accent-text);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.125px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -1.75px;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      line-height: 1.55;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ========== Search Card ========== */
+    .search-section {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+    .search-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      padding: 32px;
+    }
+    .search-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .search-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .search-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.25px;
+    }
+    .search-header p {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+    }
+    .form-group input {
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 500;
+      padding: 10px 12px;
+      border: 1px solid #dddddd;
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+    }
+    .form-group input::placeholder {
+      color: var(--color-text-muted);
+    }
+    .form-group input:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(0,117,222,0.12);
+    }
+    .form-hint {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .filter-btn {
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    .filter-btn.active {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+
+    .search-btn {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 24px;
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .search-btn:hover {
+      background: var(--color-accent-hover);
+    }
+    .search-btn:active {
+      transform: scale(0.98);
+    }
+    .search-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ========== Results ========== */
+    .results-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .results-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .results-meta {
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+    .results-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .results-divider span {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+    .results-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    /* ========== Spirit Cards Grid ========== */
+    .spirit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .spirit-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .spirit-card:hover {
+      box-shadow: var(--shadow-deep);
+      transform: translateY(-2px);
+    }
+    .spirit-card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--color-bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .spirit-card-img img {
+      width: 75%;
+      height: 75%;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+    .spirit-card:hover .spirit-card-img img {
+      transform: scale(1.08);
+    }
+    .spirit-card-body {
+      padding: 14px 16px 16px;
+    }
+    .spirit-card-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      margin-bottom: 6px;
+    }
+    .spirit-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .egg-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+    }
+    .egg-badge.normal {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .egg-badge.precious {
+      background: #fff3e0;
+      color: #e65100;
+    }
+    .egg-badge.shiny {
+      background: #fce4ec;
+      color: #c62828;
+    }
+    .match-tier {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .r-value-bar {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .r-value-track {
+      flex: 1;
+      height: 4px;
+      background: #eee;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .r-value-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--color-accent), #62aef0);
+      transition: width 0.6s ease;
+    }
+    .r-value-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-accent-text);
+      min-width: 32px;
+      text-align: right;
+    }
+
+    /* ========== Empty State ========== */
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .empty-state-icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+      opacity: 0.6;
+    }
+    .empty-state h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .empty-state p {
+      font-size: 15px;
+      color: var(--color-text-muted);
+    }
+
+    /* ========== Loading ========== */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .loading.show { display: block; }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #eee;
+      border-top-color: var(--color-accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p {
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      border-top: 1px solid var(--color-border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+    .footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ========== Stats Bar ========== */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 32px 24px;
+      background: var(--color-bg-warm);
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--color-text);
+    }
+    .stat-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 640px) {
+      .hero { padding: 48px 20px 32px; }
+      .hero h1 { font-size: 32px; letter-spacing: -1px; }
+      .hero p { font-size: 15px; }
+      .form-row { grid-template-columns: 1fr; }
+      .spirit-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .spirit-card-body { padding: 10px 12px 14px; }
+      .spirit-card-name { font-size: 14px; }
+      .stats-bar { gap: 24px; }
+      .stat-number { font-size: 24px; }
+      .nav-links { display: none; }
+      .search-card { padding: 24px; }
+    }
+    @media (max-width: 380px) {
+      .spirit-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========== Tweaks Panel (hidden by default) ========== */
+    .tweaks-panel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+    }
+    .tweaks-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-text);
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: var(--shadow-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tweaks-content {
+      display: none;
+      position: absolute;
+      bottom: 52px;
+      right: 0;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-deep);
+      padding: 20px;
+      width: 220px;
+    }
+    .tweaks-content.show { display: block; }
+    .tweaks-content h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tweak-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .tweak-row label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+    .tweak-row select {
+      font-family: var(--font);
+      font-size: 12px;
+      padding: 4px 8px;
+      border: 1px solid #ddd;
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/img/roco-mascot.png" alt="洛克" onerror="this.style.display='none'">
+      <span>洛克王国助手</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/" class="active">孵蛋查询</a></li>
+      <li><a href="/compendium">精灵图鉴</a></li>
+      <li><a href="/egg-group">蛋组配对</a></li>
+      <li><a href="/garden">家园炼金</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span>🥚</span>
+      <span>洛克王国：世界</span>
+    </div>
+    <h1>孵蛋查询</h1>
+    <p>输入蛋的身高和体重，查询可能孵化出的精灵。支持神奇的蛋和炫彩蛋筛选。</p>
+  </section>
+
+  <!-- Search -->
+  <section class="search-section">
+    <div class="search-card">
+      <div class="search-header">
+        <div class="search-icon">🥚</div>
+        <div>
+          <h2>查询孵蛋结果</h2>
+          <p>输入蛋的身高（米）和体重（千克）</p>
+        </div>
+      </div>
+      <form id="queryForm" onsubmit="handleQuery(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="height">身高 (米)</label>
+            <input type="number" id="height" step="0.01" min="0.01" placeholder="例：0.24" required>
+            <span class="form-hint">蛋的实际身高，精确到小数点后两位</span>
+          </div>
+          <div class="form-group">
+            <label for="weight">体重 (千克)</label>
+            <input type="number" id="weight" step="0.01" min="0.01" placeholder="例：1.60" required>
+            <span class="form-hint">蛋的实际体重，精确到小数点后两位</span>
+          </div>
+        </div>
+        <div class="filter-row">
+          <button type="button" class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">全部</button>
+          <button type="button" class="filter-btn" data-filter="0" onclick="setFilter(0, this)">🥚 神奇的蛋</button>
+          <button type="button" class="filter-btn" data-filter="1" onclick="setFilter(1, this)">✨ 炫彩蛋</button>
+        </div>
+        <button type="submit" class="search-btn" id="searchBtn">查询孵蛋结果</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>正在查询孵蛋结果…</p>
+  </div>
+
+  <!-- Results (hidden initially) -->
+  <section class="results-section" id="results" style="display:none;">
+    <div class="results-header">
+      <h2 id="resultsTitle">查询结果</h2>
+      <span class="results-meta" id="resultsMeta"></span>
+    </div>
+
+    <!-- Normal Eggs -->
+    <div id="normalSection">
+      <div class="results-divider">
+        <span>🥚 神奇的蛋</span>
+      </div>
+      <div class="spirit-grid" id="normalGrid"></div>
+    </div>
+
+    <!-- Precious Eggs -->
+    <div id="preciousSection" style="display:none;">
+      <div class="results-divider">
+        <span>✨ 炫彩蛋</span>
+      </div>
+      <div class="spirit-grid" id="preciousGrid"></div>
+    </div>
+  </section>
+
+  <!-- Empty State (hidden initially) -->
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <div class="empty-state-icon">🔍</div>
+    <h3>没有找到匹配的精灵</h3>
+    <p>尝试调整身高或体重的数值</p>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number" id="statTotal">—</div>
+      <div class="stat-label">可孵化精灵</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" id="statGroups">—</div>
+      <div class="stat-label">蛋组</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" id="statQueries">—</div>
+      <div class="stat-label">今日查询</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>洛克王国孵蛋查询工具 · 数据来源于开源社区 · <a href="/docs">API 文档</a></p>
+  </footer>
+
+  <!-- Tweaks Panel -->
+  <div class="tweaks-panel">
+    <div class="tweaks-content" id="tweaksContent">
+      <h4>Tweaks</h4>
+      <div class="tweak-row">
+        <label>密度</label>
+        <select onchange="setDensity(this.value)">
+          <option value="comfortable">舒适</option>
+          <option value="compact">紧凑</option>
+          <option value="spacious">宽松</option>
+        </select>
+      </div>
+      <div class="tweak-row">
+        <label>列数</label>
+        <select onchange="setColumns(this.value)">
+          <option value="auto">自动</option>
+          <option value="2">2列</option>
+          <option value="3">3列</option>
+          <option value="4">4列</option>
+        </select>
+      </div>
+    </div>
+    <button class="tweaks-toggle" onclick="toggleTweaks()">⚙</button>
+  </div>
+
+  <script>
+    // ========== State ==========
+    let currentFilter = null; // null = all, 0 = normal, 1 = precious
+    const API_BASE = window.location.origin;
+
+    // ========== Filter ==========
+    function setFilter(value, btn) {
+      currentFilter = value === 'all' ? null : value;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // ========== Query ==========
+    async function handleQuery(e) {
+      e.preventDefault();
+      const height = parseFloat(document.getElementById('height').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+
+      if (!height || !weight || height <= 0 || weight <= 0) return;
+
+      const btn = document.getElementById('searchBtn');
+      const loading = document.getElementById('loading');
+      const results = document.getElementById('results');
+      const emptyState = document.getElementById('emptyState');
+
+      btn.disabled = true;
+      btn.textContent = '查询中…';
+      loading.classList.add('show');
+      results.style.display = 'none';
+      emptyState.style.display = 'none';
+
+      try {
+        let url = `${API_BASE}/api/query?height=${height}&weight=${weight}`;
+        if (currentFilter !== null) url += `&precious=${currentFilter}`;
+
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        if (data.success && data.results.length > 0) {
+          renderResults(data);
+        } else {
+          emptyState.style.display = 'block';
+        }
+      } catch (err) {
+        // Demo mode — show mock data
+        renderMockResults(height, weight);
+      } finally {
+        loading.classList.remove('show');
+        btn.disabled = false;
+        btn.textContent = '查询孵蛋结果';
+      }
+    }
+
+    // ========== Render Results ==========
+    function renderResults(data) {
+      const results = document.getElementById('results');
+      const normalSection = document.getElementById('normalSection');
+      const preciousSection = document.getElementById('preciousSection');
+      const normalGrid = document.getElementById('normalGrid');
+      const preciousGrid = document.getElementById('preciousGrid');
+      const resultsTitle = document.getElementById('resultsTitle');
+      const resultsMeta = document.getElementById('resultsMeta');
+
+      resultsTitle.textContent = `找到 ${data.total} 个匹配精灵`;
+      resultsMeta.textContent = `R值: ${data.user_r?.toFixed(4) || '—'}`;
+
+      const normal = data.results.filter(r => !r.is_precious);
+      const precious = data.results.filter(r => r.is_precious);
+
+      normalGrid.innerHTML = normal.map(r => spiritCard(r)).join('');
+      preciousGrid.innerHTML = precious.map(r => spiritCard(r)).join('');
+
+      normalSection.style.display = normal.length ? 'block' : 'none';
+      preciousSection.style.display = precious.length ? 'block' : 'none';
+
+      results.style.display = 'block';
+    }
+
+    function spiritCard(r) {
+      const tierMap = {
+        exact: { label: '精确匹配', color: '#1aae39' },
+        tolerance1: { label: '高概率', color: '#0075de' },
+        tolerance2: { label: '中概率', color: '#dd5b00' },
+        nearest: { label: '最近值', color: '#a39e98' },
+      };
+      const tier = tierMap[r.match_tier] || tierMap.nearest;
+      const imgSrc = r.image || (r.spirit_id ? `/creature-atlas/${String(r.spirit_id).padStart(3,'0')}-base.webp` : '');
+      const probWidth = Math.max(r.probability || 0, 5);
+
+      return `
+        <div class="spirit-card" onclick="window.open('/compendium/${r.spirit_id || ''}','_blank')">
+          <div class="spirit-card-img">
+            ${imgSrc ? `<img src="${imgSrc}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">` : `<span style="font-size:48px;opacity:0.3">🥚</span>`}
+          </div>
+          <div class="spirit-card-body">
+            <div class="spirit-card-name">${r.name}</div>
+            <div class="spirit-card-meta">
+              <span class="egg-badge ${r.is_precious ? 'precious' : 'normal'}">${r.egg_type_name || (r.is_precious ? '炫彩蛋' : '神奇的蛋')}</span>
+              <span class="match-tier" style="color:${tier.color}">${tier.label}</span>
+            </div>
+            <div class="r-value-bar">
+              <div class="r-value-track">
+                <div class="r-value-fill" style="width:${probWidth}%"></div>
+              </div>
+              <span class="r-value-label">${r.probability || 0}%</span>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // ========== Mock Data for Demo ==========
+    function renderMockResults(h, w) {
+      const mockNames = [
+        '火花', '水蓝蓝', '喵喵', '丢丢', '蒲公英',
+        '格兰种子', '小糯米侠', '电咩咩', '迷你利乌',
+        '可可叮', '小灵灯笼', '粉粉球', '眯眯猪',
+      ];
+      const results = mockNames.map((name, i) => ({
+        name,
+        is_precious: i >= 10,
+        egg_type_name: i >= 10 ? '炫彩蛋' : '神奇的蛋',
+        match_tier: ['exact', 'tolerance1', 'tolerance2', 'nearest'][Math.min(i, 3)],
+        probability: Math.max(5, 95 - i * 7),
+        spirit_id: i + 1,
+        image: `/creature-atlas/${String(i + 1).padStart(3, '0')}-base.webp`,
+      }));
+
+      const data = {
+        success: true,
+        total: results.length,
+        user_r: (h / w).toFixed(4),
+        results,
+      };
+      renderResults(data);
+    }
+
+    // ========== Tweaks ==========
+    function toggleTweaks() {
+      document.getElementById('tweaksContent').classList.toggle('show');
+    }
+    function setDensity(val) {
+      const grid = document.querySelector('.spirit-grid');
+      if (!grid) return;
+      grid.style.gap = val === 'compact' ? '8px' : val === 'spacious' ? '24px' : '16px';
+    }
+    function setColumns(val) {
+      const grid = document.querySelector('.spirit-grid');
+      if (!grid) return;
+      if (val === 'auto') {
+        grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(240px, 1fr))';
+      } else {
+        grid.style.gridTemplateColumns = `repeat(${val}, 1fr)`;
+      }
+    }
+
+    // ========== URL Params Auto-fill ==========
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const hash = window.location.hash;
+      if (params.has('h')) document.getElementById('height').value = params.get('h');
+      if (params.has('w')) document.getElementById('weight').value = params.get('w');
+      // Support #h=0.24&w=1.6 format
+      if (hash) {
+        const hashParams = new URLSearchParams(hash.slice(1));
+        if (hashParams.has('h')) document.getElementById('height').value = hashParams.get('h');
+        if (hashParams.has('w')) document.getElementById('weight').value = hashParams.get('w');
+      }
+      // Auto-query if params present
+      if (document.getElementById('height').value && document.getElementById('weight').value) {
+        setTimeout(() => document.getElementById('queryForm').dispatchEvent(new Event('submit')), 300);
+      }
+    })();
+  </script>
+</body>
+</html>

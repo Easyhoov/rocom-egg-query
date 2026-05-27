@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>远行商人 - 洛克王国：世界 工具箱</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#000;--white:#fff;
+  --green:#0acf83;--red:#f24e1e;--purple:#a259ff;--pink:#ff7262;
+  --text-primary:#000;--text-secondary:#3d3d3d;--text-tertiary:#595959;--text-muted:#707070;
+  --bg:#fafafa;--card-bg:#fff;
+  --radius-pill:50px;--radius-card:8px;
+  --shadow-card:0 2px 24px rgba(0,0,0,0.06);
+  --shadow-hover:0 8px 40px rgba(0,0,0,0.12);
+}
+html{font-family:'Inter',sans-serif;font-size:16px;color:var(--text-primary);background:var(--bg);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+
+/* ── Nav ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;gap:32px;
+  padding:0 32px;height:56px;
+  background:rgba(255,255,255,0.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #e5e5e5;
+}
+.nav-logo{font-weight:700;font-size:18px;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.nav-logo svg{width:24px;height:24px}
+.nav-links{display:flex;gap:4px;flex:1}
+.nav-links a{
+  padding:6px 14px;border-radius:var(--radius-pill);
+  font-size:14px;font-weight:500;color:var(--text-tertiary);
+  transition:all .15s;
+}
+.nav-links a:hover{color:var(--text-primary);background:#f0f0f0}
+.nav-links a.active{color:var(--white);background:var(--black)}
+.nav-cta{
+  padding:8px 20px;border-radius:var(--radius-pill);
+  background:var(--green);color:#fff;font-size:14px;font-weight:600;
+  min-height:44px;display:flex;align-items:center;
+  transition:box-shadow .2s;
+}
+.nav-cta:hover{box-shadow:0 4px 16px rgba(10,207,131,0.35)}
+.hamburger{display:none;width:44px;height:44px;align-items:center;justify-content:center;border-radius:8px}
+.hamburger:hover{background:#f0f0f0}
+.hamburger svg{width:24px;height:24px}
+@media(max-width:959px){
+  .nav-links,.nav-cta{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);padding:12px 16px;border-bottom:1px solid #e5e5e5;gap:2px;z-index:99}
+  .nav-links.open a{padding:12px 16px;border-radius:8px;font-size:15px}
+  .hamburger{display:flex}
+}
+
+/* ── Main ── */
+.main{flex:1;max-width:1080px;margin:0 auto;padding:32px 24px 64px;width:100%}
+
+/* ── Header ── */
+.merchant-header{margin-bottom:32px}
+.merchant-header h1{font-size:28px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.merchant-header h1 .emoji{font-size:32px}
+.merchant-sub{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.info-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:var(--radius-pill);
+  background:#fff;border:1px solid #e5e5e5;
+  font-size:13px;font-weight:500;color:var(--text-secondary);
+  box-shadow:var(--shadow-card);
+  font-family:'JetBrains Mono',monospace;
+}
+.info-chip .label{color:var(--text-muted);font-family:'Inter',sans-serif}
+.info-chip .value{color:var(--text-primary);font-weight:700}
+.countdown .value{color:var(--green)}
+
+/* ── Section title ── */
+.section-title{
+  font-size:18px;font-weight:700;margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+
+/* ── Item Grid ── */
+.item-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;margin-bottom:32px;
+}
+.item-card{
+  background:var(--card-bg);
+  border-radius:var(--radius-card);
+  border:1px solid #eaeaea;
+  box-shadow:var(--shadow-card);
+  padding:20px 16px;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:10px;
+  transition:box-shadow .2s,transform .15s;
+}
+.item-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.item-icon{
+  width:64px;height:64px;border-radius:12px;
+  background:#f5f5f5;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.item-icon img{width:100%;height:100%;object-fit:contain}
+.item-icon .placeholder{
+  width:40px;height:40px;
+  border-radius:8px;background:#e0e0e0;
+}
+.item-name{font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.3}
+.item-meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.item-tag{
+  font-size:12px;font-weight:500;
+  padding:3px 10px;border-radius:var(--radius-pill);
+  font-family:'JetBrains Mono',monospace;
+}
+.tag-price{background:#e8f5e9;color:#1b5e20}
+.tag-stock{background:#f3e5f5;color:#6a1b9a}
+.tag-currency{background:#fff3e0;color:#e65100}
+
+/* ── Force Refresh ── */
+.actions{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+.btn{
+  min-height:44px;padding:0 24px;border-radius:var(--radius-pill);
+  font-size:14px;font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .15s;
+}
+.btn-primary{background:var(--black);color:var(--white)}
+.btn-primary:hover{background:#222;box-shadow:var(--shadow-hover)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-outline{border:2px solid #e0e0e0;color:var(--text-secondary)}
+.btn-outline:hover{border-color:#bbb;background:#fafafa}
+.btn-danger{background:var(--red);color:#fff}
+.btn-danger:hover{box-shadow:0 4px 16px rgba(242,78,30,0.3)}
+
+/* ── Toast ── */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  padding:12px 24px;border-radius:var(--radius-pill);
+  background:var(--black);color:#fff;font-size:14px;font-weight:500;
+  opacity:0;transition:all .3s;z-index:999;pointer-events:none;
+  white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── Loading ── */
+.loading-state{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:80px 0;gap:16px;color:var(--text-muted);
+}
+.spinner{
+  width:32px;height:32px;border:3px solid #e0e0e0;
+  border-top-color:var(--black);border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Empty ── */
+.empty-state{
+  text-align:center;padding:60px 20px;
+  color:var(--text-muted);font-size:15px;
+}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+
+/* ── Error ── */
+.error-state{
+  background:#fff5f5;border:1px solid #fecaca;border-radius:var(--radius-card);
+  padding:20px 24px;margin-bottom:24px;
+  color:#991b1b;font-size:14px;
+  display:flex;align-items:center;gap:12px;
+}
+
+/* ── Footer ── */
+.footer{
+  text-align:center;padding:24px;
+  font-size:13px;color:var(--text-muted);
+  border-top:1px solid #eaeaea;
+  margin-top:auto;
+}
+.footer a{color:var(--text-tertiary);text-decoration:underline;text-underline-offset:2px}
+.footer a:hover{color:var(--text-primary)}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .main{padding:20px 16px 48px}
+  .merchant-header h1{font-size:22px}
+  .item-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .item-card{padding:16px 12px}
+  .item-icon{width:52px;height:52px}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    洛克王国工具箱
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="/egg-query">孵蛋查询</a>
+    <a href="/compendium">精灵图鉴</a>
+    <a href="/egg-group">蛋组配对</a>
+    <a href="/garden">家园炼金</a>
+    <a href="/merchant" class="active">远行商人</a>
+  </div>
+  <a class="nav-cta" href="/">打开工具箱</a>
+  <button class="hamburger" id="hamburger" aria-label="菜单" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- Main -->
+<main class="main">
+  <!-- Header -->
+  <div class="merchant-header">
+    <h1><span class="emoji">🧳</span> 远行商人</h1>
+    <div class="merchant-sub" id="merchantSub">
+      <div class="info-chip"><span class="label">轮次</span><span class="value" id="roundInfo">--</span></div>
+      <div class="info-chip countdown"><span class="label">刷新倒计时</span><span class="value" id="countdown">--</span></div>
+      <div class="info-chip"><span class="label">上次更新</span><span class="value" id="lastUpdate">--</span></div>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div id="errorBox" style="display:none"></div>
+
+  <!-- Items -->
+  <div class="section-title">📦 商品列表</div>
+  <div id="itemContainer">
+    <div class="loading-state"><div class="spinner"></div><span>加载中…</span></div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn btn-primary" id="refreshBtn" onclick="fetchMerchant()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      刷新数据
+    </button>
+    <button class="btn btn-danger" id="forceBtn" onclick="forceRefresh()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      强制刷新
+    </button>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  洛克王国：世界 工具箱 · <a href="/">rocom.nousresearch.com</a>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const API_BASE = '';
+
+function showToast(msg, ms=2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), ms);
+}
+
+function renderError(msg) {
+  const box = document.getElementById('errorBox');
+  box.style.display = 'block';
+  box.innerHTML = `<div class="error-state">⚠️ ${msg}</div>`;
+}
+
+function hideError() {
+  document.getElementById('errorBox').style.display = 'none';
+}
+
+function renderItems(items) {
+  const c = document.getElementById('itemContainer');
+  if (!items || items.length === 0) {
+    c.innerHTML = `<div class="empty-state"><div class="icon">🏪</div>暂无商品数据</div>`;
+    return;
+  }
+  c.innerHTML = `<div class="item-grid">${items.map(it => {
+    const iconSrc = it.icon || `/item-icons/${encodeURIComponent(it.name || '')}.png`;
+    const name = it.name || '未知物品';
+    const timeLabel = it.time_label || '';
+    return `<div class="item-card">
+      <div class="item-icon"><img src="${iconSrc}" alt="${name}" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder></div>'"/></div>
+      <div class="item-name">${name}</div>
+      ${timeLabel ? `<div class="item-meta"><span class="item-tag tag-currency">⏰ ${timeLabel}</span></div>` : ''}
+    </div>`;
+  }).join('')}</div>`;
+}
+
+let refreshTimer = null;
+let refreshTarget = null;
+
+function startCountdown(nextRefresh) {
+  if (refreshTimer) clearInterval(refreshTimer);
+  refreshTarget = nextRefresh ? new Date(nextRefresh).getTime() : null;
+  const el = document.getElementById('countdown');
+  if (!refreshTarget) { el.textContent = '--'; return; }
+  function tick() {
+    const diff = refreshTarget - Date.now();
+    if (diff <= 0) { el.textContent = '即将刷新'; return; }
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = (h > 0 ? h + '时' : '') + m + '分' + s + '秒';
+  }
+  tick();
+  refreshTimer = setInterval(tick, 1000);
+}
+
+async function fetchMerchant() {
+  hideError();
+  const btn = document.getElementById('refreshBtn');
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${API_BASE}/api/merchant/info`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || '获取数据失败');
+    const merchant = data.merchant;
+    // Update header
+    if (merchant.round) {
+      const roundText = merchant.round.is_open ? `第 ${merchant.round.current} / ${merchant.round.total} 轮` : '已打烊';
+      document.getElementById('roundInfo').textContent = roundText;
+      if (merchant.round.countdown) {
+        document.getElementById('countdown').textContent = merchant.round.countdown;
+      }
+    }
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleString('zh-CN');
+    // Render items
+    const items = merchant.goods || [];
+    renderItems(items);
+    showToast('数据已更新 ✓');
+  } catch (e) {
+    renderError('获取商人数据失败：' + e.message + '。请确认后端服务已启动。');
+    renderItems(null);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function forceRefresh() {
+  hideError();
+  const btn = document.getElementById('forceBtn');
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${API_BASE}/api/merchant/refresh`, { method: 'POST' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    showToast('已触发强制刷新 ✓');
+    setTimeout(fetchMerchant, 800);
+  } catch (e) {
+    showToast('强制刷新失败');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// Init
+fetchMerchant();
+</script>
+</body>
+</html>

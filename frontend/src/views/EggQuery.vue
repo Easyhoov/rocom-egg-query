@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import '../styles/dark-theme.css'
 
 const router = useRouter()
 
@@ -30,7 +31,7 @@ function parseHash() {
 
 // 蛋类型标签
 const eggTags = [
-  { key: 'magic', label: '🥚 神奇的蛋' },
+  { key: 'magic', label: '神奇的蛋' },
   { key: 'colorful', label: '✨ 炫彩蛋' },
   { key: 'all', label: '📦 不限类型' },
 ]
@@ -124,23 +125,23 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="garden">
+  <div class="garden dark-page">
     <div class="garden__box">
       <div class="garden__hd">
-        <h1>🥚 孵蛋查询</h1>
+        <h1><img src="/favicon.png" alt="神奇的蛋" class="title-egg"> 孵蛋查询</h1>
         <p class="garden__sub">洛克王国：世界</p>
       </div>
 
       <!-- 表单 -->
-      <div class="garden__card">
+      <div class="garden__card dark-card">
         <div class="eq-row">
           <div class="eq-ipt">
             <label>身高 (m)</label>
-            <input v-model.number="height" type="number" step="0.01" min="0" placeholder="0.24" class="eq-input">
+            <input v-model.number="height" type="number" step="0.01" min="0" placeholder="0.24" class="eq-input dark-input">
           </div>
           <div class="eq-ipt">
             <label>体重 (kg)</label>
-            <input v-model.number="weight" type="number" step="0.001" min="0" placeholder="1.600" class="eq-input">
+            <input v-model.number="weight" type="number" step="0.001" min="0" placeholder="1.600" class="eq-input dark-input">
           </div>
         </div>
         <div class="eq-tags">
@@ -151,7 +152,7 @@ onUnmounted(() => {
             @click="eggType = t.key"
           >{{ t.label }}</span>
         </div>
-        <button class="query-btn" :disabled="loading" @click="queryEgg">
+        <button class="query-btn dark-btn dark-btn--accent" :disabled="loading" @click="queryEgg">
           {{ loading ? '查询中...' : '查询' }}
         </button>
       </div>
@@ -160,7 +161,7 @@ onUnmounted(() => {
       <div v-if="error" class="error-msg">{{ error }}</div>
 
       <!-- 结果 -->
-      <div v-if="hasQueried && results.length" class="garden__card garden__result">
+      <div v-if="hasQueried && results.length" class="garden__card garden__result dark-card">
         <div class="eq-tabs">
           <button class="eq-tb" :class="{ 'eq-tb--on': tab === 'all' }" @click="tab = 'all'">
             全部 <span class="eq-n">{{ total }}</span>
@@ -200,7 +201,7 @@ onUnmounted(() => {
       </div>
 
       <!-- 空状态 -->
-      <div v-else-if="hasQueried && !results.length" class="garden__card garden__result" style="text-align:center">
+      <div v-else-if="hasQueried && !results.length" class="garden__card garden__result dark-card" style="text-align:center">
         <div style="font-size:48px;margin-bottom:8px">🐣</div>
         <p style="color:#ccc">暂无结果</p>
       </div>
@@ -227,124 +228,99 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.garden {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
-  padding: 16px 16px 80px;
-}
-.garden__box { max-width: 420px; margin: 0 auto; }
-.garden__hd { text-align: center; padding: 24px 0 20px; }
-.garden__hd h1 { font-size: 22px; color: #1a1a2e; font-weight: 700; margin: 0 0 6px; }
-.garden__sub { font-size: 13px; color: #888; margin: 0; }
-.garden__card {
-  background: #fff;
-  border-radius: 18px;
-  padding: 16px;
-  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
-  margin-bottom: 12px;
-}
-.garden__result {
-  display: flex;
-  flex-direction: column;
-}
-.query-btn {
-  width: 100%;
-  padding: 12px;
-  background: #8b3dff;
-  color: #fff;
-  border: none;
-  border-radius: 14px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: .15s;
-}
-.query-btn:active { transform: scale(.97); }
-.query-btn:disabled { opacity: .5; cursor: not-allowed; }
+/* ===== 组件专属布局样式（深色主题由 dark-theme.css 提供） ===== */
 
-/* Error */
+/* 页面内边距 */
+.garden { padding: 16px 16px 80px; }
+
+/* 容器 */
+.garden__box { max-width: 420px; margin: 0 auto; position: relative; z-index: 1; }
+.garden__hd { text-align: center; padding: 24px 0 20px; }
+.garden__hd h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; display: flex; align-items: center; justify-content: center; gap: 6px; color: #fff; }
+.title-egg { width: 28px; height: 28px; vertical-align: middle; }
+.garden__sub { font-size: 13px; margin: 0; color: rgba(255, 255, 255, 0.75); }
+
+/* 卡片内边距/间距（背景/边框/圆角由 .dark-card 提供） */
+.garden__card { padding: 16px; margin-bottom: 12px; }
+.garden__result { display: flex; flex-direction: column; }
+
+/* 查询按钮（宽度为组件专属，其余由 .dark-btn 提供） */
+.query-btn { width: 100%; }
+
+/* 错误提示 */
 .error-msg {
-  background: #fff0f0;
-  color: #e74c3c;
+  background: var(--dt-error-bg);
+  color: var(--dt-error-text);
   padding: 12px 16px;
   border-radius: 14px;
   font-size: 14px;
   text-align: center;
   margin-bottom: 12px;
+  border: 1px solid rgba(231, 76, 60, 0.2);
 }
 
-/* Form row */
+/* 表单行 */
 .eq-row { display: flex; gap: 12px; margin-bottom: 12px; }
 .eq-ipt { flex: 1; }
-.eq-ipt label { display: block; font-size: 12px; color: #888; margin-bottom: 6px; }
-.eq-input {
-  width: 100%;
-  padding: 12px;
-  border: 1.5px solid #e8e8e8;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: 500;
-  background: #fafafa;
-  transition: .2s;
-  box-sizing: border-box;
-}
-.eq-input:focus { outline: none; border-color: #8b3dff; background: #fff; }
+.eq-ipt label { display: block; font-size: 12px; color: var(--dt-text-muted); margin-bottom: 6px; }
+/* 输入框只保留 font-weight，其余由 .dark-input 提供 */
+.eq-input { font-weight: 500; }
 
-/* Tags */
+/* 标签 */
 .eq-tags { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
 .eq-tag {
   padding: 7px 14px;
   border-radius: 20px;
   font-size: 13px;
-  border: 1.5px solid #e8e8e8;
-  background: #fff;
-  color: #666;
+  border: 1.5px solid var(--dt-tag-border);
+  background: var(--dt-tag-bg);
+  color: var(--dt-tag-text);
   cursor: pointer;
   transition: .2s;
   user-select: none;
 }
-.eq-tag--on { border-color: #8b3dff; background: #8b3dff; color: #fff; }
+.eq-tag--on { border-color: var(--dt-accent); background: var(--dt-accent); color: #fff; }
 
-/* Tabs */
-.eq-tabs { display: flex; background: #f5f5f5; border-radius: 10px; padding: 3px; margin-bottom: 8px; }
+/* 标签页 */
+.eq-tabs { display: flex; background: rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 3px; margin-bottom: 8px; }
 .eq-tb {
   flex: 1;
   padding: 8px 0;
   text-align: center;
   border-radius: 8px;
   font-size: 13px;
-  color: #888;
+  color: var(--dt-text-muted);
   cursor: pointer;
   border: none;
   background: none;
   transition: .2s;
 }
-.eq-tb--on { background: #fff; color: #333; font-weight: 600; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-.eq-n { font-weight: 700; color: #8b3dff; }
+.eq-tb--on { background: rgba(255, 255, 255, 0.1); color: #fff; font-weight: 600; }
+.eq-n { font-weight: 700; color: var(--dt-accent); }
 
 /* R值 */
-.eq-rval { text-align: center; font-size: 10px; color: #8b3dff; margin: 4px 0; font-weight: 500; }
+.eq-rval { text-align: center; font-size: 10px; color: var(--dt-accent); margin: 4px 0; font-weight: 500; }
 
 /* 3列网格 */
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
 
-/* Pet card */
+/* 精灵卡片 */
 .pc {
-  background: #f5f2ff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   padding: 28px 4px 8px;
   text-align: center;
-  border: 1.5px solid transparent;
   transition: .15s;
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
-.pc:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
+.pc:hover { border-color: var(--dt-accent-glow); box-shadow: 0 8px 24px rgba(139, 61, 255, 0.15); }
 .pc:active { transform: scale(.96); }
 .pc--precious {
-  background: linear-gradient(135deg, #fffdf0, #fff8dc);
-  border-color: rgba(102, 126, 234, 0.25);
+  background: rgba(255, 215, 0, 0.08);
+  border-color: rgba(255, 215, 0, 0.2);
 }
 .pc__badge {
   position: absolute;
@@ -369,16 +345,16 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  background: linear-gradient(135deg, #f0ecff, #e2d6ff);
+  background: rgba(139, 61, 255, 0.15);
   overflow: hidden;
 }
-.pc--precious .pc__ico { background: linear-gradient(135deg, #fff3cd, #ffe082); }
+.pc--precious .pc__ico { background: rgba(255, 215, 0, 0.15); }
 .pc__img { width: 48px; height: 48px; object-fit: contain; }
 .pc__emoji { font-size: 20px; }
 .pc__name {
   font-size: 11px;
   font-weight: 600;
-  color: #333;
+  color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -386,43 +362,33 @@ onUnmounted(() => {
   max-width: 100%;
   padding: 0 2px;
 }
-.pc__range { font-size: 9px; color: #bbb; margin-top: 1px; }
-.pc__rval { font-size: 9px; color: #8b3dff; font-weight: 500; margin-top: 1px; }
-.pc__rdiff { font-size: 9px; color: #ff6d00; font-weight: 500; margin-top: 1px; }
+.pc__range { font-size: 9px; color: var(--dt-text-muted); margin-top: 1px; opacity: 0.8; }
+.pc__rval { font-size: 9px; color: var(--dt-accent); font-weight: 500; margin-top: 1px; }
+.pc__rdiff { font-size: 9px; color: #ff9800; font-weight: 500; margin-top: 1px; }
 
-/* Footer */
-.eq-ft { text-align: center; padding: 16px 0 8px; font-size: 11px; color: #bbb; }
-.eq-ft a { color: #999; }
+/* 底部 */
+.eq-ft { text-align: center; padding: 16px 0 8px; font-size: 11px; color: var(--dt-text-muted); }
+.eq-ft a { color: rgba(255, 255, 255, 0.6); }
 
-/* Tip modal */
+/* 弹窗遮罩 */
 .eq-tip {
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,.4);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   z-index: 100;
   justify-content: center;
   align-items: center;
 }
 .eq-tip--on { display: flex; }
+/* 弹窗内容复用 .dark-card，仅补充组件专属间距 */
 .eq-tip--box {
-  background: #fff;
-  border-radius: 18px;
   padding: 24px;
   width: 85%;
   max-width: 320px;
 }
 .eq-tip--box h3 { font-size: 16px; margin-bottom: 12px; }
-.eq-tip--box p { font-size: 13px; color: #666; line-height: 1.8; }
-.eq-tip--box button {
-  margin-top: 16px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  background: #8b3dff;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-}
+.eq-tip--box p { font-size: 13px; line-height: 1.8; }
+.eq-tip--box button { margin-top: 16px; width: 100%; padding: 10px; border-radius: 8px; font-size: 14px; }
 </style>

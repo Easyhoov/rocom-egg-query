@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>洛克王国孵蛋查询 · 前端设计模板</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+  background: linear-gradient(180deg, #e8f0fe, #f5f0ff, #fff);
+  color: #1a1a2e;
+  line-height: 1.6;
+  padding: 16px 16px 80px;
+}
+.wrap { max-width: 480px; margin: 0 auto; }
+h2 { font-size: 18px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+h3 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: #333; }
+p, li { font-size: 14px; color: #333; }
+ul { padding-left: 20px; }
+.card {
+  background: #fff; border-radius: 16px; padding: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 16px;
+}
+.header { text-align: center; padding: 28px 0 24px; }
+.header h1 { font-size: 22px; font-weight: 700; color: #1a1a2e; }
+.header p { font-size: 13px; color: #888; margin-top: 6px; }
+
+/* Color swatches */
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.swatch {
+  width: 64px; border-radius: 10px; overflow: hidden; text-align: center;
+  border: 1px solid rgba(0,0,0,.06); font-size: 10px;
+}
+.swatch-color { height: 40px; }
+.swatch-label { padding: 4px 2px; color: #666; word-break: break-all; }
+
+/* Typography */
+.type-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
+.type-size { width: 40px; font-size: 11px; color: #aaa; flex-shrink: 0; text-align: right; }
+.type-sample { flex: 1; }
+
+/* Cards demo */
+.demo-card {
+  background: #fff; border-radius: 16px; padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 10px;
+}
+.demo-card-warm {
+  background: rgba(255,255,255,0.68); backdrop-filter: blur(8px);
+  border: 1px solid rgba(140,115,80,0.1); border-radius: 18px;
+  padding: 16px; margin-bottom: 10px;
+}
+.demo-card-precious {
+  background: linear-gradient(135deg, #fffdf0, #fff8dc);
+  border: 1px solid rgba(102,126,234,0.25); border-radius: 16px;
+  padding: 16px; margin-bottom: 10px;
+}
+.demo-pet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.demo-pet {
+  background: #fff; border-radius: 14px; padding: 10px 6px 8px;
+  text-align: center; box-shadow: 0 8px 24px rgba(15,16,21,0.08);
+  transition: .2s;
+}
+.demo-pet:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
+.demo-pet-img { width: 48px; height: 48px; background: #f5f2ff; border-radius: 50%; margin: 0 auto 4px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.demo-pet-name { font-size: 13px; font-weight: 600; }
+
+/* Inputs & Buttons */
+.demo-input {
+  width: 100%; padding: 10px 14px; border: 1.5px solid #8b3dff;
+  border-radius: 10px; font-size: 15px; background: #fff; outline: none;
+  margin-bottom: 8px;
+}
+.demo-input-unfocus {
+  width: 100%; padding: 10px 14px; border: 1.5px solid #e8e8e8;
+  border-radius: 10px; font-size: 15px; background: #fafafa; outline: none;
+  margin-bottom: 8px;
+}
+.demo-btn-primary {
+  display: inline-block; padding: 10px 24px;
+  background: linear-gradient(135deg, #8b3dff, #667eea); color: #fff;
+  border: none; border-radius: 12px; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: .2s; margin-right: 8px;
+}
+.demo-btn-primary:hover { box-shadow: 0 4px 12px rgba(102,126,234,.4); }
+.demo-btn-reset {
+  display: inline-block; padding: 10px 24px;
+  background: #f5f5f5; color: #666; border: none;
+  border-radius: 12px; font-size: 14px; cursor: pointer; transition: .2s;
+}
+.demo-btn-warm {
+  display: inline-block; padding: 10px 24px;
+  background: rgba(255,255,255,0.72); color: #8b5e2b;
+  border: 1px solid rgba(179,123,45,0.25); border-radius: 999px;
+  font-size: 14px; cursor: pointer; transition: .2s; margin-right: 8px;
+}
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.tag {
+  padding: 5px 12px; border-radius: 20px; font-size: 12px;
+  border: 1.5px solid #e8e8e8; background: #fff; color: #666;
+  cursor: pointer; transition: .2s; display: inline-block;
+}
+.tag-on { border-color: #8b3dff; background: #8b3dff; color: #fff; }
+.tag-attr { background: rgba(139,61,255,0.08); color: #8b3dff; border-color: transparent; }
+.tag-egg { background: #f5f0ff; color: #8b3dff; border-color: transparent; }
+.tag-shiny { background: #fff8e1; color: #9b59b6; border-color: #ffd700; }
+.tag-nobreed { background: #fee; color: #e74c3c; border-color: transparent; }
+
+/* Radius */
+.radius-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.radius-box { width: 48px; height: 48px; background: #8b3dff20; border: 2px solid #8b3dff; flex-shrink: 0; }
+.radius-label { font-size: 12px; color: #666; }
+
+/* Shadow */
+.shadow-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.shadow-box { width: 80px; height: 60px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #888; text-align: center; }
+
+/* Nav preview */
+.nav-preview {
+  position: relative; background: #fff; border-radius: 16px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.06); display: flex;
+  justify-content: space-around; padding: 10px 0; margin-top: 12px;
+}
+.nav-item {
+  text-decoration: none; color: #999; font-size: 12px; font-weight: 500;
+  padding: 4px 8px; border-radius: 18px; transition: .2s;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.nav-item-on { color: #8b3dff; background: #f0ecff; }
+
+/* Structure diagram */
+.struct { font-family: 'Courier New', monospace; font-size: 12px; color: #667eea; background: #f8f9ff; padding: 12px; border-radius: 10px; line-height: 1.8; white-space: pre; overflow-x: auto; }
+
+/* Checklist */
+.check { list-style: none; padding: 0; }
+.check li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.check li::before { content: "☐"; color: #8b3dff; font-size: 16px; }
+
+/* Asset table */
+.asset-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.asset-table th { text-align: left; padding: 8px 6px; border-bottom: 2px solid #e8e8e8; color: #888; font-size: 12px; }
+.asset-table td { padding: 8px 6px; border-bottom: 1px solid #f5f5f5; }
+.asset-table td:last-child { color: #888; }
+
+/* Skill type badges */
+.skill-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-badge { padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+
+/* Two style comparison */
+.style-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.style-demo { border-radius: 14px; padding: 16px; min-height: 80px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Header -->
+<div class="header">
+  <h1>🎨 前端设计模板</h1>
+  <p>洛克王国孵蛋查询 · 统一设计规范</p>
+</div>
+
+<!-- 1. Color Palette -->
+<div class="card">
+  <h2>🎨 色彩系统</h2>
+  
+  <h3>现代紫蓝（EggQuery / 图鉴 / 蛋组 / 家园）</h3>
+  <div class="swatches">
+    <div class="swatch"><div class="swatch-color" style="background:#667eea"></div><div class="swatch-label">#667eea<br>主色</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8b3dff"></div><div class="swatch-label">#8b3dff<br>强调</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1a1a2e"></div><div class="swatch-label">#1a1a2e<br>标题</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#333"></div><div class="swatch-label">#333<br>正文</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#888"></div><div class="swatch-label">#888<br>副文</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#aaa"></div><div class="swatch-label">#aaa<br>标签</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#e8e8e8"></div><div class="swatch-label">#e8e8e8<br>边框</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f0ecff"></div><div class="swatch-label">#f0ecff<br>激活底</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f5f2ff"></div><div class="swatch-label">#f5f2ff<br>图片底</div></div>
+  </div>
+
+  <h3>暖色羊皮纸（首页 / 商人）</h3>
+  <div class="swatches">
+    <div class="swatch"><div class="swatch-color" style="background:#c97926"></div><div class="swatch-label">#c97926<br>主色</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffc65f"></div><div class="swatch-label">#ffc65f<br>金色</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#3d2b16"></div><div class="swatch-label">#3d2b16<br>标题</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#5a3e1b"></div><div class="swatch-label">#5a3e1b<br>正文</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8c7a61"></div><div class="swatch-label">#8c7a61<br>副文</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#bfae95"></div><div class="swatch-label">#bfae95<br>弱文</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f5efe6"></div><div class="swatch-label">#f5efe6<br>背景</div></div>
+  </div>
+
+  <h3>语义色</h3>
+  <div class="swatches">
+    <div class="swatch"><div class="swatch-color" style="background:#4caf50"></div><div class="swatch-label">#4caf50<br>草/成功</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#e74c3c"></div><div class="swatch-label">#e74c3c<br>物攻/错误</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#42a5f5"></div><div class="swatch-label">#42a5f5<br>水/冰/电</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#667eea"></div><div class="swatch-label">#667eea<br>魔法</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#9b59b6"></div><div class="swatch-label">#9b59b6<br>异色</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f39c12"></div><div class="swatch-label">#f39c12<br>总和</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1abc9c"></div><div class="swatch-label">#1abc9c<br>速度</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ff9800"></div><div class="swatch-label">#ff9800<br>状态</div></div>
+  </div>
+</div>
+
+<!-- 2. Typography -->
+<div class="card">
+  <h2>📝 字号阶梯</h2>
+  <div class="type-row"><div class="type-size">9px</div><div class="type-sample" style="font-size:9px">徽章文字 / 精灵编号</div></div>
+  <div class="type-row"><div class="type-size">10px</div><div class="type-sample" style="font-size:10px">Spinner / 进化等级</div></div>
+  <div class="type-row"><div class="type-size">11px</div><div class="type-sample" style="font-size:11px">Footer / 标签图标</div></div>
+  <div class="type-row"><div class="type-size">12px</div><div class="type-sample" style="font-size:12px">导航项 / 筛选标签 / 描述</div></div>
+  <div class="type-row"><div class="type-size">13px</div><div class="type-sample" style="font-size:13px">副标题 / 卡片描述</div></div>
+  <div class="type-row"><div class="type-size">14px</div><div class="type-sample" style="font-size:14px">区块标签 / 表单标签</div></div>
+  <div class="type-row"><div class="type-size">15px</div><div class="type-sample" style="font-size:15px">输入框 / 卡片标题</div></div>
+  <div class="type-row"><div class="type-size">17px</div><div class="type-sample" style="font-size:17px;font-weight:800">首页功能卡标题</div></div>
+  <div class="type-row"><div class="type-size">22px</div><div class="type-sample" style="font-size:22px;font-weight:700">页面主标题 h1</div></div>
+</div>
+
+<!-- 3. Card Styles -->
+<div class="card">
+  <h2>🃏 卡片样式</h2>
+  
+  <h3>标准白卡（紫蓝页面）</h3>
+  <div class="demo-card">
+    <div style="font-weight:600;font-size:15px">标准卡片标题</div>
+    <div style="font-size:13px;color:#888;margin-top:4px">圆角 16px · 阴影 0 2px 12px · 白色背景</div>
+  </div>
+
+  <h3>精灵网格卡（3列）</h3>
+  <div class="demo-pet-grid">
+    <div class="demo-pet">
+      <div class="demo-pet-img">🔥</div>
+      <div class="demo-pet-name">火花龙</div>
+    </div>
+    <div class="demo-pet">
+      <div class="demo-pet-img">💧</div>
+      <div class="demo-pet-name">水灵兽</div>
+    </div>
+    <div class="demo-pet">
+      <div class="demo-pet-img">🌿</div>
+      <div class="demo-pet-name">藤蔓蛇</div>
+    </div>
+  </div>
+
+  <h3>毛玻璃卡（暖色页面）</h3>
+  <div style="background:#f5efe6;padding:16px;border-radius:14px;margin-bottom:10px">
+    <div class="demo-card-warm">
+      <div style="font-weight:800;font-size:17px;color:#3d2b16">孵蛋查询</div>
+      <div style="font-size:13px;color:#8c7a61;margin-top:4px">输入身高体重，查询可能孵化的精灵</div>
+    </div>
+  </div>
+
+  <h3>珍贵变体卡</h3>
+  <div class="demo-card-precious">
+    <div style="font-weight:600;font-size:15px">✨ 珍贵蛋精灵</div>
+    <div style="font-size:13px;color:#888;margin-top:4px">金色渐变底 · 蓝色边框</div>
+  </div>
+</div>
+
+<!-- 4. Buttons & Inputs -->
+<div class="card">
+  <h2>🔘 按钮与输入框</h2>
+  
+  <h3>输入框</h3>
+  <div class="demo-input-unfocus">未聚焦状态 — 边框 #e8e8e8 · 底色 #fafafa</div>
+  <div class="demo-input">聚焦状态 — 边框 #8b3dff · 白色背景</div>
+  
+  <h3>按钮</h3>
+  <div style="margin-bottom:12px">
+    <button class="demo-btn-primary">主要按钮</button>
+    <button class="demo-btn-reset">重置按钮</button>
+  </div>
+  <div>
+    <button class="demo-btn-warm">暖色按钮</button>
+    <button class="demo-btn-warm">金色胶囊</button>
+  </div>
+
+  <h3>标签</h3>
+  <div class="tags">
+    <span class="tag tag-on">全部</span>
+    <span class="tag">火</span>
+    <span class="tag">水</span>
+    <span class="tag">草</span>
+  </div>
+  <div class="tags">
+    <span class="tag tag-attr">🔥 火</span>
+    <span class="tag tag-egg">🥚 龙系</span>
+    <span class="tag tag-shiny">✨ 异色</span>
+    <span class="tag tag-nobreed">不可繁殖</span>
+  </div>
+
+  <h3>技能类型</h3>
+  <div class="skill-badges">
+    <span class="skill-badge" style="background:#fee8e8;color:#e74c3c">物理</span>
+    <span class="skill-badge" style="background:#e8e8ff;color:#667eea">魔法</span>
+    <span class="skill-badge" style="background:#e8f5e9;color:#4caf50">防御</span>
+    <span class="skill-badge" style="background:#fff3e0;color:#ff9800">状态</span>
+  </div>
+</div>
+
+<!-- 5. Border Radius -->
+<div class="card">
+  <h2>⭕ 圆角阶梯</h2>
+  <div class="radius-row"><div class="radius-box" style="border-radius:4px"></div><div class="radius-label">4px — 小徽章</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:8px"></div><div class="radius-label">8px — 按钮/标签</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:10px"></div><div class="radius-label">10px — 输入框</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:12px"></div><div class="radius-label">12px — 操作按钮</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:14px"></div><div class="radius-label">14px — 精灵网格卡</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:16px"></div><div class="radius-label">16px — 标准白卡</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:18px"></div><div class="radius-label">18px — 功能入口卡</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:20px"></div><div class="radius-label">20px — 筛选标签 pill</div></div>
+  <div class="radius-row"><div class="radius-box" style="border-radius:50%"></div><div class="radius-label">50% — 圆形头像</div></div>
+</div>
+
+<!-- 6. Shadow -->
+<div class="card">
+  <h2>🌑 阴影阶梯</h2>
+  <div class="shadow-row">
+    <div class="shadow-box" style="box-shadow:0 2px 12px rgba(0,0,0,.06)">标准卡<br>2px 12px</div>
+    <div class="shadow-box" style="box-shadow:0 4px 16px rgba(15,16,21,0.08)">精灵卡<br>4px 16px</div>
+    <div class="shadow-box" style="box-shadow:0 8px 24px rgba(15,16,21,0.08)">悬浮卡<br>8px 24px</div>
+  </div>
+  <div class="shadow-row">
+    <div class="shadow-box" style="box-shadow:0 8px 24px rgba(139,61,255,0.12)">Hover<br>紫色光晕</div>
+    <div class="shadow-box" style="box-shadow:0 -2px 12px rgba(0,0,0,.06)">导航栏<br>顶部阴影</div>
+    <div class="shadow-box" style="box-shadow:0 4px 12px rgba(102,126,234,.4)">按钮光<br>紫色强光</div>
+  </div>
+</div>
+
+<!-- 7. Nav Bar -->
+<div class="card">
+  <h2>📱 底部导航栏</h2>
+  <div class="nav-preview">
+    <a class="nav-item nav-item-on">🏠<br>首页</a>
+    <a class="nav-item">🥚<br>孵蛋查询</a>
+    <a class="nav-item">📖<br>精灵图鉴</a>
+    <a class="nav-item">🌿<br>家园炼金</a>
+    <a class="nav-item">🛒<br>商人</a>
+  </div>
+  <p style="font-size:12px;color:#aaa;margin-top:8px">固定底部 · 首页不显示 · 选中态 #8b3dff + #f0ecff 底色</p>
+</div>
+
+<!-- 8. Page Structure -->
+<div class="card">
+  <h2>📐 页面结构</h2>
+  <div class="struct">┌─ .page ──────────────────────┐
+│  background: 渐变            │
+│  padding: 16px 16px 80px    │
+│                              │
+│  ┌─ .page__box ───────────┐  │
+│  │  max-width: 420px      │  │
+│  │                        │  │
+│  │  ┌─ .page__hd ──────┐  │  │
+│  │  │  h1 + icon        │  │  │
+│  │  │  p.subtitle       │  │  │
+│  │  └──────────────────┘  │  │
+│  │                        │  │
+│  │  ┌─ .page__card ────┐  │  │
+│  │  │  筛选/内容        │  │  │
+│  │  └──────────────────┘  │  │
+│  │                        │  │
+│  │  ┌─ .page__card ────┐  │  │
+│  │  │  列表/网格        │  │  │
+│  │  └──────────────────┘  │  │
+│  │                        │  │
+│  │  ┌─ .page__ft ──────┐  │  │
+│  │  │  footer           │  │  │
+│  │  └──────────────────┘  │  │
+│  └────────────────────────┘  │
+└──────────────────────────────┘</div>
+</div>
+
+<!-- 9. Assets -->
+<div class="card">
+  <h2>🖼️ 可用素材</h2>
+  <table class="asset-table">
+    <tr><th>目录</th><th>数量</th><th>内容</th></tr>
+    <tr><td>/img/</td><td>24 张</td><td>通用 UI 图片（标题/装饰/图标）</td></tr>
+    <tr><td>/attr-icons/</td><td>18 张</td><td>属性图标 30×30（火水草电冰…）</td></tr>
+    <tr><td>/creature-atlas/</td><td>465 张</td><td>精灵图鉴 WebP</td></tr>
+    <tr><td>/item-icons/</td><td>274 张</td><td>道具图标 PNG</td></tr>
+    <tr><td>/skill-icons/</td><td>433 张</td><td>技能图标 PNG</td></tr>
+    <tr><td>/garden-icons/</td><td>53 张</td><td>种子/材料/食物/精灵球</td></tr>
+  </table>
+</div>
+
+<!-- 10. Checklist -->
+<div class="card">
+  <h2>✅ 新增页面 Checklist</h2>
+  <ul class="check">
+    <li>确定风格归属（紫蓝 or 暖色）</li>
+    <li>在 router/index.js 添加路由</li>
+    <li>在 App.vue 导航栏添加入口</li>
+    <li>在 Home.vue features 添加卡片</li>
+    <li>创建 views/XxxPage.vue</li>
+    <li>main.py 添加页面路由（返回 INDEX_HTML）</li>
+    <li>新增静态目录必须在 main.py mount</li>
+    <li>图片引用用 <code>:src="'/img/xxx.png'"</code> 动态绑定</li>
+    <li>cd frontend && npx vite build</li>
+    <li>重启 uvicorn 服务</li>
+  </ul>
+</div>
+
+<!-- 11. Principles -->
+<div class="card">
+  <h2>⚡ 设计原则</h2>
+  <ul>
+    <li><strong>移动端优先</strong> — 420px 居中，底部留 80px</li>
+    <li><strong>浅色渐变背景</strong> — 绝不用深色主题</li>
+    <li><strong>白色圆角卡片</strong> — 16~18px 圆角</li>
+    <li><strong>紫色主色调</strong> — #8b3dff / #667eea</li>
+    <li><strong>本地素材优先</strong> — 不依赖外部 CDN</li>
+    <li><strong>动态绑定图片</strong> — 避免 Vite 构建报错</li>
+    <li><strong>平滑过渡</strong> — transition: .2s</li>
+    <li><strong>按压缩放</strong> — transform: scale(0.97)</li>
+  </ul>
+</div>
+
+<div style="text-align:center;padding:20px 0;font-size:12px;color:#ccc">
+  洛克王国孵蛋查询 · 前端设计模板 v1.0<br>
+  <a href="/" style="color:#8b3dff;text-decoration:none">← 返回首页</a>
+</div>
+
+</div>
+</body>
+</html>

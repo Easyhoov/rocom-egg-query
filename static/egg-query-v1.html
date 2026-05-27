@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>孵蛋查询 - 洛克王国：世界</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#000;--white:#fff;--green:#0acf83;--red:#f24e1e;--purple:#a259ff;--pink:#ff7262;--blue:#4882ff;--text-primary:#000;--text-secondary:#3d3d3d;--text-tertiary:#595959;--text-muted:#707070;--radius-pill:50px;--radius-card:8px;--shadow-card:0 2px 24px rgba(0,0,0,.06);--shadow-hover:0 8px 40px rgba(0,0,0,.12)}
+body{font-family:'Inter',sans-serif;color:var(--text-primary);background:var(--white);line-height:1.5;letter-spacing:-0.14px}
+a{color:inherit;text-decoration:none}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 24px;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px}
+.nav-logo img{width:28px;height:28px;border-radius:var(--radius-card)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:14px;font-weight:500;color:rgba(0,0,0,.55);transition:color .2s}
+.nav-links a.active{color:var(--black)}
+.nav-cta{height:36px;padding:0 20px;border-radius:var(--radius-pill);background:var(--black);color:var(--white);font-size:13px;font-weight:500;border:none;cursor:pointer}
+.nav-hamburger{display:none;background:none;border:none;font-size:24px;cursor:pointer}
+
+/* Drawer */
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200}
+.drawer-overlay.open{display:block}
+.drawer{position:fixed;top:0;right:0;width:280px;height:100%;background:var(--white);padding:24px;z-index:201;transform:translateX(100%);transition:transform .3s}
+.drawer-overlay.open .drawer{transform:translateX(0)}
+.drawer-close{background:none;border:none;font-size:24px;cursor:pointer;float:right}
+.drawer a{display:block;padding:12px 0;font-size:15px;font-weight:500;color:var(--text-secondary);border-bottom:1px solid rgba(0,0,0,.06)}
+.drawer a.active{color:var(--black)}
+
+/* Main */
+.container{max-width:960px;margin:0 auto;padding:32px 24px 64px}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:40px}
+.hero-icon{font-size:48px;margin-bottom:12px}
+.hero h1{font-size:32px;font-weight:700;letter-spacing:-0.96px;margin-bottom:8px}
+.hero p{color:var(--text-muted);font-size:15px}
+
+/* Form Card */
+.form-card{background:var(--white);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:32px;margin-bottom:40px}
+.form-row{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.form-field{flex:1;min-width:140px}
+.form-field label{display:block;font-size:13px;font-weight:500;color:var(--text-tertiary);margin-bottom:6px}
+.form-field input{width:100%;height:44px;border:1px solid rgba(0,0,0,.12);border-radius:var(--radius-card);padding:0 14px;font-size:15px;font-family:'JetBrains Mono',monospace;outline:none;transition:border .2s}
+.form-field input:focus{border-color:var(--black);box-shadow:0 0 0 2px rgba(0,0,0,.1)}
+
+.filter-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.filter-pill{height:36px;padding:0 18px;border-radius:var(--radius-pill);border:1px solid rgba(0,0,0,.12);background:var(--white);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+.filter-pill.active{background:var(--black);color:var(--white);border-color:var(--black)}
+
+.btn-submit{width:100%;height:48px;border-radius:var(--radius-pill);background:var(--black);color:var(--white);font-size:15px;font-weight:600;border:none;cursor:pointer;transition:opacity .2s}
+.btn-submit:hover{opacity:.85}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+
+/* Divider */
+.gradient-divider{height:3px;border-radius:2px;background:linear-gradient(90deg,var(--purple),var(--blue),var(--green),var(--pink));margin:0 0 40px;opacity:.7}
+
+/* Results Header */
+.results-header{display:flex;align-items:baseline;gap:12px;margin-bottom:24px}
+.results-header h2{font-size:20px;font-weight:700}
+.results-header .r-value{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text-muted)}
+.results-section-title{font-size:14px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.results-section-title::before{content:'';display:inline-block;width:4px;height:16px;border-radius:2px}
+
+.section-normal .results-section-title::before{background:var(--blue)}
+.section-precious .results-section-title::before{background:var(--gold,var(--purple))}
+
+/* Grid */
+.spirit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+
+/* Card */
+.spirit-card{background:var(--white);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:16px;text-align:center;transition:box-shadow .2s,transform .2s;cursor:default}
+.spirit-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.spirit-card img{width:72px;height:72px;object-fit:contain;margin-bottom:8px;border-radius:var(--radius-card)}
+.spirit-card .name{font-size:14px;font-weight:600;margin-bottom:4px}
+.spirit-card .egg-badge{display:inline-block;padding:2px 10px;border-radius:var(--radius-pill);font-size:11px;font-weight:500;color:var(--white);margin-bottom:6px}
+.spirit-card .tier{font-size:11px;font-weight:500;margin-bottom:6px}
+.tier-exact{color:var(--green)}
+.tier-tolerance1{color:var(--blue)}
+.tier-tolerance2{color:var(--purple)}
+.tier-nearest{color:var(--text-muted)}
+.prob-bar{height:4px;border-radius:2px;background:rgba(0,0,0,.06);overflow:hidden;margin-top:6px}
+.prob-bar-fill{height:100%;border-radius:2px;transition:width .4s}
+.prob-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:4px}
+.r-value{font-size:10px;color:var(--primary);font-weight:500;margin-top:2px}
+.r-diff{font-size:10px;color:#ff6d00;font-weight:500;margin-top:1px}
+
+.empty-state{text-align:center;padding:48px 0;color:var(--text-muted);font-size:15px}
+
+/* Footer */
+.footer{background:var(--black);color:var(--white);text-align:center;padding:32px 24px;font-size:13px;color:rgba(255,255,255,.5)}
+.footer a{color:rgba(255,255,255,.7)}
+
+/* Loading */
+.loading-spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(0,0,0,.1);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:960px){
+  .nav-links{display:none}
+  .nav-hamburger{display:block}
+  .spirit-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:720px){
+  .spirit-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:560px){
+  .spirit-grid{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:24px}
+  .form-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/img/roco-mascot.png" onerror="this.style.display='none'" alt="">
+    <span>洛克工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/egg-query" class="active">孵蛋查询</a>
+    <a href="/compendium">精灵图鉴</a>
+    <a href="/egg-group">蛋组配对</a>
+    <a href="/garden">家园炼金</a>
+    <a href="/merchant">远行商人</a>
+  </div>
+  <button class="nav-cta">打开工具箱</button>
+  <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="菜单">☰</button>
+</nav>
+
+<!-- Drawer -->
+<div class="drawer-overlay" id="drawer" onclick="closeDrawer()">
+  <div class="drawer" onclick="event.stopPropagation()">
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    <a href="/egg-query" class="active">孵蛋查询</a>
+    <a href="/compendium">精灵图鉴</a>
+    <a href="/egg-group">蛋组配对</a>
+    <a href="/garden">家园炼金</a>
+    <a href="/merchant">远行商人</a>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-icon">🥚</div>
+    <h1>孵蛋查询</h1>
+    <p>输入身高体重，匹配可孵化的精灵蛋</p>
+  </div>
+
+  <!-- Form -->
+  <div class="form-card">
+    <div class="form-row">
+      <div class="form-field">
+        <label>身高 (m)</label>
+        <input type="number" id="height" step="0.01" min="0" placeholder="0.24">
+      </div>
+      <div class="form-field">
+        <label>体重 (kg)</label>
+        <input type="number" id="weight" step="0.01" min="0" placeholder="1.60">
+      </div>
+    </div>
+    <div class="filter-pills">
+      <button class="filter-pill active" data-val="">全部</button>
+      <button class="filter-pill" data-val="0">神奇的蛋</button>
+      <button class="filter-pill" data-val="1">炫彩蛋</button>
+    </div>
+    <button class="btn-submit" id="submitBtn" onclick="doQuery()">🔍 查询匹配</button>
+  </div>
+
+  <!-- Divider -->
+  <div class="gradient-divider"></div>
+
+  <!-- Results -->
+  <div id="results" style="display:none"></div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>洛克王国：世界 · 工具箱 &copy; 2026</p>
+</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+function toggleDrawer() { $('#drawer').classList.toggle('open'); }
+function closeDrawer() { $('#drawer').classList.remove('open'); }
+
+// Filter pills
+let precious = '';
+$$('.filter-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('.filter-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    precious = btn.dataset.val;
+  });
+});
+
+// URL params
+const params = new URLSearchParams(location.search);
+if (params.get('h')) $('#height').value = params.get('h');
+if (params.get('w')) $('#weight').value = params.get('w');
+
+const tierMap = { exact: '精确匹配', tolerance1: '高拟合', tolerance2: '中拟合', nearest: '最近值' };
+const tierClass = { exact: 'tier-exact', tolerance1: 'tier-tolerance1', tolerance2: 'tier-tolerance2', nearest: 'tier-nearest' };
+
+function getDemoData(h, w) {
+  const spirits = [
+    { name: '小火花', spirit_id: 1, is_precious: false, egg_type_name: '神奇的蛋', egg_type_color: '#4882ff', match_tier: 'exact', probability: 0.35, height_min: 0.20, height_max: 0.28, weight_min: 1.40, weight_max: 1.80, r_value: 0.42, r_diff: 0.00 },
+    { name: '水蓝蓝', spirit_id: 2, is_precious: false, egg_type_name: '神奇的蛋', egg_type_color: '#4882ff', match_tier: 'tolerance1', probability: 0.22, height_min: 0.18, height_max: 0.30, weight_min: 1.20, weight_max: 2.00, r_value: 0.38, r_diff: 0.04 },
+    { name: '喵喵', spirit_id: 3, is_precious: false, egg_type_name: '神奇的蛋', egg_type_color: '#4882ff', match_tier: 'tolerance2', probability: 0.12, height_min: 0.15, height_max: 0.35, weight_min: 1.00, weight_max: 2.20, r_value: 0.50, r_diff: 0.08 },
+    { name: '格斗小五', spirit_id: 4, is_precious: false, egg_type_name: '神奇的蛋', egg_type_color: '#4882ff', match_tier: 'nearest', probability: 0.05, height_min: 0.10, height_max: 0.40, weight_min: 0.80, weight_max: 2.50, r_value: 0.60, r_diff: 0.18 },
+    { name: '幻彩精灵', spirit_id: 5, is_precious: true, precious_type: '炫彩', egg_type_name: '炫彩蛋', egg_type_color: '#a259ff', match_tier: 'tolerance1', probability: 0.08, height_min: 0.22, height_max: 0.26, weight_min: 1.50, weight_max: 1.70, r_value: 0.44, r_diff: 0.02 },
+    { name: '星辰龙', spirit_id: 6, is_precious: true, precious_type: '炫彩', egg_type_name: '炫彩蛋', egg_type_color: '#a259ff', match_tier: 'nearest', probability: 0.03, height_min: 0.30, height_max: 0.50, weight_min: 2.00, weight_max: 3.00, r_value: 0.70, r_diff: 0.28 },
+  ];
+  const normal = spirits.filter(s => !s.is_precious);
+  const preciousList = spirits.filter(s => s.is_precious);
+  return { success: true, total: spirits.length, normal_count: normal.length, precious_count: preciousList.length, user_r: 0.42, results: spirits };
+}
+
+// Emoji fallback（和原项目一致）
+function ico(name) {
+  if (!name) return '🐾'
+  const m = {
+    '喵': '🐱', '水蓝': '💧', '火': '🔥', '迪莫': '✨', '鸟': '🐦',
+    '鸭': '🦆', '鼠': '🐭', '犬': '🐕', '猫': '🐱', '虫': '🐛',
+    '蝶': '🦋', '花': '🌸', '草': '🌿', '石': '🪨', '龙': '🐉',
+    '蛇': '🐍', '兔': '🐰', '羊': '🐑', '猪': '🐷', '熊': '🐻',
+    '狐': '🦊', '鱼': '🐟', '龟': '🐢', '蜂': '🐝', '蛛': '🕷️',
+    '菇': '🍄', '树': '🌳', '冰': '❄️', '电': '⚡', '雪': '🌨️',
+    '精灵': '🧚', '恶魔': '😈', '幽': '👻', '幻': '🔮', '甲': '🪲',
+    '鹰': '🦅', '狼': '🐺',
+  }
+  for (const [k, v] of Object.entries(m)) if (name.includes(k)) return v
+  return '🐾'
+}
+
+async function doQuery() {
+  const h = parseFloat($('#height').value);
+  const w = parseFloat($('#weight').value);
+  if (isNaN(h) || isNaN(w)) { alert('请输入身高和体重'); return; }
+
+  history.replaceState(null, '', `?h=${h}&w=${w}`);
+  const btn = $('#submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading-spinner"></span> 查询中...';
+
+  let data;
+  try {
+    const url = `/api/query?height=${h}&weight=${w}&precious=${precious || '0'}`;
+    const res = await fetch(url);
+    data = await res.json();
+    if (!data.success) throw new Error();
+  } catch {
+    data = getDemoData(h, w);
+  }
+
+  btn.disabled = false;
+  btn.textContent = '🔍 查询匹配';
+  renderResults(data, h, w);
+}
+
+function renderResults(data, h, w) {
+  const el = $('#results');
+  el.style.display = 'block';
+
+  let results = data.results || [];
+  if (precious !== '') {
+    results = results.filter(r => precious === '1' ? r.is_precious : !r.is_precious);
+  }
+  const normal = results.filter(r => !r.is_precious);
+  const preciousList = results.filter(r => r.is_precious);
+
+  if (results.length === 0) {
+    el.innerHTML = `<div class="empty-state">🥚 没有找到匹配的精灵蛋<br><small>尝试调整身高体重参数</small></div>`;
+    return;
+  }
+
+  const probColor = tier => tier === 'exact' ? 'var(--green)' : tier === 'tolerance1' ? 'var(--blue)' : tier === 'tolerance2' ? 'var(--purple)' : 'var(--text-muted)';
+
+  function cardHTML(s) {
+    const pct = Math.min(s.probability, 100);
+    const imgSrc = s.image || `/creature-atlas/${String(s.spirit_id).padStart(3,'0')}-base.webp`;
+    return `<div class="spirit-card">
+      <img src="${imgSrc}" onerror="this.remove();this.parentElement.innerHTML=ico('${s.name}')" alt="${s.name}">
+      <div class="name">${s.name}</div>
+      <div class="egg-badge" style="background:${s.egg_type_color || '#4882ff'}">${s.egg_type_name}</div>
+      <div class="tier ${tierClass[s.match_tier] || ''}">${tierMap[s.match_tier] || s.match_tier}</div>
+      <div class="r-value">🎯R值: ${s.r_value?.toFixed(2) || '-'}</div>
+      <div class="r-diff">📏差值: ${s.r_diff != null ? s.r_diff.toFixed(2) : '-'}</div>
+      <div class="prob-bar"><div class="prob-bar-fill" style="width:${pct}%;background:${probColor(s.match_tier)}"></div></div>
+      <div class="prob-label">${pct}%</div>
+    </div>`;
+  }
+
+  let html = `<div class="results-header"><h2>查询结果</h2><span class="r-value">R=${(data.user_r||0).toFixed(2)} · 共 ${results.length} 个</span></div>`;
+
+  if (normal.length && precious !== '1') {
+    html += `<div class="section-normal"><div class="results-section-title">普通蛋 (${normal.length})</div><div class="spirit-grid">${normal.map(cardHTML).join('')}</div></div>`;
+  }
+  if (preciousList.length && precious !== '0') {
+    html += `<div class="section-precious"><div class="results-section-title">稀有蛋 (${preciousList.length})</div><div class="spirit-grid">${preciousList.map(cardHTML).join('')}</div></div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+// Auto-query if URL params present
+if (params.get('h') && params.get('w')) {
+  setTimeout(doQuery, 100);
+}
+</script>
+</body>
+</html>

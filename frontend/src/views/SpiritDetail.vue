@@ -2,6 +2,7 @@
 import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getAttrIcon } from '../utils/attrIcons'
+import '../styles/dark-theme.css'
 
 const route = useRoute()
 const router = useRouter()
@@ -167,7 +168,7 @@ watch(spiritId, () => {
 </script>
 
 <template>
-  <div class="detail">
+  <div class="detail dark-page">
     <div class="detail__box">
       <!-- 返回 -->
       <div class="detail__nav">
@@ -190,7 +191,7 @@ watch(spiritId, () => {
 
       <template v-else>
         <!-- 基础信息卡片 -->
-        <div class="detail__card">
+        <div class="detail__card dark-card">
           <div class="detail__hero">
             <div class="detail__img">
               <img v-if="spirit.has_shiny_variant && showShiny && spirit.shiny_image" :src="spirit.shiny_image" :alt="spirit.base_name + ' 异色'" />
@@ -230,7 +231,7 @@ watch(spiritId, () => {
         </div>
 
         <!-- 特性 -->
-        <div v-if="spirit.trait_name" class="detail__card">
+        <div v-if="spirit.trait_name" class="detail__card dark-card">
           <h2 class="detail__card-title">💡 特性</h2>
           <div class="detail__trait">
             <span class="detail__trait-name">{{ spirit.trait_name }}</span>
@@ -239,7 +240,7 @@ watch(spiritId, () => {
         </div>
 
         <!-- 种族值 -->
-        <div v-if="spirit.race_total" class="detail__card">
+        <div v-if="spirit.race_total" class="detail__card dark-card">
           <h2 class="detail__card-title">📊 种族值 <span class="detail__card-sub">总和 {{ spirit.race_total }}</span></h2>
           <div class="detail__radar">
             <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
@@ -258,7 +259,7 @@ watch(spiritId, () => {
         </div>
 
         <!-- 属性克制 -->
-        <div v-if="matchups" class="detail__card detail__matchups">
+        <div v-if="matchups" class="detail__card detail__matchups dark-card">
           <h2 class="detail__card-title">⚔️ 属性克制</h2>
           <div class="detail__mu-row">
             <div v-if="matchups.strong_against?.length" class="detail__mu-group">
@@ -302,7 +303,7 @@ watch(spiritId, () => {
         </div>
 
         <!-- 技能列表（两列卡片网格） -->
-        <div v-if="skills.length > 0" class="detail__card">
+        <div v-if="skills.length > 0" class="detail__card dark-card">
           <h2 class="detail__card-title">⚡ 技能 <span class="detail__card-sub">共 {{ skills.length }} 个</span></h2>
           <div class="detail__skills-loading" v-if="skillsLoading">加载中...</div>
           <div v-else class="sk-grid">
@@ -329,7 +330,7 @@ watch(spiritId, () => {
         </div>
 
         <!-- 进化链 -->
-        <div v-if="spirit.evolution_chain?.length > 1" class="detail__card">
+        <div v-if="spirit.evolution_chain?.length > 1" class="detail__card dark-card">
           <h2 class="detail__card-title">🔄 进化链</h2>
           <div class="detail__evo">
             <template v-for="(evo, idx) in spirit.evolution_chain" :key="evo.spirit_id">
@@ -350,7 +351,7 @@ watch(spiritId, () => {
         </div>
 
         <!-- 其他形态 -->
-        <div v-if="spirit.forms?.length > 1" class="detail__card">
+        <div v-if="spirit.forms?.length > 1" class="detail__card dark-card">
           <h2 class="detail__card-title">🎭 其他形态</h2>
           <div class="detail__forms">
             <router-link v-for="form in spirit.forms" :key="form.spirit_id" :to="`/compendium/${form.spirit_id}`" class="detail__form-tag" :class="{ 'detail__form-tag--current': form.spirit_id === spirit.spirit_id }">
@@ -361,7 +362,7 @@ watch(spiritId, () => {
         </div>
 
         <!-- 出没地点 -->
-        <div v-if="spirit.locations?.length" class="detail__card">
+        <div v-if="spirit.locations?.length" class="detail__card dark-card">
           <h2 class="detail__card-title">📍 出没地点</h2>
           <div class="detail__locations">
             <span v-for="loc in spirit.locations" :key="loc" class="detail__loc">{{ loc }}</span>
@@ -377,25 +378,37 @@ watch(spiritId, () => {
 <style scoped>
 .detail {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
+  background: var(--dt-bg, #1a1a2e);
+  position: relative;
   padding: 16px 16px 80px;
 }
+.detail::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.detail__box { position: relative; z-index: 1; }
 .detail__box { max-width: 420px; margin: 0 auto; }
 .detail__nav { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 12px; }
 .detail__back { font-size: 13px; color: #8b3dff; text-decoration: none; }
-.detail__nav-no { font-size: 12px; color: #bbb; }
+.detail__nav-no { font-size: 12px; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 
 .detail__card {
-  background: #fff;
-  border-radius: 16px;
+  background: var(--dt-card-bg, rgba(20,20,40,0.6));
+  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
+  border: 1px solid var(--dt-border, rgba(255,255,255,0.1));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   margin-bottom: 12px;
 }
 .detail__card-title {
   font-size: 15px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--dt-text, #fff);
   margin-bottom: 12px;
 }
 .detail__card-sub { font-size: 12px; color: #8b3dff; font-weight: 400; margin-left: 6px; }
@@ -404,32 +417,32 @@ watch(spiritId, () => {
 .detail__img {
   width: 100px; height: 100px; flex-shrink: 0; position: relative;
   display: flex; align-items: center; justify-content: center;
-  background: #f5f2ff; border-radius: 14px; overflow: visible;
+  background: rgba(139,61,255,0.15); border-radius: 14px; overflow: visible;
 }
 .detail__img img { width: 88px; height: 88px; object-fit: contain; }
 .detail__noimg { font-size: 40px; opacity: .3; }
 .detail__shiny-toggle {
   position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
   font-size: 10px; padding: 2px 8px; border-radius: 8px;
-  background: #fff8e1; color: #f57f17; border: 1px solid #ffe082;
+  background: rgba(255,248,225,0.15); color: #f57f17; border: 1px solid rgba(255,224,130,0.3);
   cursor: pointer; white-space: nowrap; font-weight: 600;
 }
 .detail__shiny-toggle:active { transform: translateX(-50%) scale(.95); }
 .detail__info { flex: 1; min-width: 0; }
-.detail__info h1 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+.detail__info h1 { font-size: 20px; font-weight: 700; color: var(--dt-text, #fff); margin-bottom: 6px; }
 .detail__tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
 .detail__tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; display: inline-flex; align-items: center; gap: 3px; }
 .detail__tag-icon { width: 14px; height: 14px; }
-.detail__meta { font-size: 12px; color: #888; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 6px; }
+.detail__meta { font-size: 12px; color: var(--dt-text-secondary, rgba(255,255,255,0.75)); display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 6px; }
 .detail__race { color: #f39c12; font-weight: 600; }
 .detail__egg-groups { font-size: 12px; }
-.detail__egg-label { color: #aaa; }
-.detail__egg-tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 6px; background: #f5f0ff; color: #8b3dff; margin-left: 4px; }
-.detail__desc { font-size: 13px; color: #999; line-height: 1.6; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+.detail__egg-label { color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
+.detail__egg-tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 6px;  background: rgba(139,61,255,0.2); color: #8b3dff;margin-left: 4px; }
+.detail__desc { font-size: 13px; color: var(--dt-text-secondary, rgba(255,255,255,0.75)); line-height: 1.6; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--dt-border, rgba(255,255,255,0.1)); }
 
 .detail__trait { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
-.detail__trait-name { font-size: 13px; font-weight: 600; background: #fff8e1; color: #f57f17; padding: 4px 10px; border-radius: 8px; }
-.detail__trait-desc { font-size: 13px; color: #888; line-height: 1.6; flex: 1; min-width: 200px; }
+.detail__trait-name { font-size: 13px; font-weight: 600; background: rgba(255,248,225,0.15); color: #f57f17; padding: 4px 10px; border-radius: 8px; }
+.detail__trait-desc { font-size: 13px; color: var(--dt-text-secondary, rgba(255,255,255,0.75)); line-height: 1.6; flex: 1; min-width: 200px; }
 
 .detail__radar { display: flex; justify-content: center; }
 .detail__radar svg { width: 100%; max-width: 300px; }
@@ -441,24 +454,24 @@ watch(spiritId, () => {
   font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
   flex-shrink: 0; min-width: 42px; text-align: center;
 }
-.detail__mu-label--advantage { background: #e8f5e9; color: #2e7d32; }
-.detail__mu-label--disadvantage { background: #ffebee; color: #c62828; }
-.detail__mu-label--resist { background: #e3f2fd; color: #1565c0; }
-.detail__mu-label--weak { background: #f5f5f5; color: #888; }
+.detail__mu-label--advantage { background: rgba(46,125,50,0.15); color: #4caf50; }
+.detail__mu-label--disadvantage { background: rgba(198,40,40,0.15); color: #ef5350; }
+.detail__mu-label--resist { background: rgba(21,101,192,0.15); color: #42a5f5; }
+.detail__mu-label--weak { background: rgba(255,255,255,0.06); color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 .detail__mu-tags { display: flex; flex-wrap: wrap; gap: 4px; }
 .detail__mu-tag {
   font-size: 11px; padding: 2px 8px; border-radius: 8px;
   display: inline-flex; align-items: center; gap: 3px; font-weight: 500;
 }
-.detail__mu-tag--advantage { background: #e8f5e9; color: #2e7d32; }
-.detail__mu-tag--disadvantage { background: #ffebee; color: #c62828; }
-.detail__mu-tag--resist { background: #e3f2fd; color: #1565c0; }
-.detail__mu-tag--weak { background: #f5f5f5; color: #888; }
+.detail__mu-tag--advantage { background: rgba(46,125,50,0.15); color: #4caf50; }
+.detail__mu-tag--disadvantage { background: rgba(198,40,40,0.15); color: #ef5350; }
+.detail__mu-tag--resist { background: rgba(21,101,192,0.15); color: #42a5f5; }
+.detail__mu-tag--weak { background: rgba(255,255,255,0.06); color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 .detail__mu-icon { width: 14px; height: 14px; }
-.detail__mu-note { font-size: 10px; color: #ccc; text-align: right; margin-top: 6px; }
+.detail__mu-note { font-size: 10px; color: var(--dt-text-secondary, rgba(255,255,255,0.4)); text-align: right; margin-top: 6px; }
 
 /* 技能列表-两列卡片网格 */
-.detail__skills-loading { text-align: center; padding: 20px 0; color: #ccc; font-size: 13px; }
+.detail__skills-loading { text-align: center; padding: 20px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); font-size: 13px; }
 .sk-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -467,8 +480,8 @@ watch(spiritId, () => {
 .sk-card {
   display: flex;
   gap: 8px;
-  background: #fff;
-  border: 1px solid #f0f0f0;
+  background: var(--dt-card-bg, rgba(20,20,40,0.6));
+  border: 1px solid var(--dt-border, rgba(255,255,255,0.1));
   border-radius: 12px;
   padding: 10px;
   min-height: 76px;
@@ -503,7 +516,7 @@ watch(spiritId, () => {
 .sk-card__name {
   font-size: 12px;
   font-weight: 600;
-  color: #222;
+  color: var(--dt-text, #fff);
   line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
@@ -553,13 +566,13 @@ watch(spiritId, () => {
 }
 .sk-card__power {
   font-size: 10px;
-  color: #999;
+  color: var(--dt-text-secondary, rgba(255,255,255,0.6));
   font-weight: 500;
   margin-left: auto;
 }
 .sk-card__effect {
   font-size: 10px;
-  color: #999;
+  color: var(--dt-text-secondary, rgba(255,255,255,0.5));
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -569,43 +582,43 @@ watch(spiritId, () => {
 
 .detail__evo { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
 .detail__evo-arrow { display: flex; flex-direction: column; align-items: center; padding: 0 2px; }
-.detail__evo-arrow span:first-child { color: #ccc; font-size: 16px; }
-.detail__evo-lv { font-size: 10px; color: #bbb; }
+.detail__evo-arrow span:first-child { color: var(--dt-text-secondary, rgba(255,255,255,0.5)); font-size: 16px; }
+.detail__evo-lv { font-size: 10px; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 .detail__evo-node {
   display: flex; flex-direction: column; align-items: center;
   padding: 8px; border-radius: 10px; text-decoration: none; color: inherit;
   transition: .2s; min-width: 72px;
 }
 .detail__evo-node:active { transform: scale(.95); }
-.detail__evo-node--current { background: #f5f0ff; box-shadow: 0 0 0 2px #8b3dff40; }
+.detail__evo-node--current { background: rgba(139,61,255,0.15); box-shadow: 0 0 0 2px #8b3dff40; }
 .detail__evo-img {
   width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
-  background: #f5f2ff; border-radius: 50%; margin-bottom: 4px; overflow: hidden;
+  background: rgba(139,61,255,0.15); border-radius: 50%; margin-bottom: 4px; overflow: hidden;
 }
 .detail__evo-img img { width: 40px; height: 40px; object-fit: contain; }
-.detail__evo-name { font-size: 12px; font-weight: 600; color: #1a1a2e; }
-.detail__evo-no { font-size: 10px; color: #ccc; }
+.detail__evo-name { font-size: 12px; font-weight: 600; color: var(--dt-text, #fff); }
+.detail__evo-no { font-size: 10px; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 
 .detail__forms { display: flex; flex-wrap: wrap; gap: 6px; }
 .detail__form-tag {
   padding: 6px 12px; border-radius: 10px; font-size: 13px; font-weight: 500;
-  background: #f5f2ff; color: #666; text-decoration: none; border: 1.5px solid #e8e8e8; transition: .2s;
+  background: rgba(139,61,255,0.1); color: var(--dt-text, #fff); text-decoration: none; border: 1.5px solid var(--dt-border, rgba(255,255,255,0.2)); transition: .2s;
 }
 .detail__form-tag--current { background: #8b3dff; color: #fff; border-color: #8b3dff; }
 .detail__form-sub { font-size: 11px; color: inherit; opacity: .6; }
 
 .detail__locations { display: flex; flex-wrap: wrap; gap: 6px; }
-.detail__loc { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: #f0ecff; color: #8b3dff; }
+.detail__loc { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: rgba(139,61,255,0.15); color: #8b3dff; }
 
-.detail__loading { text-align: center; padding: 60px 0; color: #ccc; }
+.detail__loading { text-align: center; padding: 60px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 .detail__spinner {
-  width: 32px; height: 32px; border: 3px solid #e8e8e8; border-top-color: #8b3dff;
+  width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #8b3dff;
   border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 12px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.detail__empty { text-align: center; padding: 60px 0; color: #ccc; }
+.detail__empty { text-align: center; padding: 60px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 .detail__empty-icon { font-size: 48px; margin-bottom: 8px; }
 .detail__btn { display: inline-block; margin-top: 12px; padding: 8px 20px; background: #8b3dff; color: #fff; border-radius: 10px; text-decoration: none; font-size: 14px; }
 
-.detail__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: #ccc; }
+.detail__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: rgba(255,255,255,0.3); }
 </style>

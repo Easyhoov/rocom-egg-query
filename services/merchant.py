@@ -90,7 +90,7 @@ def _resolve_icon(icon_url: str, item_name: str) -> str:
     # 5) 都没有则返回原 URL（兜底）
     return icon_url
 
-WEGAME_API_KEY = os.getenv("WEGAME_API_KEY") or "sk-ff14f964051a5c966564e29b5bd3a768"
+WEGAME_API_KEY = os.getenv("WEGAME_API_KEY", "")
 WEGAME_BASE_URL = "https://wegame.shallow.ink"
 
 # 缓存
@@ -121,7 +121,12 @@ def compute_round() -> dict:
 
     # 计算本轮结束时间
     slot_end_hour = 8 + (slot + 1) * 4
-    end_dt = now.replace(hour=slot_end_hour, minute=0, second=0, microsecond=0)
+
+    # 处理跨天：第4轮结束时间0点（即第2天）
+    if slot_end_hour == 24:
+        end_dt = now.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    else:
+        end_dt = now.replace(hour=slot_end_hour, minute=0, second=0, microsecond=0)
     remaining = int((end_dt - now).total_seconds())
 
     if remaining <= 0:
@@ -129,7 +134,10 @@ def compute_round() -> dict:
         if current < 4:
             current += 1
             slot_end_hour = 8 + current * 4
-            end_dt = now.replace(hour=slot_end_hour, minute=0, second=0, microsecond=0)
+            if slot_end_hour == 24:
+                end_dt = now.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+            else:
+                end_dt = now.replace(hour=slot_end_hour, minute=0, second=0, microsecond=0)
             remaining = int((end_dt - now).total_seconds())
         else:
             return {

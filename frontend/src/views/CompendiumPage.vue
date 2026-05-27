@@ -2,6 +2,7 @@
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getAttrIcon } from '../utils/attrIcons'
+import '../styles/dark-theme.css'
 
 const route = useRoute()
 const router = useRouter()
@@ -117,11 +118,11 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
 </script>
 
 <template>
-  <div class="comp">
+  <div class="comp dark-page">
     <div class="comp__box">
       <!-- 标题 -->
       <div class="comp__hd">
-        <h1>📖 精灵图鉴</h1>
+        <h1><img :src="'/img/icon-decorative-book.6KbZJc7F.png'" class="comp__title-icon" /> 精灵图鉴</h1>
         <p class="comp__sub">共 {{ total }} 只精灵{{ loading ? ' · 加载中...' : '' }}</p>
       </div>
 
@@ -131,7 +132,7 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
           v-model="search"
           @input="onSearchInput"
           placeholder="搜索精灵名称或编号..."
-          class="comp__input"
+          class="comp__input dark-input"
         />
       </div>
 
@@ -140,14 +141,14 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
         <div class="comp__label">属性</div>
         <div class="comp__tags">
           <span
-            class="comp__tag"
+            class="comp__tag dark-btn"
             :class="{ 'comp__tag--on': !selectedAttr }"
             @click="clearAttr"
           >全部</span>
           <span
             v-for="attr in attributes"
             :key="attr"
-            class="comp__tag"
+            class="comp__tag dark-btn"
             :class="{ 'comp__tag--on': selectedAttr === attr }"
             @click="selectedAttr = attr; onFilterChange()"
           ><img v-if="getAttrIcon(attr)" :src="getAttrIcon(attr)" class="comp__tag-icon" />{{ attr }}</span>
@@ -159,14 +160,14 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
         <div class="comp__label">蛋组</div>
         <div class="comp__tags">
           <span
-            class="comp__tag"
+            class="comp__tag dark-btn"
             :class="{ 'comp__tag--on': !selectedEggGroup }"
             @click="clearEggGroup"
           >全部</span>
           <span
             v-for="g in eggGroups"
             :key="g.egg_group_name"
-            class="comp__tag"
+            class="comp__tag dark-btn"
             :class="{ 'comp__tag--on': selectedEggGroup === g.egg_group_name }"
             @click="selectedEggGroup = g.egg_group_name; onFilterChange()"
           >{{ g.egg_group_icon }} {{ g.egg_group_name }}</span>
@@ -178,12 +179,12 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
         <div class="comp__label">异色</div>
         <div class="comp__tags">
           <span
-            class="comp__tag"
+            class="comp__tag dark-btn"
             :class="{ 'comp__tag--on': !selectedShiny }"
             @click="clearShiny"
           >全部</span>
           <span
-            class="comp__tag comp__tag--shiny"
+            class="comp__tag comp__tag--shiny dark-btn"
             :class="{ 'comp__tag--on': selectedShiny }"
             @click="selectedShiny = !selectedShiny; onFilterChange()"
           >✨ 有异色</span>
@@ -223,12 +224,12 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
 
       <!-- 分页 -->
       <div v-if="totalPages > 1" class="comp__pager">
-        <button v-if="page > 1" @click="goToPage(page - 1)" class="comp__page-btn">← 上一页</button>
+          <button v-if="page > 1" @click="goToPage(page - 1)" class="comp__page-btn dark-btn">← 上一页</button>
         <template v-for="p in pageWindow" :key="p">
           <span v-if="p === '...'" class="comp__page-dots">…</span>
-          <button v-else @click="goToPage(p)" class="comp__page-btn" :class="{ 'comp__page-btn--on': p === page }">{{ p }}</button>
+          <button v-else @click="goToPage(p)" class="comp__page-btn dark-btn" :class="{ 'comp__page-btn--on': p === page }">{{ p }}</button>
         </template>
-        <button v-if="page < totalPages" @click="goToPage(page + 1)" class="comp__page-btn">下一页 →</button>
+        <button v-if="page < totalPages" @click="goToPage(page + 1)" class="comp__page-btn dark-btn">下一页 →</button>
       </div>
 
       <div class="comp__ft">洛克王国：世界 · 精灵图鉴</div>
@@ -239,42 +240,56 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
 <style scoped>
 .comp {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
+  background: var(--dt-bg, #1a1a2e);
+  position: relative;
   padding: 16px 16px 80px;
 }
+.comp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.comp__box { position: relative; z-index: 1; }
 .comp__box { max-width: 420px; margin: 0 auto; }
 .comp__hd { text-align: center; padding: 24px 0 20px; }
-.comp__hd h1 { font-size: 22px; color: #1a1a2e; font-weight: 700; margin: 0; }
-.comp__sub { font-size: 13px; color: #888; margin-top: 6px; }
+.comp__hd h1 { font-size: 22px; color: var(--dt-text, #fff); font-weight: 700; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.comp__title-icon { width: 28px; height: 28px; object-fit: contain; }
+.comp__sub { font-size: 13px; color: var(--dt-text-secondary, rgba(255,255,255,0.75)); margin-top: 6px; }
 
 .comp__card {
-  background: #fff;
-  border-radius: 16px;
+  background: var(--dt-card-bg, rgba(20,20,40,0.6));
+  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
+  border: 1px solid var(--dt-border, rgba(255,255,255,0.1));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   margin-bottom: 12px;
 }
 .comp__input {
   width: 100%;
   padding: 10px 14px;
-  border: 1.5px solid #e8e8e8;
+  border: 1.5px solid var(--dt-border, rgba(255,255,255,0.2));
   border-radius: 10px;
   font-size: 15px;
-  background: #fafafa;
+  background: var(--dt-input-bg, rgba(20,20,40,0.8));
+  color: var(--dt-text, #fff);
   outline: none;
   transition: .2s;
   box-sizing: border-box;
 }
-.comp__input:focus { border-color: #8b3dff; background: #fff; }
-.comp__label { font-size: 12px; color: #aaa; font-weight: 600; margin-bottom: 8px; }
+.comp__input:focus { border-color: #8b3dff; background: rgba(20,20,40,0.9); }
+.comp__label { font-size: 12px; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); font-weight: 600; margin-bottom: 8px; }
 .comp__tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .comp__tag {
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 12px;
-  border: 1.5px solid #e8e8e8;
-  background: #fff;
-  color: #666;
+  border: 1.5px solid var(--dt-border, rgba(255,255,255,0.3));
+  background: var(--dt-btn-bg, rgba(20,20,40,0.6));
+  color: var(--dt-text, #fff);
   cursor: pointer;
   transition: .2s;
   user-select: none;
@@ -293,13 +308,15 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   margin-top: 12px;
 }
 .comp__pet {
-  background: #fff;
+  background: var(--dt-card-bg, rgba(20,20,40,0.6));
   border-radius: 14px;
   padding: 10px 6px 8px;
   text-align: center;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 8px 24px rgba(15,16,21,0.08);
+  border: 1px solid var(--dt-border, rgba(255,255,255,0.1));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   transition: .2s;
   position: relative;
   overflow: hidden;
@@ -323,18 +340,18 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f2ff;
+  background: rgba(139,61,255,0.15);
   border-radius: 50%;
 }
 .comp__pet-img img { width: 48px; height: 48px; object-fit: contain; }
 .comp__pet-noimg { font-size: 24px; opacity: .3; }
-.comp__pet-no { font-size: 10px; color: #bbb; }
-.comp__pet-name { font-size: 13px; font-weight: 600; color: #1a1a2e; margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.comp__pet-no { font-size: 10px; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
+.comp__pet-name { font-size: 13px; font-weight: 600; color: var(--dt-text, #fff); margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .comp__pet-tags { display: flex; gap: 3px; justify-content: center; flex-wrap: wrap; }
 .comp__pet-tag { font-size: 9px; padding: 1px 5px; border-radius: 6px; display: inline-flex; align-items: center; gap: 2px; }
 .comp__pet-tag-icon { width: 12px; height: 12px; }
 
-.comp__empty { text-align: center; padding: 40px 0; color: #ccc; }
+.comp__empty { text-align: center; padding: 40px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
 .comp__empty-icon { font-size: 48px; margin-bottom: 8px; }
 
 .comp__pager { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 20px 0; flex-wrap: wrap; }
@@ -342,14 +359,14 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 13px;
-  border: 1.5px solid #e8e8e8;
-  background: #fff;
-  color: #666;
+  border: 1.5px solid var(--dt-border, rgba(255,255,255,0.3));
+  background: var(--dt-btn-bg, rgba(20,20,40,0.6));
+  color: var(--dt-text, #fff);
   cursor: pointer;
   transition: .2s;
 }
 .comp__page-btn--on { border-color: #8b3dff; background: #8b3dff; color: #fff; font-weight: 600; }
-.comp__page-dots { color: #ccc; padding: 0 4px; }
+.comp__page-dots { color: var(--dt-text-secondary, rgba(255,255,255,0.5)); padding: 0 4px; }
 
-.comp__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: #ccc; }
+.comp__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: rgba(255,255,255,0.3); }
 </style>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>精灵图鉴 - 洛克王国：世界</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#000;--white:#fff;--green:#0acf83;--red:#f24e1e;--purple:#a259ff;--pink:#ff7262;
+  --primary:#000;--secondary:#3d3d3d;--tertiary:#595959;--muted:#707070;
+  --bg:#fafafa;--card-bg:#fff;--border:#e5e5e5;
+  --pill:50px;--radius:8px;
+  --shadow:0 2px 24px rgba(0,0,0,.06);--shadow-hover:0 8px 40px rgba(0,0,0,.12);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--primary);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;padding:0 24px}
+.nav-inner{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-weight:700;font-size:18px;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.logo span{color:var(--green)}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{padding:8px 14px;border-radius:var(--pill);font-size:14px;font-weight:500;color:var(--tertiary);transition:all .15s;white-space:nowrap}
+.nav-links a:hover{background:#f0f0f0;color:var(--primary)}
+.nav-links a.active{background:var(--green);color:var(--white)}
+.nav-cta{display:none}
+@media(min-width:960px){.nav-cta{display:inline-flex;padding:8px 20px;border-radius:var(--pill);background:var(--primary);color:var(--white);font-size:14px;font-weight:600;align-items:center;gap:6px;border:none;cursor:pointer;transition:opacity .15s}.nav-cta:hover{opacity:.85}}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:20px;height:2px;background:var(--primary);border-radius:2px;transition:all .2s}
+@media(min-width:960px){.hamburger{display:none}}
+.drawer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:200;pointer-events:none}
+.drawer.open{pointer-events:all}
+.drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.3);opacity:0;transition:opacity .25s}
+.drawer.open .drawer-overlay{opacity:1}
+.drawer-panel{position:absolute;top:0;right:0;width:280px;height:100%;background:var(--white);transform:translateX(100%);transition:transform .25s;padding:24px;display:flex;flex-direction:column;gap:8px}
+.drawer.open .drawer-panel{transform:translateX(0)}
+.drawer-close{align-self:flex-end;background:none;border:none;cursor:pointer;font-size:24px;line-height:1;padding:8px}
+.drawer-panel a{display:block;padding:12px 16px;border-radius:var(--radius);font-size:15px;font-weight:500;color:var(--tertiary);transition:background .15s}
+.drawer-panel a:hover{background:#f0f0f0}
+.drawer-panel a.active{background:var(--green);color:var(--white)}
+
+/* ── MAIN ── */
+.main{max-width:1280px;margin:0 auto;padding:24px 24px 64px}
+
+/* ── SEARCH ── */
+.search-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:32px}
+.search-input{flex:1;min-width:200px;padding:10px 16px;border:1px solid var(--border);border-radius:var(--pill);font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--green)}
+.filter-select{padding:10px 36px 10px 14px;border:1px solid var(--border);border-radius:var(--pill);font-size:14px;font-family:inherit;background:var(--white);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23707070' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 5h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;cursor:pointer;outline:none;transition:border-color .15s}
+.filter-select:focus{border-color:var(--green)}
+.shiny-toggle{display:flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border);border-radius:var(--pill);cursor:pointer;font-size:14px;font-weight:500;user-select:none;transition:all .15s;background:var(--white)}
+.shiny-toggle.active{border-color:var(--purple);background:rgba(162,89,255,.06);color:var(--purple)}
+.shiny-icon{font-size:16px}
+
+/* ── GRID ── */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:960px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:all .2s;display:flex;flex-direction:column}
+.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.card-img-wrap{position:relative;width:100%;aspect-ratio:1;background:#f5f5f5;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card-img-wrap img{width:80%;height:80%;object-fit:contain;transition:transform .25s}
+.card:hover .card-img-wrap img{transform:scale(1.06)}
+.card-img-wrap .shiny-badge{position:absolute;top:8px;right:8px;font-size:11px;padding:2px 8px;border-radius:var(--pill);background:var(--purple);color:var(--white);font-weight:600}
+.card-body{padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.card-no{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.card-name{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-badges{display:flex;flex-wrap:wrap;gap:4px}
+.badge{display:inline-flex;padding:2px 8px;border-radius:var(--pill);font-size:11px;font-weight:600;color:var(--white)}
+.badge-attr{background:var(--green)}
+.badge-attr.secondary{background:var(--tertiary)}
+.badge-egg{background:#e8e8e8;color:var(--tertiary);font-weight:500}
+
+/* attr colors */
+.badge-attr[data-attr="火"]{background:#f24e1e}
+.badge-attr[data-attr="水"]{background:#1e90ff}
+.badge-attr[data-attr="草"]{background:#0acf83}
+.badge-attr[data-attr="电"]{background:#f5a623}
+.badge-attr[data-attr="冰"]{background:#7ec8e3}
+.badge-attr[data-attr="土"]{background:#c4a35a}
+.badge-attr[data-attr="石"]{background:#8b8b8b}
+.badge-attr[data-attr="风"]{background:#67c5b0}
+.badge-attr[data-attr="光"]{background:#ffd700}
+.badge-attr[data-attr="暗"]{background:#6b4c9a}
+.badge-attr[data-attr="普通"]{background:#a0a0a0}
+.badge-attr[data-attr="龙"]{background:#7038f8}
+.badge-attr[data-attr="虫"]{background:#a8b820}
+.badge-attr[data-attr="恶魔"]{background:#705848}
+.badge-attr[data-attr="机械"]{background:#7899b8}
+.badge-attr[data-attr="幽灵"]{background:#5c4a72}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:80px 24px;color:var(--muted);font-size:15px}
+.empty-icon{font-size:48px;margin-bottom:16px;opacity:.5}
+
+/* ── PAGINATION ── */
+.pagination{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:40px;flex-wrap:wrap}
+.page-btn{min-width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--pill);border:1px solid var(--border);background:var(--white);font-size:14px;font-family:inherit;cursor:pointer;transition:all .15s;padding:0 10px}
+.page-btn:hover{border-color:var(--green);color:var(--green)}
+.page-btn.active{background:var(--green);color:var(--white);border-color:var(--green)}
+.page-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── LOADING ── */
+.loading{text-align:center;padding:80px 24px;color:var(--muted)}
+.spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--muted);font-size:13px}
+.footer a{color:var(--green);font-weight:500}
+
+/* ── COUNT ── */
+.result-count{font-size:13px;color:var(--muted);margin-bottom:16px}
+.result-count strong{color:var(--primary);font-weight:600}
+
+/* ── IMAGE ERROR PLACEHOLDER ── */
+.img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:#d0d0d0;background:#f5f5f5}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">洛克<span>工具箱</span></a>
+    <ul class="nav-links">
+      <li><a href="/egg-query">孵蛋查询</a></li>
+      <li><a href="/compendium" class="active">精灵图鉴</a></li>
+      <li><a href="/egg-group">蛋组配对</a></li>
+      <li><a href="/garden">家园炼金</a></li>
+      <li><a href="/merchant">远行商人</a></li>
+    </ul>
+    <button class="nav-cta">GitHub</button>
+    <button class="hamburger" onclick="toggleDrawer()" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <div class="drawer-overlay" onclick="toggleDrawer()"></div>
+  <div class="drawer-panel">
+    <button class="drawer-close" onclick="toggleDrawer()">✕</button>
+    <a href="/egg-query">孵蛋查询</a>
+    <a href="/compendium" class="active">精灵图鉴</a>
+    <a href="/egg-group">蛋组配对</a>
+    <a href="/garden">家园炼金</a>
+    <a href="/merchant">远行商人</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- SEARCH -->
+  <div class="search-bar">
+    <input class="search-input" id="searchInput" type="text" placeholder="搜索精灵名称或编号..." />
+    <select class="filter-select" id="attrFilter">
+      <option value="">全部属性</option>
+      <option value="火">🔥 火</option>
+      <option value="水">💧 水</option>
+      <option value="草">🌿 草</option>
+      <option value="电">⚡ 电</option>
+      <option value="冰">❄️ 冰</option>
+      <option value="土">🪨 土</option>
+      <option value="石">🗿 石</option>
+      <option value="风">🌬️ 风</option>
+      <option value="光">✨ 光</option>
+      <option value="暗">🌑 暗</option>
+      <option value="普通">⚪ 普通</option>
+      <option value="龙">🐉 龙</option>
+      <option value="虫">🐛 虫</option>
+      <option value="恶魔">😈 恶魔</option>
+      <option value="机械">⚙️ 机械</option>
+      <option value="幽灵">👻 幽灵</option>
+    </select>
+    <select class="filter-select" id="eggGroupFilter">
+      <option value="">全部蛋组</option>
+    </select>
+    <div class="shiny-toggle" id="shinyToggle" onclick="toggleShiny()">
+      <span class="shiny-icon">✦</span>
+      <span>仅异色</span>
+    </div>
+  </div>
+
+  <!-- RESULT COUNT -->
+  <div class="result-count" id="resultCount"></div>
+
+  <!-- GRID -->
+  <div id="gridContainer" class="grid"></div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading" style="display:none"><div class="spinner"></div><p style="margin-top:12px">加载中…</p></div>
+
+  <!-- EMPTY -->
+  <div class="empty" id="emptyState" style="display:none">
+    <div class="empty-icon">🔍</div>
+    <p>没有找到匹配的精灵</p>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>洛克王国：世界 工具箱 · 数据仅供参考 · <a href="https://github.com" target="_blank">GitHub</a></p>
+</footer>
+
+<script>
+(function(){
+  const API_BASE = '/api/spirits';
+  const PAGE_SIZE = 24;
+  let currentPage = 1;
+  let shinyOnly = false;
+  let debounceTimer = null;
+
+  // DOM refs
+  const searchInput = document.getElementById('searchInput');
+  const attrFilter = document.getElementById('attrFilter');
+  const eggGroupFilter = document.getElementById('eggGroupFilter');
+  const shinyToggle = document.getElementById('shinyToggle');
+  const gridContainer = document.getElementById('gridContainer');
+  const loadingEl = document.getElementById('loading');
+  const emptyState = document.getElementById('emptyState');
+  const paginationEl = document.getElementById('pagination');
+  const resultCount = document.getElementById('resultCount');
+
+  // 属性图标映射
+  const ATTR_ICONS = {
+    '普通': '/attr-icons/普通.png', '草': '/attr-icons/草.png', '火': '/attr-icons/火.png',
+    '水': '/attr-icons/水.png', '光': '/attr-icons/光.png', '地': '/attr-icons/地.png',
+    '冰': '/attr-icons/冰.png', '龙': '/attr-icons/龙.png', '电': '/attr-icons/电.png',
+    '毒': '/attr-icons/毒.png', '虫': '/attr-icons/虫.png', '武': '/attr-icons/武.png',
+    '翼': '/attr-icons/翼.png', '萌': '/attr-icons/萌.png', '幽': '/attr-icons/幽.png',
+    '恶': '/attr-icons/恶.png', '机械': '/attr-icons/机械.png', '幻': '/attr-icons/幻.png',
+  };
+
+  function getAttrIcon(attr) {
+    return ATTR_ICONS[attr] || null;
+  }
+
+  // Egg groups for dropdown (populated from API)
+  let EGG_GROUPS = [];
+
+  async function loadEggGroups(){
+    try {
+      const resp = await fetch('/api/official-egg-groups');
+      const data = await resp.json();
+      if(data.success && data.groups){
+        EGG_GROUPS = data.groups.filter(g => !g.is_unbreedable_group).map(g => g.egg_group_name);
+        EGG_GROUPS.forEach(g => {
+          const opt = document.createElement('option');
+          opt.value = g; opt.textContent = g;
+          eggGroupFilter.appendChild(opt);
+        });
+      }
+    } catch(e){
+      console.error('加载蛋组失败:', e);
+      // Fallback
+      EGG_GROUPS = ['两栖组','动物组','大地组','天空组','妖精组','巨灵组','拟人组','昆虫组','机械组','植物组','海洋组','软体组','魔力组','龙组'];
+      EGG_GROUPS.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g; opt.textContent = g;
+        eggGroupFilter.appendChild(opt);
+      });
+    }
+  }
+
+  // URL 参数同步
+  function syncUrl(){
+    const params = new URLSearchParams();
+    const q = searchInput.value.trim();
+    if(q) params.set('q', q);
+    const attr = attrFilter.value;
+    if(attr) params.set('attribute', attr);
+    const egg = eggGroupFilter.value;
+    if(egg) params.set('egg_group', egg);
+    if(shinyOnly) params.set('shiny', 'true');
+    if(currentPage > 1) params.set('page', currentPage);
+    const newUrl = window.location.pathname + (params.toString() ? '?' + params : '');
+    window.history.replaceState(null, '', newUrl);
+  }
+
+  // 从 URL 恢复状态
+  function restoreFromUrl(){
+    const params = new URLSearchParams(window.location.search);
+    if(params.get('q')) searchInput.value = params.get('q');
+    if(params.get('attribute')) attrFilter.value = params.get('attribute');
+    if(params.get('egg_group')) eggGroupFilter.value = params.get('egg_group');
+    if(params.get('shiny') === 'true') {
+      shinyOnly = true;
+      shinyToggle.classList.add('active');
+    }
+    if(params.get('page')) currentPage = parseInt(params.get('page')) || 1;
+  }
+
+  function init(){
+    restoreFromUrl();
+    loadEggGroups();
+    searchInput.addEventListener('input', debounceSearch);
+    attrFilter.addEventListener('change', ()=>{ currentPage=1; fetchSpirits(); syncUrl(); });
+    eggGroupFilter.addEventListener('change', ()=>{ currentPage=1; fetchSpirits(); syncUrl(); });
+    fetchSpirits();
+  }
+
+  function debounceSearch(){
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(()=>{ currentPage=1; fetchSpirits(); syncUrl(); }, 300);
+  }
+
+  function toggleShiny(){
+    shinyOnly = !shinyOnly;
+    shinyToggle.classList.toggle('active', shinyOnly);
+    currentPage = 1;
+    fetchSpirits();
+    syncUrl();
+  }
+  window.toggleShiny = toggleShiny;
+
+  function buildParams(){
+    const p = new URLSearchParams();
+    p.set('page', currentPage);
+    p.set('page_size', PAGE_SIZE);
+    const q = searchInput.value.trim();
+    if(q) p.set('q', q);
+    const attr = attrFilter.value;
+    if(attr) p.set('attribute', attr);
+    const egg = eggGroupFilter.value;
+    if(egg) p.set('egg_group', egg);
+    if(shinyOnly) p.set('shiny', 'true');
+    return p.toString();
+  }
+
+  async function fetchSpirits(){
+    loadingEl.style.display = '';
+    emptyState.style.display = 'none';
+    gridContainer.innerHTML = '';
+    paginationEl.innerHTML = '';
+    resultCount.innerHTML = '';
+
+    try {
+      const resp = await fetch(`${API_BASE}?${buildParams()}`);
+      if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+
+      if(!data.success) throw new Error('API error');
+      renderCount(data.total);
+      if(data.total === 0){
+        emptyState.style.display = '';
+      } else {
+        renderGrid(data.items);
+        renderPagination(data.total, data.page, data.page_size);
+      }
+    } catch(err){
+      console.error('Fetch error:', err);
+      // Show demo data if API unavailable
+      renderDemo();
+    } finally {
+      loadingEl.style.display = 'none';
+    }
+  }
+
+  function renderCount(total){
+    resultCount.innerHTML = `共 <strong>${total}</strong> 个精灵`;
+  }
+
+  function renderGrid(items){
+    gridContainer.innerHTML = items.map(s => {
+      const padded = String(s.spirit_id).padStart(3, '0');
+      const imgSrc = s.image || `/creature-atlas/${padded}-base.webp`;
+      const shinyBadge = s.has_shiny_variant ? '<span class="shiny-badge">✦ 异色</span>' : '';
+      const attrs = [];
+      if(s.primary_attribute) {
+        const icon = getAttrIcon(s.primary_attribute);
+        const iconHtml = icon ? `<img src="${icon}" class="attr-icon" style="width:12px;height:12px;vertical-align:middle;margin-right:2px" />` : '';
+        attrs.push(`<span class="badge badge-attr" data-attr="${s.primary_attribute}">${iconHtml}${s.primary_attribute}</span>`);
+      }
+      if(s.secondary_attribute) {
+        const icon = getAttrIcon(s.secondary_attribute);
+        const iconHtml = icon ? `<img src="${icon}" class="attr-icon" style="width:12px;height:12px;vertical-align:middle;margin-right:2px" />` : '';
+        attrs.push(`<span class="badge badge-attr secondary" data-attr="${s.secondary_attribute}">${iconHtml}${s.secondary_attribute}</span>`);
+      }
+      const eggs = (s.egg_groups||[]).map(g => `<span class="badge badge-egg">${g}</span>`).join('');
+      const breedBadge = !s.can_breed ? '<span class="badge" style="background:#e74c3c;color:#fff;font-size:9px;padding:1px 5px;border-radius:6px;position:absolute;top:4px;right:4px">不可孵蛋</span>' : '';
+      return `
+        <a class="card" href="/compendium/${s.spirit_id}" data-id="${s.spirit_id}">
+          <div class="card-img-wrap">
+            <img src="${imgSrc}" alt="${s.display_name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'img-fallback\\'>🖼️</div>'" />
+            ${shinyBadge}
+            ${breedBadge}
+          </div>
+          <div class="card-body">
+            <span class="card-no">#${s.spirit_no || padded}</span>
+            <span class="card-name">${s.display_name || s.base_name}</span>
+            <div class="card-badges">${attrs}${eggs}</div>
+          </div>
+        </a>`;
+    }).join('');
+  }
+
+  function renderPagination(total, page, pageSize){
+    const totalPages = Math.ceil(total / pageSize);
+    if(totalPages <= 1) return;
+    let html = '';
+    html += `<button class="page-btn" ${page<=1?'disabled':''} onclick="goPage(${page-1})">‹</button>`;
+    const range = getPageRange(page, totalPages);
+    range.forEach(p => {
+      if(p === '...'){
+        html += '<span style="padding:0 4px;color:var(--muted)">…</span>';
+      } else {
+        html += `<button class="page-btn${p===page?' active':''}" onclick="goPage(${p})">${p}</button>`;
+      }
+    });
+    html += `<button class="page-btn" ${page>=totalPages?'disabled':''} onclick="goPage(${page+1})">›</button>`;
+    paginationEl.innerHTML = html;
+  }
+
+  function getPageRange(current, total){
+    if(total <= 7) return Array.from({length:total},(_,i)=>i+1);
+    const pages = [];
+    pages.push(1);
+    if(current > 3) pages.push('...');
+    for(let i = Math.max(2,current-1); i <= Math.min(total-1, current+1); i++) pages.push(i);
+    if(current < total-2) pages.push('...');
+    pages.push(total);
+    return pages;
+  }
+
+  window.goPage = function(p){
+    currentPage = p;
+    fetchSpirits();
+    syncUrl();
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  // Demo data fallback when API unavailable
+  function renderDemo(){
+    const demo = [
+      {spirit_id:1,spirit_no:'001',base_name:'火花',display_name:'火花',primary_attribute:'火',secondary_attribute:'',egg_groups:['怪兽'],has_shiny_variant:true,spirit_no_number:1},
+      {spirit_id:2,spirit_no:'004',base_name:'小水龟',display_name:'小水龟',primary_attribute:'水',secondary_attribute:'',egg_groups:['水栖','怪兽'],has_shiny_variant:false,spirit_no_number:4},
+      {spirit_id:3,spirit_no:'007',base_name:'绿叶兽',display_name:'绿叶兽',primary_attribute:'草',secondary_attribute:'',egg_groups:['植物'],has_shiny_variant:true,spirit_no_number:7},
+      {spirit_id:4,spirit_no:'010',base_name:'电击兔',display_name:'电击兔',primary_attribute:'电',secondary_attribute:'',egg_groups:['野兽'],has_shiny_variant:false,spirit_no_number:10},
+      {spirit_id:5,spirit_no:'013',base_name:'冰晶凤凰',display_name:'冰晶凤凰',primary_attribute:'冰',secondary_attribute:'飞行',egg_groups:['飞行'],has_shiny_variant:true,spirit_no_number:13},
+      {spirit_id:6,spirit_no:'016',base_name:'岩石巨兵',display_name:'岩石巨兵',primary_attribute:'石',secondary_attribute:'土',egg_groups:['矿物'],has_shiny_variant:false,spirit_no_number:16},
+      {spirit_id:7,spirit_no:'019',base_name:'暗影龙',display_name:'暗影龙',primary_attribute:'龙',secondary_attribute:'暗',egg_groups:['龙','怪兽'],has_shiny_variant:true,spirit_no_number:19},
+      {spirit_id:8,spirit_no:'022',base_name:'幽灵猫',display_name:'幽灵猫',primary_attribute:'幽灵',secondary_attribute:'',egg_groups:['亡灵','妖精'],has_shiny_variant:false,spirit_no_number:22},
+      {spirit_id:9,spirit_no:'025',base_name:'圣光天使',display_name:'圣光天使',primary_attribute:'光',secondary_attribute:'飞行',egg_groups:['飞行','魔法'],has_shiny_variant:true,spirit_no_number:25},
+      {spirit_id:10,spirit_no:'028',base_name:'机械战狼',display_name:'机械战狼',primary_attribute:'机械',secondary_attribute:'',egg_groups:['机械','野兽'],has_shiny_variant:false,spirit_no_number:28},
+      {spirit_id:11,spirit_no:'031',base_name:'虫王甲虫',display_name:'虫王甲虫',primary_attribute:'虫',secondary_attribute:'',egg_groups:['虫'],has_shiny_variant:false,spirit_no_number:31},
+      {spirit_id:12,spirit_no:'034',base_name:'恶魔领主',display_name:'恶魔领主',primary_attribute:'恶魔',secondary_attribute:'暗',egg_groups:['妖精','亡灵'],has_shiny_variant:true,spirit_no_number:34},
+    ];
+
+    // Apply filters
+    const q = searchInput.value.trim().toLowerCase();
+    const attr = attrFilter.value;
+    const egg = eggGroupFilter.value;
+    let filtered = demo;
+    if(q) filtered = filtered.filter(s => s.display_name.toLowerCase().includes(q) || s.spirit_no.includes(q));
+    if(attr) filtered = filtered.filter(s => s.primary_attribute === attr || s.secondary_attribute === attr);
+    if(egg) filtered = filtered.filter(s => s.egg_groups.includes(egg));
+    if(shinyOnly) filtered = filtered.filter(s => s.has_shiny_variant);
+
+    renderCount(filtered.length);
+    if(filtered.length === 0){
+      emptyState.style.display = '';
+    } else {
+      renderGrid(filtered);
+    }
+  }
+
+  // Drawer
+  window.toggleDrawer = function(){
+    document.getElementById('drawer').classList.toggle('open');
+  };
+
+  init();
+})();
+</script>
+</body>
+</html>

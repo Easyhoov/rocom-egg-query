@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家园炼金 - 洛克王国：世界</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#000;--white:#fff;--green:#0acf83;--red:#f24e1e;--purple:#a259ff;--pink:#ff7262;--text-primary:#000;--text-secondary:#3d3d3d;--text-tertiary:#595959;--text-muted:#707070;--pill-radius:50px;--card-radius:8px;--shadow-card:0 2px 24px rgba(0,0,0,0.06);--shadow-hover:0 8px 40px rgba(0,0,0,0.12)}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text-primary);background:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.06);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text-primary);font-weight:700;font-size:15px}
+.nav-logo img{width:28px;height:28px;border-radius:6px;object-fit:cover}
+.nav-links{display:flex;gap:4px}
+.nav-links a{text-decoration:none;padding:8px 14px;border-radius:var(--pill-radius);font-size:13px;font-weight:500;color:var(--text-secondary);transition:all .15s}
+.nav-links a:hover{background:rgba(0,0,0,0.04)}
+.nav-links a.active{background:var(--black);color:var(--white)}
+.nav-cta{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:var(--pill-radius);background:var(--green);color:var(--white);font-size:13px;font-weight:600;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:18px;height:2px;background:var(--black);margin:4px 0;border-radius:1px;transition:.2s}
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:200}
+.drawer-overlay.open{display:block}
+.drawer{position:fixed;top:0;right:-280px;width:280px;height:100%;background:var(--white);z-index:201;transition:right .25s;padding:24px;display:flex;flex-direction:column;gap:4px}
+.drawer.open{right:0}
+.drawer a{text-decoration:none;padding:12px 16px;border-radius:var(--card-radius);font-size:14px;font-weight:500;color:var(--text-secondary)}
+.drawer a.active{background:var(--black);color:var(--white)}
+.drawer-close{position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;font-size:20px}
+@media(max-width:960px){.nav-links,.nav-cta{display:none}.hamburger{display:block}}
+
+/* MAIN */
+.container{max-width:960px;margin:0 auto;padding:32px 24px 64px}
+h1{font-size:28px;font-weight:700;margin-bottom:4px}
+.subtitle{color:var(--text-muted);font-size:14px;margin-bottom:32px}
+
+/* CONTROLS */
+.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:end;margin-bottom:24px}
+.control-group{display:flex;flex-direction:column;gap:6px}
+.control-label{font-size:12px;font-weight:500;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.5px}
+.level-input{width:120px;height:44px;border:2px solid #e5e5e5;border-radius:var(--card-radius);padding:0 14px;font-size:15px;font-family:inherit;outline:none;transition:border-color .15s}
+.level-input:focus{border-color:var(--black);box-shadow:0 0 0 2px rgba(0,0,0,0.08)}
+.level-slider{-webkit-appearance:none;width:240px;height:6px;border-radius:3px;background:#e5e5e5;outline:none}
+.level-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--black);cursor:pointer}
+.level-display{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:500;min-width:48px;text-align:center}
+
+/* BALL PILLS */
+.ball-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.ball-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--pill-radius);border:2px solid #e5e5e5;background:var(--white);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;min-height:44px}
+.ball-pill:hover{border-color:#ccc}
+.ball-pill.active{border-color:var(--black);background:var(--black);color:var(--white)}
+.ball-pill img{width:20px;height:20px;border-radius:4px;object-fit:cover}
+
+/* BEST CARD */
+.best-card{background:var(--white);border:2px solid #e5e5e5;border-radius:var(--card-radius);padding:24px;margin-bottom:28px;box-shadow:var(--shadow-card);transition:box-shadow .2s}
+.best-card:hover{box-shadow:var(--shadow-hover)}
+.best-header{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.best-badge{background:var(--green);color:var(--white);font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--pill-radius);text-transform:uppercase;letter-spacing:0.5px}
+.best-content{display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+.best-recipe{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.recipe-item{display:flex;align-items:center;gap:8px;background:#f7f7f7;padding:8px 14px;border-radius:var(--card-radius)}
+.recipe-item img{width:32px;height:32px;border-radius:6px;object-fit:cover}
+.recipe-item .label{font-size:11px;color:var(--text-muted)}
+.recipe-item .name{font-size:13px;font-weight:600}
+.recipe-arrow{font-size:18px;color:var(--text-muted)}
+.best-stats{display:flex;gap:24px;margin-left:auto}
+.stat{text-align:center}
+.stat-value{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--green)}
+.stat-label{font-size:11px;color:var(--text-muted)}
+
+/* RECIPE LIST */
+.recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px}
+.recipe-card{background:var(--white);border:1.5px solid #e5e5e5;border-radius:var(--card-radius);padding:16px;transition:all .2s;cursor:default}
+.recipe-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-1px)}
+.rc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.rc-ball{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.rc-ball img{width:22px;height:22px;border-radius:4px;object-fit:cover}
+.rc-group{font-size:10px;background:#f0f0f0;padding:2px 8px;border-radius:var(--pill-radius);color:var(--text-muted);font-weight:500}
+.rc-items{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rc-item{display:flex;align-items:center;gap:6px}
+.rc-item img{width:28px;height:28px;border-radius:5px;object-fit:cover}
+.rc-item span{font-size:12px;color:var(--text-secondary)}
+.rc-arrow{color:var(--text-muted);font-size:14px}
+.rc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid #f0f0f0}
+.rc-exp{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--green)}
+.rc-level{font-size:12px;color:var(--text-muted)}
+.rc-formula{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);background:#f7f7f7;padding:6px 10px;border-radius:6px;margin-top:10px;word-break:break-all}
+
+/* SUMMARY */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:32px}
+.sum-card{background:#f7f7f7;border-radius:var(--card-radius);padding:16px;text-align:center}
+.sum-val{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700}
+.sum-label{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+/* LOADING/EMPTY */
+.loading,.empty{text-align:center;padding:48px;color:var(--text-muted);font-size:14px}
+.spinner{display:inline-block;width:24px;height:24px;border:3px solid #e5e5e5;border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FOOTER */
+.footer{text-align:center;padding:32px 24px;border-top:1px solid #f0f0f0;color:var(--text-muted);font-size:12px}
+.footer a{color:var(--text-secondary)}
+
+/* IMG fallback */
+img[data-fallback]{background:#f0f0f0}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/img/roco-mascot.png" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span>🐾</span>')" alt="">
+    洛克王国：世界
+  </a>
+  <div class="nav-links">
+    <a href="/egg-query">孵蛋查询</a>
+    <a href="/compendium">精灵图鉴</a>
+    <a href="/egg-group">蛋组配对</a>
+    <a href="/garden" class="active">家园炼金</a>
+    <a href="/merchant">远行商人</a>
+  </div>
+  <a href="/" class="nav-cta">🏠 工具箱</a>
+  <button class="hamburger" onclick="toggleDrawer()" aria-label="菜单">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="drawer-overlay" onclick="toggleDrawer()"></div>
+<div class="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()">✕</button>
+  <a href="/egg-query">孵蛋查询</a>
+  <a href="/compendium">精灵图鉴</a>
+  <a href="/egg-group">蛋组配对</a>
+  <a href="/garden" class="active">家园炼金</a>
+  <a href="/merchant">远行商人</a>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <h1>🏠 家园炼金</h1>
+  <p class="subtitle">输入家园等级，查看最优炼金配方与可用精灵球</p>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="control-group">
+      <label class="control-label">家园等级</label>
+      <input type="number" id="levelInput" class="level-input" min="1" max="25" value="16" placeholder="1-25">
+    </div>
+    <div class="control-group">
+      <label class="control-label">等级滑块</label>
+      <input type="range" id="levelSlider" class="level-slider" min="1" max="25" value="16">
+    </div>
+    <div class="level-display" id="levelDisplay">Lv.16</div>
+  </div>
+
+  <!-- BALL FILTER -->
+  <div class="ball-filter" id="ballFilter"></div>
+
+  <!-- CONTENT -->
+  <div id="content">
+    <div class="loading"><span class="spinner"></span><br>加载中...</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>洛克王国：世界 工具箱 · 家园炼金查询</p>
+  <p style="margin-top:4px">数据来源于游戏公开信息，仅供参考</p>
+</footer>
+
+<script>
+function toggleDrawer(){
+  document.querySelector('.drawer-overlay').classList.toggle('open');
+  document.querySelector('.drawer').classList.toggle('open');
+}
+
+const levelInput=document.getElementById('levelInput');
+const levelSlider=document.getElementById('levelSlider');
+const levelDisplay=document.getElementById('levelDisplay');
+const content=document.getElementById('content');
+const ballFilter=document.getElementById('ballFilter');
+
+let currentLevel=16;
+let currentBall=null;
+let allBalls=[];
+
+function syncLevel(v){
+  v=Math.max(1,Math.min(25,parseInt(v)||1));
+  currentLevel=v;
+  levelInput.value=v;
+  levelSlider.value=v;
+  levelDisplay.textContent='Lv.'+v;
+}
+
+levelInput.addEventListener('input',e=>{syncLevel(e.target.value);debouncedLoad()});
+levelSlider.addEventListener('input',e=>{syncLevel(e.target.value);debouncedLoad()});
+
+let debounceTimer;
+function debouncedLoad(){clearTimeout(debounceTimer);debounceTimer=setTimeout(loadData,300)}
+
+function renderIcon(url,name){
+  return `<img src="${url}" alt="${name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><rect fill=%22%23f0f0f0%22 width=%2240%22 height=%2240%22 rx=%226%22/><text x=%2220%22 y=%2226%22 text-anchor=%22middle%22 font-size=%2216%22>⚗️</text></svg>'">`;
+}
+
+function renderBallPills(balls){
+  ballFilter.innerHTML=`<button class="ball-pill ${!currentBall?'active':''}" onclick="selectBall(null)">全部</button>`+
+    balls.map(b=>`<button class="ball-pill ${currentBall===b.name?'active':''}" onclick="selectBall('${b.name}')">
+      ${renderIcon(b.icon_url,b.name)} ${b.name}
+    </button>`).join('');
+}
+
+function selectBall(name){
+  currentBall=name;
+  document.querySelectorAll('.ball-pill').forEach(p=>{
+    const isAll=!name&&p.textContent.includes('全部');
+    const isThis=name&&p.textContent.trim().includes(name);
+    p.classList.toggle('active',isAll||isThis);
+  });
+  renderCards();
+}
+
+let lastData=null;
+
+function renderCards(){
+  if(!lastData)return;
+  const d=lastData;
+  const filtered=currentBall?d.ball_cards.filter(c=>c.ball.name===currentBall):d.ball_cards;
+
+  const best=d.best_recommendation;
+  const bestHtml=best?`<div class="best-card">
+    <div class="best-header"><span class="best-badge">⭐ 最优推荐</span></div>
+    <div class="best-content">
+      <div class="best-recipe">
+        <div class="recipe-item">
+          ${renderIcon(best.seed.icon_url,best.seed.name)}
+          <div><div class="label">种子</div><div class="name">${best.seed.name}</div></div>
+        </div>
+        <span class="recipe-arrow">+</span>
+        <div class="recipe-item">
+          ${renderIcon(best.material.icon_url,best.material.name)}
+          <div><div class="label">材料</div><div class="name">${best.material.name}</div></div>
+        </div>
+        <span class="recipe-arrow">+</span>
+        <div class="recipe-item">
+          ${renderIcon(best.food.icon_url,best.food.name)}
+          <div><div class="label">食物</div><div class="name">${best.food.name}</div></div>
+        </div>
+        <span class="recipe-arrow">→</span>
+        <div class="recipe-item">
+          <div><div class="label">产出</div><div class="name">${best.food.duration_label} · ${best.food.exp}经验</div></div>
+        </div>
+      </div>
+      <div class="best-stats">
+        <div class="stat"><div class="stat-value">${best.exp_per_hour}</div><div class="stat-label">经验/时</div></div>
+        <div class="stat"><div class="stat-value">Lv.${best.unlock_level}</div><div class="stat-label">解锁等级</div></div>
+      </div>
+    </div>
+    ${best.food.formula?`<div class="rc-formula">配方: ${best.food.formula}</div>`:''}
+  </div>`:'';
+
+  const cardsHtml=filtered.length?filtered.map(c=>`<div class="recipe-card">
+    <div class="rc-header">
+      <div class="rc-ball">${renderIcon(c.ball.icon_url,c.ball.name)} ${c.ball.name}</div>
+      ${c.ball.group_label?`<span class="rc-group">${c.ball.group_label}</span>`:''}
+    </div>
+    <div class="rc-items">
+      <div class="rc-item">${renderIcon(c.seed.icon_url,c.seed.name)}<span>${c.seed.name}</span></div>
+      <span class="rc-arrow">+</span>
+      <div class="rc-item">${renderIcon(c.material.icon_url,c.material.name)}<span>${c.material.name}</span></div>
+      <span class="rc-arrow">+</span>
+      <div class="rc-item">${renderIcon(c.food.icon_url,c.food.name)}<span>${c.food.name}</span></div>
+    </div>
+    ${c.ball.formula_label?`<div class="rc-formula">${c.ball.formula_label}</div>`:''}
+    <div class="rc-footer">
+      <div class="rc-exp">${c.exp_per_hour} <span style="font-size:11px;font-weight:400;color:var(--text-muted)">经验/时</span></div>
+      <div class="rc-level">Lv.${c.unlock_level} 解锁</div>
+    </div>
+  </div>`).join(''):'<div class="empty">暂无符合条件的配方</div>';
+
+  const s=d.summary;
+  const summaryHtml=`<div class="summary">
+    <div class="sum-card"><div class="sum-val">${s.available_count}</div><div class="sum-label">可用配方</div></div>
+    <div class="sum-card"><div class="sum-val">${s.available_ball_count}</div><div class="sum-label">可用球种</div></div>
+    <div class="sum-card"><div class="sum-val">${s.best_exp_per_hour||'-'}</div><div class="sum-label">最高经验/时</div></div>
+    <div class="sum-card"><div class="sum-val">${s.best_food||'-'}</div><div class="sum-label">最优食物</div></div>
+  </div>`;
+
+  content.innerHTML=summaryHtml+bestHtml+`<h2 style="font-size:18px;font-weight:700;margin:24px 0 16px">📋 全部配方</h2>`+`<div class="recipe-grid">${cardsHtml}</div>`;
+}
+
+async function loadData(){
+  content.innerHTML='<div class="loading"><span class="spinner"></span><br>加载中...</div>';
+  try{
+    const params=new URLSearchParams({level:currentLevel});
+    if(currentBall)params.set('target_ball',currentBall);
+    const [queryRes,ballsRes]=await Promise.all([
+      fetch('/api/garden/query?'+params).then(r=>r.json()),
+      allBalls.length?Promise.resolve({balls:allBalls}):fetch('/api/garden/balls').then(r=>r.json())
+    ]);
+    if(ballsRes.balls)allBalls=ballsRes.balls;
+    if(!queryRes.success)throw new Error(queryRes.error||'请求失败');
+    lastData=queryRes;
+    renderBallPills(allBalls);
+    renderCards();
+  }catch(e){
+    content.innerHTML=`<div class="empty">⚠️ 加载失败: ${e.message}<br><br>请确保后端服务已启动</div>`;
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>

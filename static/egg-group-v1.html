@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蛋组配对 - 洛克王国：世界 工具箱</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#000;--white:#fff;--green:#0acf83;--red:#f24e1e;--purple:#a259ff;--pink:#ff7262;--primary:#000;--secondary:#3d3d3d;--tertiary:#595959;--muted:#707070;--pill:50px;--card-radius:8px}
+body{font-family:'Inter',sans-serif;color:var(--primary);background:#fafafa;line-height:1.6}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid #e5e5e5;height:56px;display:flex;align-items:center;padding:0 24px;max-width:1200px;margin:0 auto}
+.nav-logo{font-weight:700;font-size:18px;color:var(--black);text-decoration:none;white-space:nowrap}
+.nav-logo span{color:var(--green)}
+.nav-links{display:flex;gap:24px;margin-left:40px;list-style:none}
+.nav-links a{text-decoration:none;font-size:14px;color:var(--muted);font-weight:500;white-space:nowrap}
+.nav-links a.active{color:var(--black)}
+.nav-links a:hover{color:var(--black)}
+.nav-cta{margin-left:auto;background:var(--green);color:var(--white);border:none;padding:8px 20px;border-radius:var(--pill);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;margin-left:auto;padding:8px}
+.hamburger span{display:block;width:20px;height:2px;background:var(--black);border-radius:1px}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:var(--white);padding:16px 24px;gap:16px;border-bottom:1px solid #e5e5e5;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .nav-links.open a{font-size:16px}
+}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* HEADER */
+.page-header{margin-bottom:24px}
+.page-header h1{font-size:28px;font-weight:700;margin-bottom:4px}
+.page-header p{font-size:14px;color:var(--muted)}
+
+/* PILLS */
+.pill-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pill-scroll::-webkit-scrollbar{display:none}
+.pill{flex-shrink:0;padding:8px 20px;border-radius:var(--pill);border:1.5px solid #e0e0e0;background:var(--white);font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:'Inter',sans-serif}
+.pill:hover{border-color:var(--green);color:var(--green)}
+.pill.active{background:var(--black);color:var(--white);border-color:var(--black)}
+.pill .count{font-size:12px;color:var(--muted);margin-left:4px}
+.pill.active .count{color:rgba(255,255,255,.6)}
+
+/* GROUP INFO */
+.group-info{display:flex;align-items:center;gap:12px;margin:24px 0 16px}
+.group-info h2{font-size:22px;font-weight:700}
+.group-badge{background:var(--purple);color:var(--white);font-size:12px;font-weight:600;padding:4px 12px;border-radius:var(--pill)}
+
+/* SPIRIT LIST */
+.spirit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.spirit-row{display:flex;align-items:center;gap:12px;background:var(--white);border:1px solid #e5e5e5;border-radius:var(--card-radius);padding:12px 16px;transition:box-shadow .2s}
+.spirit-row:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.spirit-img{width:48px;height:48px;border-radius:var(--card-radius);background:#f0f0f0;object-fit:cover;flex-shrink:0}
+.spirit-info{flex:1;min-width:0}
+.spirit-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spirit-attrs{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
+.attr-tag{font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--pill);white-space:nowrap}
+.attr-tag.type1{background:#e8f5e9;color:#2e7d32}
+.attr-tag.type2{background:#e3f2fd;color:#1565c0}
+.attr-tag.type3{background:#fce4ec;color:#c62828}
+
+/* LOADING / EMPTY */
+.loading,.empty-state{text-align:center;padding:60px 20px;color:var(--muted);font-size:14px}
+.spinner{width:24px;height:24px;border:3px solid #e0e0e0;border-top-color:var(--green);border-radius:50%;animation:spin .6s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px 20px;color:var(--muted);font-size:12px;border-top:1px solid #e5e5e5;margin-top:48px}
+.footer a{color:var(--green);text-decoration:none}
+
+/* SKELETON */
+.skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--card-radius)}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">洛克王国<span>：世界</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/">首页</a></li>
+    <li><a href="/egg-query">孵蛋查询</a></li>
+    <li><a href="/egg-group" class="active">蛋组配对</a></li>
+    <li><a href="/compendium">精灵图鉴</a></li>
+    <li><a href="/garden">家园炼金</a></li>
+    <li><a href="/merchant">远行商人</a></li>
+  </ul>
+  <button class="nav-cta">反馈建议</button>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="page-header">
+    <h1>🥚 蛋组配对</h1>
+    <p>查看各蛋组内的精灵，快速筛选可孵蛋的精灵组合</p>
+  </div>
+
+  <!-- PILLS -->
+  <div class="pill-scroll" id="pillScroll">
+    <div class="loading"><div class="spinner"></div>加载蛋组中…</div>
+  </div>
+
+  <!-- GROUP CONTENT -->
+  <div id="groupContent"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  洛克王国：世界 工具箱 · 数据来源官方 · <a href="#">GitHub</a>
+</div>
+
+<script>
+const API_BASE = '';
+let currentGroup = null;
+let eggGroups = [];
+
+async function init() {
+  try {
+    const res = await fetch(`${API_BASE}/api/official-egg-groups`);
+    const data = await res.json();
+    eggGroups = (data.groups || []).filter(g => !g.is_unbreedable_group);
+    renderPills();
+    if (eggGroups.length > 0) selectGroup(eggGroups[0].egg_group_name);
+  } catch (e) {
+    document.getElementById('pillScroll').innerHTML = '<div class="empty-state">加载蛋组失败，请刷新重试</div>';
+  }
+}
+
+function renderPills() {
+  const el = document.getElementById('pillScroll');
+  el.innerHTML = eggGroups.map(g =>
+    `<button class="pill" data-group="${g.egg_group_name}" onclick="selectGroup('${g.egg_group_name}')">${g.egg_group_icon} ${g.egg_group_name}<span class="count">${g.spirit_count}</span></button>`
+  ).join('');
+}
+
+async function selectGroup(name) {
+  currentGroup = name;
+  document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.group === name));
+
+  const group = eggGroups.find(g => g.egg_group_name === name);
+  const content = document.getElementById('groupContent');
+  content.innerHTML = `
+    <div class="group-info">
+      <h2>${group ? group.egg_group_icon : ''} ${name}</h2>
+      <span class="group-badge">${group ? group.spirit_count : '?'} 只精灵</span>
+    </div>
+    <div class="spirit-grid" id="spiritGrid">
+      ${Array(6).fill('<div class="spirit-row skeleton" style="height:72px"></div>').join('')}
+    </div>`;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/spirits?egg_group=${encodeURIComponent(name)}&page=1&page_size=200`);
+    const data = await res.json();
+    const spirits = (data.items || []).filter(s => s.can_breed);
+    renderSpirits(spirits);
+  } catch (e) {
+    document.getElementById('spiritGrid').innerHTML = '<div class="empty-state">加载精灵失败</div>';
+  }
+}
+
+function renderSpirits(spirits) {
+  const grid = document.getElementById('spiritGrid');
+  if (!spirits.length) {
+    grid.innerHTML = '<div class="empty-state">该蛋组暂无繁殖数据</div>';
+    return;
+  }
+  grid.innerHTML = spirits.map(s => {
+    const img = s.image || '';
+    const name = s.display_name || s.base_name || '未知';
+    const attr = s.primary_attribute || '';
+    const attrBadge = attr ? `<span class="attr-tag type1">${attr}</span>` : '';
+    return `<a class="spirit-row" href="/compendium/${s.spirit_id}" style="text-decoration:none;color:inherit">
+      ${img ? `<img class="spirit-img" src="${img}" alt="${name}" onerror="this.style.display='none'" loading="lazy">` : `<div class="spirit-img"></div>`}
+      <div class="spirit-info">
+        <div class="spirit-name">${name}</div>
+        <div class="spirit-attrs">${attrBadge}</div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+init();
+</script>
+</body>
+</html>

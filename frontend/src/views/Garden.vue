@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import '../styles/dark-theme.css'
 
 const level = ref(16)
 const targetBall = ref('')
@@ -72,31 +73,31 @@ const resetAll = () => {
 </script>
 
 <template>
-  <div class="garden">
-    <div class="garden__box">
+  <div class="garden dark-page">
+    <div class="garden__box" style="position: relative; z-index: 1;">
       <div class="garden__hd">
-        <h1>🌿 家园炼金方案查询</h1>
+        <h1><img :src="'/img/peach-icon.png'" class="garden__title-icon" alt="" /> 家园炼金方案查询</h1>
         <p class="garden__sub">根据家园等级推荐最优经验效率的炼金配方，支持按目标球查询</p>
       </div>
 
-    <div class="garden__card">
+    <div class="garden__card dark-card">
       <div class="form-group">
         <label>🏠 家园等级 (1-25)</label>
-        <input v-model.number="level" type="number" min="1" max="25" class="form-input" placeholder="输入家园等级">
+        <input v-model.number="level" type="number" min="1" max="25" class="form-input dark-input" placeholder="输入家园等级">
       </div>
 
       <div class="form-group">
         <label>🎯 目标球 (可选)</label>
-        <select v-model="targetBall" class="form-select">
+        <select v-model="targetBall" class="form-select dark-input">
           <option value="">全部（按经验效率排序）</option>
           <option v-for="ball in ballOptions" :key="ball.name" :value="ball.name">{{ ball.name }}</option>
         </select>
       </div>
 
-      <button @click="queryGarden" class="query-btn" :disabled="loading">
+      <button @click="queryGarden" class="query-btn dark-btn dark-btn--accent" :disabled="loading">
         {{ loading ? '查询中...' : '🔍 查询推荐方案' }}
       </button>
-      <button @click="resetAll" class="reset-btn" v-if="result">🔄 重置</button>
+      <button @click="resetAll" class="reset-btn dark-btn" v-if="result">🔄 重置</button>
     </div>
 
     <div v-if="error" class="error-msg">{{ error }}</div>
@@ -123,7 +124,7 @@ const resetAll = () => {
 
     <div v-if="result" class="result-section">
       <!-- 最优推荐 -->
-      <div class="garden__card garden__result">
+      <div class="garden__card garden__result dark-card">
         <h2>⭐ 最优推荐方案 (Lv.{{ result.level }})</h2>
         <div class="recipe-grid">
           <div class="item-card">
@@ -152,7 +153,7 @@ const resetAll = () => {
       </div>
 
       <!-- 可炼制的球 -->
-      <div class="garden__card garden__result">
+      <div class="garden__card garden__result dark-card">
         <h2>🎾 当前等级可炼制的球 (共{{ result.available_balls.length }}种)</h2>
         <div class="balls-grid">
           <div v-for="ball in result.available_balls" :key="ball.name" class="ball-card" @click="selectBall(ball.name)">
@@ -163,7 +164,7 @@ const resetAll = () => {
       </div>
 
       <!-- 目标球配方列表 -->
-      <div v-if="targetBall && result.ball_cards && result.ball_cards.length > 0" class="garden__card garden__result">
+      <div v-if="targetBall && result.ball_cards && result.ball_cards.length > 0" class="garden__card garden__result dark-card">
         <h2>📋 可炼制「{{ targetBall }}」的所有配方</h2>
         <div class="ball-recipe-list">
           <div v-for="(card, index) in result.ball_cards" :key="index" class="ball-recipe-card">
@@ -187,24 +188,38 @@ const resetAll = () => {
 </template>
 
 <style scoped>
+/* ===== 深色主题 - 家园炼金页 ===== */
 .garden {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f0ecff 0%, #ffffff 100%);
+  background: #1a1a2e;
+  position: relative;
+  overflow: hidden;
   padding: 16px 16px 80px;
 }
-.garden__box { max-width: 420px; margin: 0 auto; }
+.garden::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.garden__box { max-width: 420px; margin: 0 auto; position: relative; z-index: 1; }
 
-/* Header */
+/* 标题 */
 .garden__hd { text-align: center; padding: 24px 0 20px; }
-.garden__hd h1 { font-size: 22px; color: #1a1a2e; font-weight: 700; margin: 0 0 6px; }
-.garden__sub { font-size: 13px; color: #888; margin: 0; }
+.garden__hd h1 { font-size: 22px; color: #fff; font-weight: 700; margin: 0 0 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.garden__title-icon { width: 28px; height: 28px; object-fit: contain; }
+.garden__sub { font-size: 13px; color: rgba(255, 255, 255, 0.6); margin: 0; }
 
-/* Card */
+/* 卡片 */
 .garden__card {
-  background: #fff;
+  background: rgba(20, 20, 40, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   margin-bottom: 12px;
   display: flex;
   gap: 12px;
@@ -212,17 +227,18 @@ const resetAll = () => {
   flex-wrap: wrap;
   transition: box-shadow .2s;
 }
-.garden__card:hover { box-shadow: 0 8px 24px rgba(139,61,255,0.12); }
+.garden__card:hover { box-shadow: 0 8px 24px rgba(139, 61, 255, 0.15); }
 
-/* Error */
+/* 错误提示 */
 .error-msg {
-  background: #fff0f0;
-  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.15);
+  color: #ff6b6b;
   padding: 12px 16px;
   border-radius: 12px;
   font-size: 14px;
   text-align: center;
   margin-bottom: 16px;
+  border: 1px solid rgba(231, 76, 60, 0.2);
 }
 
 .form-group {
@@ -233,30 +249,34 @@ const resetAll = () => {
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: #1a1a2e;
+  color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
 }
 .form-input, .form-select {
   width: 100%;
   padding: 10px 14px;
-  border: 1.5px solid #e8e8e8;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
-  background: #fafafa;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   font-size: 15px;
   transition: .2s;
   box-sizing: border-box;
 }
+.form-input::placeholder { color: rgba(255, 255, 255, 0.35); }
 .form-input:focus, .form-select:focus {
   outline: none;
   border-color: #8b3dff;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.12);
 }
+.form-select option { background: #1a1a2e; color: #fff; }
 
 .query-btn {
   padding: 10px 24px;
-  background: #8b3dff;
+  background: rgba(139, 61, 255, 0.6);
   color: #fff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
   border-radius: 12px;
   font-size: 15px;
   font-weight: 500;
@@ -266,25 +286,25 @@ const resetAll = () => {
 }
 .query-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102,126,234,.4);
+  background: rgba(139, 61, 255, 0.8);
 }
 .query-btn:active { transform: scale(.97); }
 .query-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
 .reset-btn {
   padding: 10px 16px;
-  background: #f5f5f5;
-  color: #888;
-  border: 1.5px solid #e8e8e8;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   font-size: 14px;
   cursor: pointer;
   transition: .2s;
   height: fit-content;
 }
-.reset-btn:hover { background: #eee; }
+.reset-btn:hover { background: rgba(255, 255, 255, 0.12); }
 
-/* Summary row */
+/* 摘要统计 */
 .summary-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -292,11 +312,12 @@ const resetAll = () => {
   margin-bottom: 12px;
 }
 .summary-item {
-  background: #fff;
+  background: rgba(20, 20, 40, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
   border-radius: 12px;
   padding: 12px 8px;
   text-align: center;
-  box-shadow: 0 8px 24px rgba(15,16,21,0.08);
 }
 .summary-val {
   font-size: 16px;
@@ -308,11 +329,11 @@ const resetAll = () => {
 }
 .summary-label {
   font-size: 11px;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.5);
   margin-top: 4px;
 }
 
-/* Result cards */
+/* 结果卡片 */
 .result-section {
   display: flex;
   flex-direction: column;
@@ -325,7 +346,7 @@ const resetAll = () => {
 }
 .garden__result h2 {
   font-size: 16px;
-  color: #1a1a2e;
+  color: #fff;
   margin: 0 0 16px;
   font-weight: 700;
 }
@@ -339,7 +360,8 @@ const resetAll = () => {
   margin-bottom: 16px;
 }
 .item-card {
-  background: #f5f2ff;
+  background: rgba(139, 61, 255, 0.1);
+  border: 1px solid rgba(139, 61, 255, 0.2);
   border-radius: 12px;
   padding: 14px;
   text-align: center;
@@ -347,8 +369,8 @@ const resetAll = () => {
   position: relative;
 }
 .food-card {
-  background: #f0fff4;
-  border: 1px solid #9ae6b4;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.25);
 }
 .item-icon {
   width: 56px;
@@ -358,19 +380,19 @@ const resetAll = () => {
 }
 .item-name {
   font-weight: 600;
-  color: #1a1a2e;
+  color: #fff;
   margin-bottom: 2px;
   font-size: 14px;
 }
 .item-label {
   font-size: 12px;
-  color: #888;
+  color: rgba(255, 255, 255, 0.6);
 }
 .formula-tag {
   position: absolute;
   top: 6px;
   right: 6px;
-  background: #8b3dff;
+  background: rgba(139, 61, 255, 0.7);
   color: #fff;
   padding: 2px 8px;
   border-radius: 10px;
@@ -389,55 +411,61 @@ const resetAll = () => {
   flex-wrap: wrap;
 }
 .exp-badge, .level-badge {
-  background: #f0ecff;
+  background: rgba(139, 61, 255, 0.12);
   color: #8b3dff;
   padding: 6px 14px;
   border-radius: 20px;
   font-weight: 500;
   font-size: 13px;
+  border: 1px solid rgba(139, 61, 255, 0.2);
 }
 
-/* Balls */
+/* 球列表 - 横向胶囊标签式 */
 .balls-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .ball-card {
-  background: #f5f2ff;
-  border-radius: 12px;
-  padding: 14px;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  padding: 8px 16px 8px 8px;
   cursor: pointer;
   transition: .2s;
-  border: 2px solid transparent;
 }
 .ball-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102,126,234,.2);
-  border-color: #8b3dff;
+  border-color: rgba(139, 61, 255, 0.5);
+  background: rgba(139, 61, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(139, 61, 255, 0.15);
 }
 .ball-card:active { transform: scale(.97); }
 .ball-icon {
-  width: 42px;
-  height: 42px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  margin-bottom: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .ball-name {
   font-size: 13px;
-  color: #1a1a2e;
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
+  white-space: nowrap;
 }
 
-/* Ball recipe list */
+/* 球配方列表 */
 .ball-recipe-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 .ball-recipe-card {
-  background: #f5f2ff;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   padding: 14px;
   display: flex;
@@ -445,12 +473,12 @@ const resetAll = () => {
   gap: 14px;
   transition: .2s;
 }
-.ball-recipe-card:hover { background: #f0ecff; }
+.ball-recipe-card:hover { background: rgba(255, 255, 255, 0.08); }
 .recipe-rank {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #8b3dff;
+  background: rgba(139, 61, 255, 0.6);
   color: #fff;
   display: flex;
   align-items: center;
@@ -462,7 +490,7 @@ const resetAll = () => {
 .recipe-content { flex: 1; }
 .recipe-items {
   font-size: 14px;
-  color: #1a1a2e;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 4px;
   font-weight: 500;
 }
@@ -471,7 +499,7 @@ const resetAll = () => {
   display: flex;
   gap: 16px;
   font-size: 12px;
-  color: #888;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 768px) {
@@ -483,5 +511,5 @@ const resetAll = () => {
   .recipe-grid { flex-direction: column; }
   .plus, .equal { transform: rotate(90deg); }
 }
-.garden__ft { text-align: center; padding: 24px 0 16px; font-size: 11px; color: #ccc; }
+.garden__ft { text-align: center; padding: 24px 0 16px; font-size: 11px; color: rgba(255, 255, 255, 0.3); }
 </style>

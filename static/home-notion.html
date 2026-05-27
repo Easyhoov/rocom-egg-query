@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>洛克王国：世界 - 冒险者工具箱</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+        'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      color: rgba(0,0,0,0.95);
+      background: #ffffff;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav Bar ──────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+    }
+
+    .nav-logo-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: #f6f5f4;
+    }
+
+    /* Fallback: show emoji when image fails */
+    .nav-logo-icon-fallback {
+      display: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #f6f5f4;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .nav-logo-icon-fallback.visible {
+      display: flex;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-links a {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0,0,0,0.65);
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: rgba(0,0,0,0.04);
+      color: rgba(0,0,0,0.95);
+    }
+
+    .nav-links a.active {
+      color: rgba(0,0,0,0.95);
+      font-weight: 600;
+    }
+
+    /* Mobile nav: simple scrollable */
+    .nav-mobile {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .nav-mobile::-webkit-scrollbar { display: none; }
+
+    .nav-mobile a {
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0,0,0,0.6);
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .nav-mobile a:hover,
+    .nav-mobile a.active {
+      color: rgba(0,0,0,0.95);
+    }
+
+    .nav-mobile a.active {
+      font-weight: 600;
+    }
+
+    @media (min-width: 640px) {
+      .nav-mobile { display: none; }
+      .nav-links { display: flex; }
+    }
+
+    /* ── Hero Section ─────────────────────────────────── */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(0,117,222,0.06);
+      color: #0075de;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 9999px;
+      margin-bottom: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-badge::before {
+      content: '✦';
+      font-size: 11px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: rgba(0,0,0,0.95);
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      font-weight: 400;
+      color: #615d59;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+    }
+
+    @media (min-width: 640px) {
+      .hero { padding: 88px 0 64px; }
+      .hero-title { font-size: 56px; letter-spacing: -1.75px; }
+      .hero-subtitle { font-size: 18px; }
+    }
+
+    @media (min-width: 1024px) {
+      .hero { padding: 104px 0 80px; }
+      .hero-title { font-size: 64px; letter-spacing: -2.125px; }
+    }
+
+    /* ── Stats Bar ────────────────────────────────────── */
+    .stats {
+      background: #f6f5f4;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .stats-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: rgba(0,0,0,0.95);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #a39e98;
+      margin-top: 4px;
+      letter-spacing: 0.2px;
+    }
+
+    @media (min-width: 640px) {
+      .stats-inner { padding: 40px 24px; }
+      .stat-number { font-size: 40px; }
+    }
+
+    /* ── Features Grid ────────────────────────────────── */
+    .features {
+      padding: 64px 0 80px;
+    }
+
+    .features-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #a39e98;
+      margin-bottom: 20px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .features { padding: 80px 0 96px; }
+      .features-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 4px 12px rgba(0,0,0,0.03);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0,0,0,0.12);
+    }
+
+    .feature-card:hover::after {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: #f6f5f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      color: rgba(0,0,0,0.95);
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      font-weight: 400;
+      color: #615d59;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .feature-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #0075de;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.2s ease;
+    }
+
+    .feature-card:hover .feature-link {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .feature-link svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Span last two cards nicely on desktop */
+    @media (min-width: 1024px) {
+      .features-grid .feature-card:nth-child(4) {
+        grid-column: 1 / 2;
+      }
+      .features-grid .feature-card:nth-child(5) {
+        grid-column: 2 / 3;
+      }
+    }
+
+    /* ── Footer ───────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: #a39e98;
+      letter-spacing: 0.1px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: #a39e98;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: rgba(0,0,0,0.65);
+    }
+
+    .footer-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    /* ── Utility ──────────────────────────────────────── */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav" role="navigation" aria-label="主导航">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="洛克王国助手首页">
+        <img
+          src="/img/roco-mascot.png"
+          alt=""
+          class="nav-logo-icon"
+          onerror="this.style.display='none';this.nextElementSibling.classList.add('visible');"
+        >
+        <span class="nav-logo-icon-fallback" aria-hidden="true">🐾</span>
+        <span>洛克王国助手</span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="nav-links">
+        <a href="/" class="active">孵蛋查询</a>
+        <a href="/compendium">精灵图鉴</a>
+        <a href="/egg-group">蛋组配对</a>
+        <a href="/garden">家园炼金</a>
+        <a href="/merchant">远行商人</a>
+      </div>
+
+      <!-- Mobile links -->
+      <div class="nav-mobile">
+        <a href="/" class="active">孵蛋查询</a>
+        <a href="/compendium">精灵图鉴</a>
+        <a href="/egg-group">蛋组配对</a>
+        <a href="/garden">家园炼金</a>
+        <a href="/merchant">远行商人</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ Hero ═══ -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-badge">洛克王国：世界</span>
+      <h1 class="hero-title">冒险者工具箱</h1>
+      <p class="hero-subtitle">
+        为洛克王国玩家打造的数据查询工具集，涵盖孵蛋、图鉴、配对、炼金与商人信息，助你高效冒险。
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ Stats ═══ -->
+  <section class="stats" aria-label="数据概览">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number">468+</div>
+        <div class="stat-label">可查精灵</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5</div>
+        <div class="stat-label">大功能模块</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1,623</div>
+        <div class="stat-label">条孵蛋数据</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Features ═══ -->
+  <section class="features">
+    <div class="container">
+      <div class="features-label">功能模块</div>
+      <div class="features-grid">
+
+        <!-- 孵蛋查询 -->
+        <a href="/egg-query" class="feature-card">
+          <div class="feature-icon">🥚</div>
+          <div class="feature-title">孵蛋查询</div>
+          <div class="feature-desc">根据身高体重查询可能孵化的精灵，支持神奇的蛋和炫彩蛋筛选。</div>
+          <div class="feature-link">
+            开始查询
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 精灵图鉴 -->
+        <a href="/compendium" class="feature-card">
+          <div class="feature-icon">📖</div>
+          <div class="feature-title">精灵图鉴</div>
+          <div class="feature-desc">浏览全部精灵信息，属性、蛋组、异色、技能一应俱全。</div>
+          <div class="feature-link">
+            浏览图鉴
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 蛋组配对 -->
+        <a href="/egg-group" class="feature-card">
+          <div class="feature-icon">🧬</div>
+          <div class="feature-title">蛋组配对</div>
+          <div class="feature-desc">查看蛋组兼容性，找到最佳繁殖配对方案。</div>
+          <div class="feature-link">
+            查看配对
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 家园炼金 -->
+        <a href="/garden" class="feature-card">
+          <div class="feature-icon">🏠</div>
+          <div class="feature-title">家园炼金</div>
+          <div class="feature-desc">查询种子配方、合成材料、精灵球和食物的炼金配方。</div>
+          <div class="feature-link">
+            查看配方
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 远行商人 -->
+        <a href="/merchant" class="feature-card">
+          <div class="feature-icon">🧳</div>
+          <div class="feature-title">远行商人</div>
+          <div class="feature-desc">查看远行商人携带物品和刷新规律。</div>
+          <div class="feature-link">
+            查看日程
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-text">洛克王国工具箱 · 数据来源于开源社区</span>
+      <div class="footer-links">
+        <span class="footer-dot"></span>
+        <a href="/api/docs" target="_blank" rel="noopener">API 文档</a>
+        <span class="footer-dot"></span>
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

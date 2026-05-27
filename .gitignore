@@ -42,3 +42,11 @@ item_mapping.json
 
 # 旧 vite 构建产物（经过 hash 变化的旧版本已删除跟踪）
 # 新构建产物保留在仓库中
+
+# 敏感文件和依赖（自动添加）
+config.yaml
+config.yml
+
+# Build artifacts
+static/assets/
+static/.vite/

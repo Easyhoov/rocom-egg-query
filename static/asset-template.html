@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>洛克王国 · 素材模板演示</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+  background: #f5efe6;
+  color: #3d2b16;
+  line-height: 1.6;
+}
+
+/* ===== Section: Hero Banner ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 */
+  overflow: hidden;
+  background: #1a1a2e;
+}
+.hero img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(245,239,230,1) 100%);
+}
+.hero-title {
+  position: absolute;
+  bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+}
+.hero-title img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+.hero-sub {
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  margin-top: 8px;
+  letter-spacing: 2px;
+}
+
+/* ===== Section: Container ===== */
+.container { max-width: 420px; margin: 0 auto; padding: 0 16px; }
+.section { margin-bottom: 24px; }
+.section-hd {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; padding: 0 4px;
+}
+.section-bar { width: 4px; height: 20px; background: #c97926; border-radius: 2px; }
+.section-title { font-size: 16px; font-weight: 700; color: #3d2b16; }
+
+/* ===== Component: Card ===== */
+.card {
+  background: rgba(255,255,255,0.68);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(140,115,80,0.1);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: .15s;
+}
+.card:active { transform: scale(0.98); background: rgba(255,255,255,0.85); }
+
+/* ===== Component: Feature Entry ===== */
+.feature {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none; color: inherit;
+  cursor: pointer;
+}
+.feature-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: linear-gradient(135deg, rgba(255,240,210,0.6), rgba(245,225,185,0.4));
+  padding: 6px;
+  flex-shrink: 0;
+}
+.feature-body { flex: 1; min-width: 0; }
+.feature-name { font-size: 16px; font-weight: 800; color: #3d2b16; }
+.feature-desc { font-size: 12px; color: #8c7a61; margin-top: 2px; }
+.feature-arrow { font-size: 22px; color: #c97926; opacity: 0.5; }
+
+/* ===== Component: Badge Row ===== */
+.badge-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center;
+  padding: 8px 0;
+}
+.badge {
+  width: 48px; height: 48px;
+  border-radius: 8px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* ===== Component: Title Banner ===== */
+.title-banner {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  position: relative;
+}
+.title-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== Component: Stat Card ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.stat-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.stat-icon { width: 48px; height: 48px; margin: 0 auto 8px; object-fit: contain; }
+.stat-value { font-size: 24px; font-weight: 800; color: #c97926; }
+.stat-label { font-size: 12px; color: #8c7a61; margin-top: 4px; }
+
+/* ===== Component: Decorative Divider ===== */
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 20px 0; padding: 0 16px;
+}
+.divider-line { flex: 1; height: 1px; background: rgba(140,115,80,0.15); }
+.divider-icon { width: 24px; height: 24px; object-fit: contain; opacity: 0.4; }
+
+/* ===== Component: NPC Card ===== */
+.npc-card {
+  display: flex; align-items: center; gap: 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(244,236,224,0.88));
+  border: 1px solid rgba(118,97,74,0.14);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 10px 26px rgba(58,39,21,0.06);
+}
+.npc-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5efe6, #ece3d3);
+  object-fit: contain;
+  padding: 8px;
+  flex-shrink: 0;
+  border: 2px solid rgba(201,121,38,0.2);
+}
+.npc-info { flex: 1; }
+.npc-name { font-size: 18px; font-weight: 800; color: #3d2b16; }
+.npc-role { font-size: 12px; color: #8c7a61; margin-top: 2px; }
+.npc-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 18px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(179,123,45,0.25);
+  border-radius: 999px;
+  font-size: 13px;
+  color: #8b5e2b;
+  cursor: pointer;
+  transition: .15s;
+}
+.npc-btn:active { transform: scale(0.96); }
+
+/* ===== Component: Image Showcase ===== */
+.img-showcase {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
+  margin-bottom: 12px;
+}
+.img-showcase img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== Component: Tag Row ===== */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(179,123,45,0.2);
+  color: #8b5e2b;
+  cursor: pointer;
+  transition: .15s;
+}
+.tag-on { background: #c97926; color: #fff; border-color: #c97926; }
+
+/* ===== Component: Bottom Nav ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.06);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 env(safe-area-inset-bottom, 10px);
+  z-index: 100;
+}
+.nav-item {
+  text-decoration: none; color: #999;
+  font-size: 12px; font-weight: 500;
+  padding: 4px 10px; border-radius: 18px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 3px;
+  transition: .15s;
+}
+.nav-item-on { color: #c97926; background: rgba(201,121,38,0.08); }
+.nav-icon { width: 20px; height: 20px; object-fit: contain; }
+
+/* ===== Component: Mascot Decoration ===== */
+.mascot-wrap {
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+.mascot-wrap img { width: 160px; height: auto; }
+
+/* ===== Component: Floating Card ===== */
+.float-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(58,39,21,0.08);
+  margin: -24px 16px 16px;
+  z-index: 2;
+}
+
+/* ===== Component: Collection Grid ===== */
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.collection-item {
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px 6px 8px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(15,16,21,0.08);
+  transition: .15s;
+}
+.collection-item:active { transform: scale(0.96); }
+.collection-img {
+  width: 52px; height: 52px;
+  margin: 0 auto 4px;
+  background: #f5f2ff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.collection-img img { width: 40px; height: 40px; object-fit: contain; }
+.collection-name { font-size: 12px; font-weight: 600; color: #3d2b16; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ===== Component: Info Banner ===== */
+.info-banner {
+  background: linear-gradient(135deg, #f5efe6, #ece3d3);
+  border: 1px solid rgba(140,115,80,0.15);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.info-banner-icon { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; }
+.info-banner-text { font-size: 13px; color: #5a3e1b; }
+.info-banner-text strong { color: #3d2b16; }
+
+/* ===== Component: Tab Bar ===== */
+.tab-bar {
+  display: flex;
+  background: rgba(255,255,255,0.6);
+  border-radius: 12px;
+  padding: 3px;
+  gap: 4px;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #8c7a61;
+  cursor: pointer;
+  transition: .15s;
+}
+.tab-item-on {
+  background: #fff;
+  color: #3d2b16;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 24px 16px 100px;
+  font-size: 12px;
+  color: #bfae95;
+}
+.footer a { color: #9a8a70; text-decoration: none; }
+.dot { margin: 0 6px; color: #d4c8b5; }
+
+/* ===== Spacer ===== */
+.spacer { height: 24px; }
+
+/* ===== Component: Label Tag Image ===== */
+.label-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ===== Authorize Style ===== */
+.auth-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.86), rgba(245,236,221,0.9));
+  border: 1px solid rgba(118,97,74,0.22);
+  border-radius: 24px;
+  box-shadow: 0 14px 36px rgba(58,39,21,0.08);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.auth-card-header {
+  padding: 20px 20px 12px;
+  text-align: center;
+}
+.auth-card-header img { height: 36px; width: auto; object-fit: contain; }
+.auth-card-body { padding: 0 20px 20px; }
+.auth-card-desc { font-size: 13px; color: #6b5846; text-align: center; line-height: 1.6; }
+
+/* ===== Section Anchor ===== */
+.section-anchor {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Hero Banner ===== -->
+<div class="hero">
+  <img src="/img/menu-up.png" alt="洛克王国" />
+  <div class="hero-overlay"></div>
+  <div class="hero-title">
+    <img src="/img/洛克王国大标题-白.png" alt="洛克王国" />
+    <div class="hero-sub">孵蛋查询工具 · 素材模板演示</div>
+  </div>
+</div>
+
+<!-- ===== Floating Action Card ===== -->
+<div class="float-card">
+  <div style="display:flex;align-items:center;gap:12px">
+    <img src="/img/搜集情况.png" style="width:44px;height:44px;object-fit:contain" alt="" />
+    <div>
+      <div style="font-size:16px;font-weight:800;color:#3d2b16">欢迎回来，小洛克</div>
+      <div style="font-size:12px;color:#8c7a61">今日可孵蛋 3 次 · 精灵收集 78%</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== Section: Quick Entry ===== -->
+  <a id="entry" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">功能入口</span>
+    </div>
+    <div class="card">
+      <div class="feature" onclick="location.href='#'">
+        <img class="feature-icon" src="/img/favicon.png" alt="孵蛋查询" />
+        <div class="feature-body">
+          <div class="feature-name">孵蛋查询</div>
+          <div class="feature-desc">输入身高体重，查询可能孵化的精灵</div>
+        </div>
+        <div class="feature-arrow">›</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="feature" onclick="location.href='#'">
+        <img class="feature-icon" src="/img/icon-decorative-book.6KbZJc7F.png" alt="精灵图鉴" />
+        <div class="feature-body">
+          <div class="feature-name">精灵图鉴</div>
+          <div class="feature-desc">468只精灵数据，属性/蛋组筛选</div>
+        </div>
+        <div class="feature-arrow">›</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="feature" onclick="location.href='#'">
+        <img class="feature-icon" src="/img/icon-chapter.DoUojjEg.png" alt="蛋组配对" />
+        <div class="feature-body">
+          <div class="feature-name">蛋组配对</div>
+          <div class="feature-desc">查看各蛋组可繁殖精灵</div>
+        </div>
+        <div class="feature-arrow">›</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="feature" onclick="location.href='#'">
+        <img class="feature-icon" src="/img/coin.png" alt="家园炼金" />
+        <div class="feature-body">
+          <div class="feature-name">家园炼金</div>
+          <div class="feature-desc">种花、做饭、炼球最优方案</div>
+        </div>
+        <div class="feature-arrow">›</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="feature" onclick="location.href='#'">
+        <img class="feature-icon" src="/img/yuanxingshangren.png" alt="远行商人" />
+        <div class="feature-body">
+          <div class="feature-name">远行商人</div>
+          <div class="feature-desc">查看当前轮次商品</div>
+        </div>
+        <div class="feature-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Divider ===== -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <img class="divider-icon" src="/img/宝箱标.png" alt="" />
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- ===== Section: NPC Card ===== -->
+  <a id="npc" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">NPC 交互</span>
+    </div>
+    <div class="npc-card">
+      <img class="npc-avatar" src="/img/yuanxingshangren.png" alt="远行商人" />
+      <div class="npc-info">
+        <div class="npc-name">远行商人</div>
+        <div class="npc-role">限时兑换 · 稀有道具</div>
+        <button class="npc-btn">查看详情 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section: Stats ===== -->
+  <a id="stats" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">数据概览</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <img class="stat-icon" src="/img/搜集情况.png" alt="" />
+        <div class="stat-value">1623</div>
+        <div class="stat-label">孵蛋数据</div>
+      </div>
+      <div class="stat-card">
+        <img class="stat-icon" src="/img/coin.png" alt="" />
+        <div class="stat-value">468</div>
+        <div class="stat-label">精灵图鉴</div>
+      </div>
+      <div class="stat-card">
+        <img class="stat-icon" src="/img/宝箱标.png" alt="" />
+        <div class="stat-value">433</div>
+        <div class="stat-label">技能数据</div>
+      </div>
+      <div class="stat-card">
+        <img class="stat-icon" src="/img/icon-stay-tuned.DHbzz5us.png" alt="" />
+        <div class="stat-value">274</div>
+        <div class="stat-label">道具图标</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section: Title Banner ===== -->
+  <a id="banner" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">标题装饰条</span>
+    </div>
+    <div class="title-banner">
+      <img src="/img/win-bg.BgshV29m.png" alt="标题装饰" />
+    </div>
+    <div class="title-banner">
+      <img src="/img/stats-title.BG5ocjGh.png" alt="统计标题" />
+    </div>
+  </div>
+
+  <!-- ===== Section: Label Images ===== -->
+  <a id="labels" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">文字标牌</span>
+    </div>
+    <div class="card" style="text-align:center">
+      <img class="label-img" src="/img/本周达宠字样.png" alt="本周达宠" style="margin:0 8px" />
+      <img class="label-img" src="/img/了不起精灵 half.png" alt="了不起精灵" style="margin:0 8px" />
+      <img class="label-img" src="/img/异色精灵 half.png" alt="异色精灵" style="margin:0 8px" />
+      <img class="label-img" src="/img/炫彩精灵 half.png" alt="炫彩精灵" style="margin:0 8px" />
+    </div>
+  </div>
+
+  <!-- ===== Section: Badge Showcase ===== -->
+  <a id="badges" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">等级徽章</span>
+    </div>
+    <div class="card">
+      <div class="badge-row">
+        <img class="badge" src="/img/1-1.DsrH8HWs.png" alt="Lv1" />
+        <img class="badge" src="/img/2-1.DtFVG_cL.png" alt="Lv2" />
+        <img class="badge" src="/img/3-1.BxPdoaGp.png" alt="Lv3" />
+        <img class="badge" src="/img/4-1.BqNyzyq3.png" alt="Lv4" />
+        <img class="badge" src="/img/5-1.CvocExIf.png" alt="Lv5" />
+        <img class="badge" src="/img/6-1.BRlbvdwy.png" alt="Lv6" />
+      </div>
+      <div class="badge-row">
+        <img class="badge" src="/img/1-2.C_m0bWhF.png" alt="" />
+        <img class="badge" src="/img/2-2.D9q6Kuvh.png" alt="" />
+        <img class="badge" src="/img/3-2.DL9tvB29.png" alt="" />
+        <img class="badge" src="/img/4-2.Dv_8-ets.png" alt="" />
+        <img class="badge" src="/img/5-2.t1A1x2Pk.png" alt="" />
+        <img class="badge" src="/img/6-2.DXVquVOt.png" alt="" />
+      </div>
+      <div class="badge-row">
+        <img class="badge" src="/img/1-3.RCKDHs5T.png" alt="" />
+        <img class="badge" src="/img/2-3.CEMPtBOM.png" alt="" />
+        <img class="badge" src="/img/3-3.DV4kIcUj.png" alt="" />
+        <img class="badge" src="/img/4-3.CqfVc4t4.png" alt="" />
+        <img class="badge" src="/img/5-3.DLqxSx5c.png" alt="" />
+        <img class="badge" src="/img/6-3.Cwq4ZJJB.png" alt="" />
+      </div>
+      <div style="text-align:center;margin-top:8px">
+        <img class="badge" src="/img/7.Wku3bA4b.png" alt="Lv7" style="width:56px;height:56px" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Divider ===== -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <img class="divider-icon" src="/img/icon-decorative-book.6KbZJc7F.png" alt="" />
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- ===== Section: Authorize Style Card ===== -->
+  <a id="auth" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">授权卡片风格</span>
+    </div>
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <img src="/img/authorize-header-title.DmTqaMIN.png" alt="标题" />
+      </div>
+      <div class="auth-card-body">
+        <div class="auth-card-desc">
+          绑定你的游戏账号，解锁更多功能：<br>
+          精灵收藏同步 · 孵蛋历史记录 · 个性化推荐
+        </div>
+        <div style="text-align:center;margin-top:16px">
+          <button class="npc-btn" style="padding:10px 32px;font-size:15px">立即绑定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section: Collection Grid ===== -->
+  <a id="collection" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">精灵收藏</span>
+    </div>
+    <div class="tab-bar" style="margin-bottom:12px">
+      <div class="tab-item tab-item-on">全部</div>
+      <div class="tab-item">火系</div>
+      <div class="tab-item">水系</div>
+      <div class="tab-item">草系</div>
+    </div>
+    <div class="collection-grid">
+      <div class="collection-item">
+        <div class="collection-img"><img src="/img/favicon.png" alt="" /></div>
+        <div class="collection-name">神奇的蛋</div>
+      </div>
+      <div class="collection-item">
+        <div class="collection-img"><img src="/img/搜集情况.png" alt="" /></div>
+        <div class="collection-name">收集进度</div>
+      </div>
+      <div class="collection-item">
+        <div class="collection-img"><img src="/img/coin.png" alt="" /></div>
+        <div class="collection-name">洛克贝</div>
+      </div>
+      <div class="collection-item">
+        <div class="collection-img"><img src="/img/宝箱标.png" alt="" /></div>
+        <div class="collection-name">宝箱奖励</div>
+      </div>
+      <div class="collection-item">
+        <div class="collection-img"><img src="/img/icon-stay-tuned.DHbzz5us.png" alt="" /></div>
+        <div class="collection-name">敬请期待</div>
+      </div>
+      <div class="collection-item">
+        <div class="collection-img"><img src="/img/icon-chapter.DoUojjEg.png" alt="" /></div>
+        <div class="collection-name">章节解锁</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section: Tags ===== -->
+  <a id="tags" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">筛选标签</span>
+    </div>
+    <div class="card">
+      <div style="font-size:12px;color:#aaa;font-weight:600;margin-bottom:8px">属性</div>
+      <div class="tags">
+        <span class="tag tag-on">全部</span>
+        <span class="tag">🔥 火</span>
+        <span class="tag">💧 水</span>
+        <span class="tag">🌿 草</span>
+        <span class="tag">⚡ 电</span>
+        <span class="tag">❄️ 冰</span>
+        <span class="tag">💡 光</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section: AI Card Style ===== -->
+  <a id="ai" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">AI 卡片风格</span>
+    </div>
+    <div class="img-showcase">
+      <img src="/img/ai卡片.png" alt="AI卡片" />
+    </div>
+  </div>
+
+  <!-- ===== Section: Info Banner ===== -->
+  <a id="info" class="section-anchor"></a>
+  <div class="section">
+    <div class="section-hd">
+      <span class="section-bar"></span>
+      <span class="section-title">提示横幅</span>
+    </div>
+    <div class="info-banner">
+      <img class="info-banner-icon" src="/img/感叹号，不知道哪里能用.png" alt="" />
+      <div class="info-banner-text">
+        <strong>提示：</strong>孵蛋结果仅供参考，实际孵化以游戏内为准。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Mascot ===== -->
+  <div class="mascot-wrap">
+    <img src="/img/小洛克.png" alt="" />
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <div class="footer">
+    <a href="/">GitHub</a>
+    <span class="dot">·</span>
+    <span>数据 RocomUID</span>
+    <span class="dot">·</span>
+    <span>AstrBot</span>
+    <div style="margin-top:6px;font-size:11px;color:#c8bca8">WeGame · 洛克王国世界</div>
+  </div>
+
+</div>
+
+<!-- ===== Bottom Navigation ===== -->
+<nav class="bottom-nav">
+  <a class="nav-item nav-item-on">
+    <img class="nav-icon" src="/img/宝箱标.png" alt="" />
+    首页
+  </a>
+  <a class="nav-item">
+    <img class="nav-icon" src="/img/favicon.png" alt="" />
+    孵蛋
+  </a>
+  <a class="nav-item">
+    <img class="nav-icon" src="/img/icon-decorative-book.6KbZJc7F.png" alt="" />
+    图鉴
+  </a>
+  <a class="nav-item">
+    <img class="nav-icon" src="/img/coin.png" alt="" />
+    家园
+  </a>
+  <a class="nav-item">
+    <img class="nav-icon" src="/img/yuanxingshangren.png" alt="" />
+    商人
+  </a>
+</nav>
+
+</body>
+</html>
