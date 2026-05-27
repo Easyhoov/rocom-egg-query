@@ -10,7 +10,10 @@ const error = ref('')
 
 const fetchBallOptions = async () => {
   try {
-    const res = await fetch('/api/garden/balls')
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 15000)
+    const res = await fetch('/api/garden/balls', { signal: controller.signal })
+    clearTimeout(timeout)
     const data = await res.json()
     if (data.success) {
       ballOptions.value = data.balls
@@ -24,18 +27,29 @@ const queryGarden = async () => {
   loading.value = true
   error.value = ''
   try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 15000)
     let url = `/api/garden/query?level=${level.value}`
     if (targetBall.value) {
       url += `&target_ball=${encodeURIComponent(targetBall.value)}`
     }
-    const res = await fetch(url)
+    const res = await fetch(url, { signal: controller.signal })
+    clearTimeout(timeout)
+    if (!res.ok) {
+      if (res.status === 404) throw new Error('接口不存在，请检查服务是否正常运行')
+      if (res.status >= 500) throw new Error(`服务器错误(${res.status})，请稍后重试`)
+      throw new Error(`请求失败(${res.status})`)
+    }
     const data = await res.json()
     if (data.success) {
       result.value = data
+    } else {
+      throw new Error(data.message || '查询失败')
     }
   } catch (e) {
-    console.error('查询失败', e)
-    error.value = '查询失败，请稍后重试'
+    if (e.name === 'AbortError') error.value = '请求超时，请检查网络后重试'
+    else if (e.name === 'TypeError' && e.message.includes('Failed to fetch')) error.value = '网络连接失败'
+    else error.value = e.message || '查询失败，请稍后重试'
   } finally {
     loading.value = false
   }

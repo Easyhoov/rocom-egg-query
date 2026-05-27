@@ -17,16 +17,26 @@ async function fetchMerchant(refresh = false) {
   loading.value = true
   error.value = ''
   try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 15000)
     const url = refresh ? '/api/merchant/info?refresh=true' : '/api/merchant/info'
-    const res = await fetch(url)
+    const res = await fetch(url, { signal: controller.signal })
+    clearTimeout(timeout)
+    if (!res.ok) {
+      if (res.status === 404) throw new Error('接口不存在，请检查服务是否正常运行')
+      if (res.status >= 500) throw new Error(`服务器错误(${res.status})，请稍后重试`)
+      throw new Error(`请求失败(${res.status})`)
+    }
     const data = await res.json()
     if (data.success) {
       merchant.value = data.merchant
     } else {
-      error.value = data.error || '获取数据失败'
+      throw new Error(data.error || '获取数据失败')
     }
   } catch (e) {
-    error.value = '网络异常，请稍后重试'
+    if (e.name === 'AbortError') error.value = '请求超时，请检查网络后重试'
+    else if (e.name === 'TypeError' && e.message.includes('Failed to fetch')) error.value = '网络连接失败'
+    else error.value = e.message || '查询失败，请稍后重试'
   } finally {
     loading.value = false
   }

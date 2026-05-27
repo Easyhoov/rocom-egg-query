@@ -106,7 +106,7 @@ function imgError(e) {
   const item = e.target.closest('.pc')?.querySelector('.pc__ico')
   if (item) {
     const name = item.dataset.name || ''
-    item.innerHTML = ico(name)
+    item.textContent = ico(name)
   }
 }
 
@@ -184,7 +184,7 @@ onUnmounted(() => {
               {{ r.egg_type_icon }} {{ (r.egg_type_name || '').replace('蛋', '') }}
             </div>
             <div class="pc__ico" :data-name="r.name">
-              <img v-if="r.image" :src="r.image" class="pc__img" @error="e => { e.target.remove(); e.target.parentElement.innerHTML = ico(r.name) }" loading="lazy">
+              <img v-if="r.image" :src="r.image" class="pc__img" @error="e => { e.target.remove(); e.target.parentElement.textContent = ico(r.name) }" loading="lazy">
               <span v-else class="pc__emoji">{{ ico(r.name) }}</span>
             </div>
             <div class="pc__name" :title="r.name">{{ r.name }}</div>

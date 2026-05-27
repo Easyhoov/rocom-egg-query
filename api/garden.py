@@ -11,6 +11,9 @@ router = APIRouter(prefix="/api/garden", tags=["家园炼金"])
 
 GARDEN_DATA_FILE = Path(__file__).parent.parent / "data" / "garden_data.json"
 
+# 模块级数据缓存，启动时加载一次
+_garden_data_cache: dict = None
+
 # CDN -> local icon URL mapping
 CDN_PATTERNS = [
     (re.compile(r'https://rococdn\.gptvip\.chat/webp/home_garden/seeds/(\d+)\.webp\S*'), r'/garden-icons/seeds/\1.webp'),
@@ -33,8 +36,20 @@ def _localize_icon_urls(obj):
     return obj
 
 def load_garden_data():
+    """加载家园炼金数据（带模块级缓存）"""
+    global _garden_data_cache
+    if _garden_data_cache is not None:
+        return _garden_data_cache
     with open(GARDEN_DATA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        _garden_data_cache = json.load(f)
+    return _garden_data_cache
+
+
+def reload_garden_data():
+    """强制重新加载数据（供内部刷新使用）"""
+    global _garden_data_cache
+    _garden_data_cache = None
+    return load_garden_data()
 
 
 @router.get("/query")

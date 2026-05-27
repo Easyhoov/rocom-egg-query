@@ -22,6 +22,12 @@ def _load_item_mapping() -> dict:
             return json.load(f)
     return {}
 
+# 模块级图标索引缓存，启动时构建一次
+_ICON_DIR = os.path.join(os.path.dirname(__file__), "..", "static", "item-icons")
+_icon_index: list[str] = []
+if os.path.isdir(_ICON_DIR):
+    _icon_index = [f for f in os.listdir(_ICON_DIR) if f.endswith(".png")]
+
 def _resolve_icon(icon_url: str, item_name: str) -> str:
     """将商品图标 URL 解析为本地路径"""
     static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
@@ -33,42 +39,38 @@ def _resolve_icon(icon_url: str, item_name: str) -> str:
         return f"/item-icons/{item_name}.png"
 
     # 2) 模糊匹配：道具名包含某图片名，或图片名包含道具名
-    if os.path.exists(icons_dir):
-        for fname in os.listdir(icons_dir):
-            if fname.endswith(".png"):
-                base = os.path.splitext(fname)[0]
-                if item_name in base or base in item_name:
-                    return f"/item-icons/{fname}"
+    for fname in _icon_index:
+        base = os.path.splitext(fname)[0]
+        if item_name in base or base in item_name:
+            return f"/item-icons/{fname}"
 
     # 2.5) 宽松匹配：取商品名和图片名的最长公共子串，够长才匹配
-    if os.path.exists(icons_dir):
-        def longest_common_substr(a: str, b: str) -> str:
-            """返回 a 和 b 的最长公共子串"""
-            m, n = len(a), len(b)
-            dp = [[0] * (n + 1) for _ in range(m + 1)]
-            lcs, end = 0, 0
-            for i in range(1, m + 1):
-                for j in range(1, n + 1):
-                    if a[i - 1] == b[j - 1]:
-                        dp[i][j] = dp[i - 1][j - 1] + 1
-                        if dp[i][j] > lcs:
-                            lcs = dp[i][j]
-                            end = i
-            return a[end - lcs:end]
+    def longest_common_substr(a: str, b: str) -> str:
+        """返回 a 和 b 的最长公共子串"""
+        m, n = len(a), len(b)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        lcs, end = 0, 0
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if a[i - 1] == b[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1] + 1
+                    if dp[i][j] > lcs:
+                        lcs = dp[i][j]
+                        end = i
+        return a[end - lcs:end]
 
-        best_name, best_lcs = None, 0
-        for fname in os.listdir(icons_dir):
-            if fname.endswith(".png"):
-                base = os.path.splitext(fname)[0]
-                lcs = longest_common_substr(item_name, base)
-                if len(lcs) > best_lcs and len(lcs) >= 4:
-                    # 公共子串至少占任一名长度的40%
-                    if len(lcs) >= len(item_name) * 0.4 and len(lcs) >= len(base) * 0.4:
-                        best_lcs = len(lcs)
-                        best_name = fname
+    best_name, best_lcs = None, 0
+    for fname in _icon_index:
+        base = os.path.splitext(fname)[0]
+        lcs = longest_common_substr(item_name, base)
+        if len(lcs) > best_lcs and len(lcs) >= 4:
+            # 公共子串至少占任一名长度的40%
+            if len(lcs) >= len(item_name) * 0.4 and len(lcs) >= len(base) * 0.4:
+                best_lcs = len(lcs)
+                best_name = fname
 
-        if best_name:
-            return f"/item-icons/{best_name}"
+    if best_name:
+        return f"/item-icons/{best_name}"
 
     # 3) 从 URL 文件名提取数字 ID (如 100121_xxx.png -> 100121)
     m = re.search(r'/(\d{6,})[_\.]', icon_url)
