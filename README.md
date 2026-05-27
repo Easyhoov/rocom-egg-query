@@ -1,6 +1,6 @@
 # 洛克王国：世界 - 游戏工具套件 🥚
 
-基于社区开源数据的洛克王国世界游戏工具箱，提供孵蛋查询、精灵图鉴、家园炼金、远行商人等一站式查询服务。
+基于社区开源数据 + WeGame API 的洛克王国世界游戏工具箱，提供孵蛋查询、精灵图鉴、家园炼金、远行商人等一站式查询服务。
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
@@ -110,6 +110,14 @@ rocom-egg-query/
 - **图标本地化** — CDN URL 自动替换为本地路径
 - **深色主题** — 统一 CSS 变量，毛玻璃卡片风格
 
+## 📊 数据来源
+
+| 数据 | 来源 |
+|------|------|
+| 孵蛋数据 | 社区开源数据（jiluoQAQ/RocomUID） |
+| 精灵图鉴 | 社区开源数据（AofeiLi-code/rocom-data） |
+| 远行商人 | WeGame API（测试 key 来自 astrbot_plugin_rocom） |
+
 ## 📝 License
 
 MIT
@@ -122,3 +130,4 @@ MIT
 
 - [jiluoQAQ/RocomUID](https://github.com/jiluoQAQ/RocomUID) — 游戏数据 UI
 - [AofeiLi-code/rocom-data](https://github.com/AofeiLi-code/rocom-data) — 技能 & 属性数据
+- [Entropy-Increase-Team/astrbot_plugin_rocom](https://github.com/Entropy-Increase-Team/astrbot_plugin_rocom) — 洛克王国数据查询插件（本项目 WeGame API 测试 key 来源）
