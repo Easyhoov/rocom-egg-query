@@ -13,7 +13,7 @@
 - **📖 精灵图鉴** — 468 只精灵数据，属性/蛋组筛选，详情页含技能列表 + 属性克制环
 - **🎯 蛋组配对** — 查看各蛋组可繁殖精灵，同组可互配
 - **🏡 家园炼金** — 种花、做饭、炼球最优方案推荐
-- **🛒 远行商人** — 实时查看当前轮次商品 + 倒计时
+- **🛒 远行商人** — 实时查看当前轮次商品 + 倒计时（*暂时下线*）
 
 ## 🚀 快速开始
 
@@ -71,8 +71,9 @@ rocom-egg-query/
 ├── frontend/                # Vue 3 前端
 │   └── src/
 │       ├── views/           # 页面组件
-│       ├── components/      # 公共组件
-│       └── styles/          # 主题样式
+│       ├── components/      # 公共组件（RadarChart/SkillTable 等）
+│       ├── composables/     # 组合式函数（useApi）
+│       └── styles/          # 主题样式（CSS 变量）
 └── static/                  # 静态资源 + 构建产物
 ```
 
@@ -85,7 +86,7 @@ rocom-egg-query/
 | 精灵图鉴 | `/compendium` | 精灵列表 + 详情 |
 | 蛋组配对 | `/egg-group` | 蛋组兼容查询 |
 | 家园炼金 | `/garden` | 等级 → 最优配方 |
-| 远行商人 | `/merchant` | 商人刷新信息 |
+| 远行商人 | `/merchant` | 商人刷新信息（*暂时下线*） |
 
 ## 🔌 API 端点
 
@@ -103,7 +104,7 @@ rocom-egg-query/
 | GET | `/api/health` | 健康检查 |
 
 ## 🎯 架构特点
-
+- **组件化前端** — Vue 3 Composition API + 可复用组件 + composables
 - **单端口部署** — 2026 端口同时提供 API 和前端页面
 - **SPA 架构** — Vue Router 客户端渲染，页面切换无刷新
 - **无数据库** — JSON 静态文件存储，启动时加载到内存
