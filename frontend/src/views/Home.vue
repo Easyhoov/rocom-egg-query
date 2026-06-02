@@ -26,12 +26,12 @@ const features = [
     desc: '种花、做饭、炼球最优方案推荐',
     href: '/garden',
   },
-  {
-    icon: '/img/yuanxingshangren.png',
-    title: '远行商人',
-    desc: '查看远行商人当前轮次商品',
-    href: '/merchant',
-  },
+  //   {
+  //     icon: '/img/yuanxingshangren.png',
+  //     title: '远行商人',
+  //     desc: '查看远行商人当前轮次商品',
+  //     href: '/merchant',
+  //   },
 ]
 </script>
 
@@ -70,11 +70,6 @@ const features = [
             <div class="card-arrow">›</div>
           </a>
         </div>
-      </div>
-
-      <!-- 装饰图（已移至背景） -->
-      <div class="xiaoluoke" style="display:none">
-        <img :src="imgBase + 'pokemon-camp.jpg'" alt="宝可梦露营" />
       </div>
 
       <!-- 底部 -->

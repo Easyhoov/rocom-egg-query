@@ -1,15 +1,13 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import { useApi } from '../composables/useApi'
 import '../styles/dark-theme.css'
-
 const router = useRouter()
-
+const { loading, error, fetchJson } = useApi()
 const height = ref(null)
 const weight = ref(null)
 const eggType = ref('magic') // 'magic' | 'colorful' | 'all'
-const loading = ref(false)
-const error = ref('')
 const results = ref([])
 const total = ref(0)
 const normalCount = ref(0)
@@ -42,40 +40,21 @@ async function queryEgg() {
     error.value = '请输入身高和体重'
     return
   }
-  loading.value = true
-  error.value = ''
-  try {
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 15000)
-    let url = `/api/query?height=${height.value}&weight=${weight.value}`
-    if (eggType.value === 'magic') url += '&precious=0'
-    else if (eggType.value === 'colorful') url += '&precious=1'
-    const res = await fetch(url, { signal: controller.signal })
-    clearTimeout(timeout)
-    if (!res.ok) {
-      if (res.status === 404) throw new Error('接口不存在，请检查服务是否正常运行')
-      if (res.status >= 500) throw new Error(`服务器错误(${res.status})，请稍后重试`)
-      throw new Error(`请求失败(${res.status})`)
-    }
-    const data = await res.json()
-    if (data.success) {
-      results.value = data.results
-      total.value = data.total
-      normalCount.value = data.normal_count
-      preciousCount.value = data.precious_count
-      userR.value = data.user_r || 0
-      hasQueried.value = true
-      await nextTick()
-      document.querySelector('.garden__result')?.scrollIntoView({ behavior: 'smooth' })
-    } else {
-      throw new Error(data.message || '查询失败')
-    }
-  } catch (e) {
-    if (e.name === 'AbortError') error.value = '请求超时，请检查网络后重试'
-    else if (e.name === 'TypeError' && e.message.includes('Failed to fetch')) error.value = '网络连接失败'
-    else error.value = e.message || '查询失败，请稍后重试'
-  } finally {
-    loading.value = false
+  let url = `/api/query?height=${height.value}&weight=${weight.value}`
+  if (eggType.value === 'magic') url += '&precious=0'
+  else if (eggType.value === 'colorful') url += '&precious=1'
+  const data = await fetchJson(url)
+  if (data && data.success) {
+    results.value = data.results
+    total.value = data.total
+    normalCount.value = data.normal_count
+    preciousCount.value = data.precious_count
+    userR.value = data.user_r || 0
+    hasQueried.value = true
+    await nextTick()
+    document.querySelector('.garden__result')?.scrollIntoView({ behavior: 'smooth' })
+  } else if (data && !data.success) {
+    error.value = data.message || '查询失败'
   }
 }
 
@@ -158,7 +137,7 @@ onUnmounted(() => {
       </div>
 
       <!-- 错误提示 -->
-      <div v-if="error" class="error-msg">{{ error }}</div>
+      <div v-if="error" class="dt-error-msg">{{ error }}</div>
 
       <!-- 结果 -->
       <div v-if="hasQueried && results.length" class="garden__card garden__result dark-card">
@@ -207,7 +186,7 @@ onUnmounted(() => {
       </div>
 
       <!-- 底部 -->
-      <div class="eq-ft">
+      <div class="dt-footer eq-ft">
         数据 <a href="https://github.com/jiluoQAQ/RocomUID" target="_blank">RocomUID</a> |
         <a href="javascript:void(0)" @click="showTip = true">R值说明</a>
       </div>
@@ -247,17 +226,7 @@ onUnmounted(() => {
 /* 查询按钮（宽度为组件专属，其余由 .dark-btn 提供） */
 .query-btn { width: 100%; }
 
-/* 错误提示 */
-.error-msg {
-  background: var(--dt-error-bg);
-  color: var(--dt-error-text);
-  padding: 12px 16px;
-  border-radius: 14px;
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 12px;
-  border: 1px solid rgba(231, 76, 60, 0.2);
-}
+
 
 /* 表单行 */
 .eq-row { display: flex; gap: 12px; margin-bottom: 12px; }
@@ -366,8 +335,7 @@ onUnmounted(() => {
 .pc__rval { font-size: 9px; color: var(--dt-accent); font-weight: 500; margin-top: 1px; }
 .pc__rdiff { font-size: 9px; color: #ff9800; font-weight: 500; margin-top: 1px; }
 
-/* 底部 */
-.eq-ft { text-align: center; padding: 16px 0 8px; font-size: 11px; color: var(--dt-text-muted); }
+.eq-ft { padding: 16px 0 8px; }
 .eq-ft a { color: rgba(255, 255, 255, 0.6); }
 
 /* 弹窗遮罩 */

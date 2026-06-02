@@ -1,48 +1,40 @@
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useApi } from '../composables/useApi'
 import { getAttrIcon } from '../utils/attrIcons'
 import '../styles/dark-theme.css'
-
 const route = useRoute()
 const router = useRouter()
-
+const { loading, fetchJson } = useApi()
 const search = ref(String(route.query.q || ''))
 const selectedAttr = ref(String(route.query.attribute || ''))
 const selectedEggGroup = ref(String(route.query.egg_group || ''))
 const selectedShiny = ref(route.query.shiny === 'true' ? true : false)
 const page = ref(Number(route.query.page) || 1)
 const pageSize = 24
-
 const spirits = ref([])
 const total = ref(0)
 const totalPages = ref(1)
-const loading = ref(false)
 
 const attributes = ['火', '水', '草', '电', '冰', '光', '地', '幻', '幽', '恶', '普通', '机械', '武', '毒', '翼', '萌', '虫', '龙']
 const eggGroups = ref([])
 let searchTimer = null
 
 async function loadSpirits() {
-  loading.value = true
-  try {
-    const params = new URLSearchParams()
-    if (search.value) params.set('q', search.value)
-    if (selectedAttr.value) params.set('attribute', selectedAttr.value)
-    if (selectedEggGroup.value) params.set('egg_group', selectedEggGroup.value)
-    if (selectedShiny.value) params.set('shiny', 'true')
-    params.set('page', String(page.value))
-    params.set('page_size', String(pageSize))
+  const params = new URLSearchParams()
+  if (search.value) params.set('q', search.value)
+  if (selectedAttr.value) params.set('attribute', selectedAttr.value)
+  if (selectedEggGroup.value) params.set('egg_group', selectedEggGroup.value)
+  if (selectedShiny.value) params.set('shiny', 'true')
+  params.set('page', String(page.value))
+  params.set('page_size', String(pageSize))
 
-    const res = await fetch(`/api/spirits?${params}`)
-    const data = await res.json()
+  const data = await fetchJson(`/api/spirits?${params}`)
+  if (data) {
     spirits.value = data.items || []
     total.value = data.total || 0
     totalPages.value = data.total_pages || 1
-  } catch (e) {
-    console.error('加载失败:', e)
-  } finally {
-    loading.value = false
   }
 }
 
@@ -232,26 +224,16 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
         <button v-if="page < totalPages" @click="goToPage(page + 1)" class="comp__page-btn dark-btn">下一页 →</button>
       </div>
 
-      <div class="comp__ft">洛克王国：世界 · 精灵图鉴</div>
+      <div class="dt-footer">洛克王国：世界 · 精灵图鉴</div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .comp {
-  min-height: 100vh;
-  background: var(--dt-bg, #1a1a2e);
-  position: relative;
   padding: 16px 16px 80px;
 }
-.comp::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
-  opacity: 0.4;
-  pointer-events: none;
-}
+
 .comp__box { position: relative; z-index: 1; }
 .comp__box { max-width: 420px; margin: 0 auto; }
 .comp__hd { text-align: center; padding: 24px 0 20px; }
@@ -368,5 +350,5 @@ onMounted(() => { loadEggGroups(); loadSpirits() })
 .comp__page-btn--on { border-color: #8b3dff; background: #8b3dff; color: #fff; font-weight: 600; }
 .comp__page-dots { color: var(--dt-text-secondary, rgba(255,255,255,0.5)); padding: 0 4px; }
 
-.comp__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: rgba(255,255,255,0.3); }
+
 </style>

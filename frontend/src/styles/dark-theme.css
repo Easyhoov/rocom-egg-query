@@ -177,3 +177,69 @@
 .dark-table tbody tr:hover {
   background: rgba(255, 255, 255, 0.08);
 }
+
+/* ---- Loading Spinner ---- */
+@keyframes dt-spin {
+  to { transform: rotate(360deg); }
+}
+.dt-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--dt-accent);
+  border-radius: 50%;
+  animation: dt-spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+
+/* ---- 错误提示 ---- */
+.dt-error-msg {
+  background: var(--dt-error-bg);
+  color: var(--dt-error-text);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 12px;
+  border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+/* ---- 空状态 ---- */
+.dt-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--dt-text-muted);
+}
+.dt-empty-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+/* ---- 页面标题区 ---- */
+.dt-page-header {
+  text-align: center;
+  padding: 24px 0 20px;
+}
+.dt-page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--dt-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.dt-page-header p {
+  font-size: 13px;
+  color: var(--dt-text-secondary);
+  margin: 0;
+}
+
+/* ---- 页脚 ---- */
+.dt-footer {
+  text-align: center;
+  padding: 20px 0 8px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+}

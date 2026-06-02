@@ -1,58 +1,35 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import '../styles/dark-theme.css'
+import { useApi } from '../composables/useApi'
 
 const level = ref(16)
 const targetBall = ref('')
-const loading = ref(false)
 const result = ref(null)
 const ballOptions = ref([])
-const error = ref('')
+
+const { fetchJson: fetchBalls } = useApi()
+const { loading, error, fetchJson } = useApi()
 
 const fetchBallOptions = async () => {
-  try {
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 15000)
-    const res = await fetch('/api/garden/balls', { signal: controller.signal })
-    clearTimeout(timeout)
-    const data = await res.json()
-    if (data.success) {
-      ballOptions.value = data.balls
-    }
-  } catch (e) {
-    console.error('获取球列表失败', e)
+  const data = await fetchBalls('/api/garden/balls')
+  if (data && data.success) {
+    ballOptions.value = data.balls
   }
 }
 
 const queryGarden = async () => {
-  loading.value = true
-  error.value = ''
-  try {
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 15000)
-    let url = `/api/garden/query?level=${level.value}`
-    if (targetBall.value) {
-      url += `&target_ball=${encodeURIComponent(targetBall.value)}`
-    }
-    const res = await fetch(url, { signal: controller.signal })
-    clearTimeout(timeout)
-    if (!res.ok) {
-      if (res.status === 404) throw new Error('接口不存在，请检查服务是否正常运行')
-      if (res.status >= 500) throw new Error(`服务器错误(${res.status})，请稍后重试`)
-      throw new Error(`请求失败(${res.status})`)
-    }
-    const data = await res.json()
+  let url = `/api/garden/query?level=${level.value}`
+  if (targetBall.value) {
+    url += `&target_ball=${encodeURIComponent(targetBall.value)}`
+  }
+  const data = await fetchJson(url)
+  if (data) {
     if (data.success) {
       result.value = data
     } else {
-      throw new Error(data.message || '查询失败')
+      error.value = data.message || '查询失败'
     }
-  } catch (e) {
-    if (e.name === 'AbortError') error.value = '请求超时，请检查网络后重试'
-    else if (e.name === 'TypeError' && e.message.includes('Failed to fetch')) error.value = '网络连接失败'
-    else error.value = e.message || '查询失败，请稍后重试'
-  } finally {
-    loading.value = false
   }
 }
 
@@ -100,7 +77,7 @@ const resetAll = () => {
       <button @click="resetAll" class="reset-btn dark-btn" v-if="result">🔄 重置</button>
     </div>
 
-    <div v-if="error" class="error-msg">{{ error }}</div>
+    <div v-if="error" class="dt-error-msg">{{ error }}</div>
 
     <!-- 摘要统计 -->
     <div v-if="result && result.summary" class="summary-row">
@@ -190,19 +167,7 @@ const resetAll = () => {
 <style scoped>
 /* ===== 深色主题 - 家园炼金页 ===== */
 .garden {
-  min-height: 100vh;
-  background: #1a1a2e;
-  position: relative;
-  overflow: hidden;
   padding: 16px 16px 80px;
-}
-.garden::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
-  opacity: 0.4;
-  pointer-events: none;
 }
 .garden__box { max-width: 420px; margin: 0 auto; position: relative; z-index: 1; }
 
@@ -214,12 +179,7 @@ const resetAll = () => {
 
 /* 卡片 */
 .garden__card {
-  background: rgba(20, 20, 40, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   margin-bottom: 12px;
   display: flex;
   gap: 12px;
@@ -228,18 +188,6 @@ const resetAll = () => {
   transition: box-shadow .2s;
 }
 .garden__card:hover { box-shadow: 0 8px 24px rgba(139, 61, 255, 0.15); }
-
-/* 错误提示 */
-.error-msg {
-  background: rgba(231, 76, 60, 0.15);
-  color: #ff6b6b;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 16px;
-  border: 1px solid rgba(231, 76, 60, 0.2);
-}
 
 .form-group {
   flex: 1;

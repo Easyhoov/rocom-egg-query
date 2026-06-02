@@ -1,45 +1,34 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useApi } from '../composables/useApi'
 import '../styles/dark-theme.css'
+const { loading, fetchJson } = useApi()
 
 const groups = ref([])
 const selectedGroup = ref(null)
 const spirits = ref([])
-const loading = ref(false)
 const loadingGroups = ref(true)
 
 async function loadGroups() {
   loadingGroups.value = true
-  try {
-    const res = await fetch('/api/official-egg-groups')
-    const data = await res.json()
-    // 过滤掉"无法孵蛋"
+  const data = await fetchJson('/api/official-egg-groups')
+  if (data) {
     groups.value = (data.groups || []).filter(g => g.egg_group_name !== '无法孵蛋')
-  } catch (e) {
-    console.error('加载蛋组失败:', e)
-  } finally {
-    loadingGroups.value = false
   }
+  loadingGroups.value = false
 }
 
 async function selectGroup(group) {
   selectedGroup.value = group
-  loading.value = true
   spirits.value = []
-  try {
-    const params = new URLSearchParams({
-      egg_group: group.egg_group_name,
-      page_size: '100',
-      page: '1',
-    })
-    const res = await fetch(`/api/spirits?${params}`)
-    const data = await res.json()
-    // 只保留可繁殖的
+  const params = new URLSearchParams({
+    egg_group: group.egg_group_name,
+    page_size: '100',
+    page: '1',
+  })
+  const data = await fetchJson(`/api/spirits?${params}`)
+  if (data) {
     spirits.value = (data.items || []).filter(s => s.can_breed)
-  } catch (e) {
-    console.error('加载精灵失败:', e)
-  } finally {
-    loading.value = false
   }
 }
 
@@ -84,7 +73,7 @@ onMounted(loadGroups)
 
       <!-- Loading -->
       <div v-if="loading || loadingGroups" class="egg__loading">
-        <div class="egg__spinner"></div>
+        <div class="dt-spinner"></div>
         <p>加载中...</p>
       </div>
 
@@ -113,27 +102,16 @@ onMounted(loadGroups)
         <p>该蛋组暂无繁殖数据</p>
       </div>
 
-      <div class="egg__ft">洛克王国：世界 · 蛋组配对</div>
+      <div class="dt-footer">洛克王国：世界 · 蛋组配对</div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .egg {
-  min-height: 100vh;
-  background: var(--dt-bg, #1a1a2e);
-  position: relative;
   padding: 16px 16px 80px;
-  overflow-x: hidden;
 }
-.egg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('/img/pokemon-camp.jpg') center center / cover no-repeat;
-  opacity: 0.4;
-  pointer-events: none;
-}
+
 .egg__box { max-width: 420px; width: 100%; margin: 0 auto; }
 .egg__box { position: relative; z-index: 1; }
 .egg__hd { text-align: center; padding: 24px 0 20px; position: relative; }
@@ -204,11 +182,7 @@ onMounted(loadGroups)
 .egg__spirit-attr { font-size: 9px; padding: 1px 5px; border-radius: 6px; background: rgba(139,61,255,0.2); color: #8b3dff; }
 
 .egg__loading { text-align: center; padding: 60px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
-.egg__spinner {
-  width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #8b3dff;
-  border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 12px;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+
 .egg__empty { text-align: center; padding: 40px 0; color: var(--dt-text-secondary, rgba(255,255,255,0.5)); }
-.egg__ft { text-align: center; padding: 20px 0 8px; font-size: 11px; color: rgba(255,255,255,0.3); }
+
 </style>

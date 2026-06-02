@@ -19,10 +19,10 @@
       <img :src="'/img/peach-icon.png'" class="app-nav__icon app-nav__icon--img" alt="" />
       <span class="app-nav__label">家园炼金</span>
     </router-link>
-    <router-link to="/merchant" class="app-nav__item" active-class="app-nav__item--active">
-      <img :src="'/img/yuanxingshangren.png'" class="app-nav__icon app-nav__icon--img" alt="" />
-      <span class="app-nav__label">远行商人</span>
-    </router-link>
+<!--     <router-link to="/merchant" class="app-nav__item" active-class="app-nav__item--active"> -->
+<!--       <img :src="'/img/yuanxingshangren.png'" class="app-nav__icon app-nav__icon--img" alt="" /> -->
+<!--       <span class="app-nav__label">远行商人</span> -->
+<!--     </router-link> -->
   </nav>
 </template>
 
